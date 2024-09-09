@@ -1,0 +1,60 @@
+---
+title: "Data Discorvery"
+author: "R&A"
+format: html
+editor: visual
+---
+
+## Data Discovery for Staffing Trends vs Student Performance (Staffing data)
+
+This discovery includes Jobvite, Tyler-Munis, FMLA, and PowerSchool Data for the 2023-2024 SY.
+```{r libs}
+library(tidyverse)
+library(janitor)
+library(ideadata)
+```
+
+```{r load_files}
+#Get data that is located in the data folder (Jobvite, Tyler-Munis, FMLA)
+source("data/get_file_data.R")
+glimpse(jobvite)
+glimpse(tyler_munis)
+glimpse(fmla)
+```
+
+
+```{r load_courses}
+#Get PowerSchool data that is located in the DWH (save into a file)
+source("data/get_course_data.R")
+
+glimpse(staffing_courses)
+glimpse(staffing_w_courses)
+```
+
+```{r merge}
+#Merge PowerSchool data with data files
+source("munge/merge_data.R")
+glimpse(courses_tm_fmla_staff) # !!! This is where we have total_days_out
+```
+
+
+```{r discovery}
+#Learning about the data sets
+
+#staff with course that on 45 days or more of FMLA
+staffing_w_course %>%
+  left_join(fmla, join_by(employee_id)) %>%
+  filter(!is.na(first_date_of_leave)) %>%
+  filter(fmla_days_out >= 45) %>%
+  summarise(count = n(),
+            average = mean(fmla_days_out)) %>%
+  mutate(comment = 'FMLA days out')
+
+
+courses_tm_fmla_staff %>%
+  filter(total_days_out >= 45) %>%
+  summarise(count = n(),
+            average = mean(total_days_out)) %>%
+  mutate(comment = 'total days out')
+
+```

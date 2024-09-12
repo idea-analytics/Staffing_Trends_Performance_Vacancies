@@ -2,16 +2,19 @@
 title: "Data Discorvery"
 author: "R&A"
 format: html
-editor: visual
+editor: source
 ---
 
 ## Data Discovery for Staffing Trends vs Student Performance (Staffing data)
 
 This discovery includes Jobvite, Tyler-Munis, FMLA, and PowerSchool Data for the 2023-2024 SY.
+
 ```{r libs}
 library(tidyverse)
 library(janitor)
 library(ideadata)
+library(ideacolors)
+library(ragg)
 ```
 
 ```{r load_files}
@@ -21,7 +24,6 @@ glimpse(jobvite)
 glimpse(tyler_munis)
 glimpse(fmla)
 ```
-
 
 ```{r load_courses}
 #Get PowerSchool data that is located in the DWH (save into a file)
@@ -37,17 +39,16 @@ source("munge/merge_data.R")
 glimpse(courses_tm_fmla_staff) # !!! This is where we have total_days_out
 ```
 
-
 ```{r discovery}
 #Learning about the data sets
 
 #staff with course that on 45 days or more of FMLA
-staffing_w_course %>%
+staffing_w_courses %>%
   left_join(fmla, join_by(employee_id)) %>%
   filter(!is.na(first_date_of_leave)) %>%
   filter(fmla_days_out >= 45) %>%
   summarise(count = n(),
-            average = mean(fmla_days_out)) %>%
+            average = mean(fmla_days_out, na.rm = T)) %>%
   mutate(comment = 'FMLA days out')
 
 
@@ -58,3 +59,52 @@ courses_tm_fmla_staff %>%
   mutate(comment = 'total days out')
 
 ```
+## Visualizations
+Let's look at some historgrams of the total days out for staff, cut a few different ways
+
+```{r historgram}
+
+calc_modes  <- function(x) {
+  ux <- unique(x)
+  tab <- tabulate(match(x, ux))
+  ux[tab == max(tab)]
+}
+
+
+p_vacancy_histogram <- courses_tm_fmla_staff %>% 
+  filter(total_days_out > 0) %>%
+  ggplot(aes(x = total_days_out)) +
+  geom_histogram(binswidth = 1, color="gray90", boundary = .5) +
+  geom_vline(aes(xintercept = calc_modes(total_days_out)), color = "red") +
+  geom_text(aes(x = unique(calc_modes(total_days_out)), y = 120, 
+                 label = glue::glue("Modal value is\n{calc_modes(total_days_out)}")
+                 ), 
+             color = "red", 
+            nudge_x = 49) +
+  theme_idea_light() +
+  NULL
+```
+
+```{r}
+courses_tm_fmla_staff %>% 
+  filter(total_days_out > 0) %>%
+  #group_by(course_credit_type) %>%
+  ggplot(aes(x = total_days_out)) +
+  geom_histogram(binswidth = 1, color="gray90", boundary = .5) +
+  geom_vline(data = . %>%
+               group_by(course_credit_type) %>% 
+               summarise(median = median(total_days_out)), 
+             aes(xintercept = median), color = "red"
+             ) +
+  geom_text(data = . %>%
+               group_by(course_credit_type) %>% 
+               summarise(median = median(total_days_out)),
+            aes(x = median, y = 120, 
+                 label = glue::glue("Modal value is\n{median}")
+                 ), 
+             color = "red", 
+            nudge_x = 49) +
+  facet_wrap(~course_credit_type) +
+  theme_idea_light() 
+```
+

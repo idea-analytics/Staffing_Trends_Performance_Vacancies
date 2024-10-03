@@ -41,8 +41,20 @@ jobvite <- read.csv("data/jobvite_07012023_06302024.csv") %>%
                             TRUE ~ campus)) %>%
   left_join(school_matching, join_by(campus, campus_type)) %>%
   inner_join(school_matching %>%  select(campus) %>% distinct(), 
-            join_by(campus))
-
+            join_by(campus)) %>%
+  mutate(job_filled_on = as.Date(job_filled_on, format("%m/%d/%Y"))) %>%
+  mutate(job_most_recent_open_date = as.Date(job_most_recent_open_date, format("%m/%d/%Y")))  %>% 
+  mutate(internal_role = iconv(internal_role, "latin1", "ASCII", sub=""),
+         job_title = iconv(department, "latin1", "ASCII", sub=""),
+         department = iconv(internal_role, "latin1", "ASCII", sub="")) %>%
+  filter(grepl("Teacher|Principal",internal_role) | 
+           grepl("Teacher|Principal",job_title) | 
+           grepl("Teach",department), 	
+         !grepl("Co-|Interventionist",internal_role),
+         !grepl("Substitute|PE",department),
+         job_title %in% c("Teaching - English Language Arts", "Teaching - Science",
+                          "Teaching - Social Studies", "Teaching - Math", "Executive Campus Leadership")) 
+  
   
 # Tylyer Munis data
 tyler_munis <- read.csv("data/tyler_munis_07012023_06302024.csv") %>%

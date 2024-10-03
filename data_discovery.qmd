@@ -8,6 +8,7 @@ editor: visual
 ## Data Discovery for Staffing Trends vs Student Performance (Staffing data)
 
 This discovery includes Jobvite, Tyler-Munis, FMLA, and PowerSchool Data for the 2023-2024 SY.
+
 ```{r libs}
 library(tidyverse)
 library(janitor)
@@ -22,7 +23,6 @@ glimpse(tyler_munis)
 glimpse(fmla)
 ```
 
-
 ```{r load_courses}
 #Get PowerSchool data that is located in the DWH (save into a file)
 source("data/get_course_data.R")
@@ -35,14 +35,14 @@ glimpse(staffing_w_courses)
 #Merge PowerSchool data with data files
 source("munge/merge_data.R")
 glimpse(courses_tm_fmla_staff) # !!! This is where we have total_days_out
+glimpse(jobvite_staffing_vacancies) # !!! This is where we have total_days_vacancy
 ```
-
 
 ```{r discovery}
 #Learning about the data sets
 
 #staff with course that on 45 days or more of FMLA
-staffing_w_course %>%
+staffing_w_courses %>%
   left_join(fmla, join_by(employee_id)) %>%
   filter(!is.na(first_date_of_leave)) %>%
   filter(fmla_days_out >= 45) %>%

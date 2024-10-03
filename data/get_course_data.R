@@ -63,4 +63,4 @@ staffing_courses <- courses_dwh %>%
 #distinct staff courses data (course that came from power school)
 staffing_w_courses <- staffing_courses %>%
   select(employee_id) %>%
-  distinct()
+  distinct() 

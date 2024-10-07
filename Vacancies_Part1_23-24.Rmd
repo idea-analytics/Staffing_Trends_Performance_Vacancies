@@ -1,0 +1,293 @@
+---
+title: "Part 1 Staffing/Vacancies Measure of Central Tendency"
+author: Maura Carter
+date: 10-03-2024
+output: html_notebook
+---
+
+1. Summative Analysis of Vacancies
+
+Include central tendency and variation by subject, grade, grade-subject, campus, campus-subject, region, region-subject
+
+a) subject    (col: course credit type)          
+b) **grade 
+c) **grade-subject
+d) campus
+e) campus-subject
+f) region
+g) region-subject
+
+
+
+#1) How long are vacancies (median and mean and SD)?
+#2) How many vacancies (median, mean and SD)?
+#3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+#4) Add box plots and histograms. 
+
+# how to install ideadata package
+https://rdrr.io/github/idea-analytics/ideadata/f/README.Rmd
+``` {r install, eval=FALSE}
+
+# install.packages("remotes")
+library(remotes)
+# remotes::install_github("idea-analytics/ideadata")
+#remotes::install_github("idea-analytics/ideacolors")
+library(ideacolors)
+```
+
+
+```{r merge}
+#Merge PowerSchool data with data files
+source("munge/merge_data.R")
+
+#Glimpse to see columns/rows in the tables
+#glimpse(courses_tm_fmla_staff) # !!! This is where we have total_days_out
+#glimpse(jobvite_staffing_vacancies) # !!! This is where we have total_days_vacancy
+
+
+#look at the tables in R
+courses_tm_fmla_staff   #FMLA data (number of days off for FMLA)
+jobvite_staffing_vacancies   #number of days vacancy
+jobvite
+```
+
+#F) Region
+```{r}
+
+#instructions
+#1) How long are vacancies (median and mean and SD)?
+#2) How many vacancies (median, mean and SD)?
+#3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+#4) Add box plots and histograms. 
+
+#-----------------------------------------
+
+#1) How long are vacancies (median and mean and SD)?
+
+
+#f-1) region
+region_median_mean_sd <-jobvite_staffing_vacancies %>%
+  mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  select(Region, total_days_vacancy) %>%
+  group_by(Region)  %>%
+  summarise(Median = median(total_days_vacancy),
+            Mean = mean(total_days_vacancy),
+            SD = sd(total_days_vacancy)) 
+  # count()
+region_median_mean_sd
+
+
+#change data to numeric
+# jobvite_staffing_vacancies$employee_id <- as.numeric(jobvite_staffing_vacancies$employee_id)
+# jobvite_staffing_vacancies$total_days_vacancy <- as.numeric(jobvite_staffing_vacancies$total_days_vacancy)
+
+```
+
+#Region
+#2) How many vacancies (median, mean and SD)?
+```{r}
+
+#2) How many vacancies are there? Count
+#f-2 (region)
+region_vacancy_count <-jobvite_staffing_vacancies %>%
+  mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  select(Region) %>%
+  group_by(Region)  %>%
+  summarise(`Number of Vacancies` = n()) 
+region_vacancy_count
+
+
+org_vacancy_count_mean_median_SD_byRegion <- region_vacancy_count %>%
+  summarise(`Median Over Regions` = median(`Number of Vacancies`),
+            `Mean Over Regions` = mean(`Number of Vacancies`),
+            `SD Over Regions` = sd(`Number of Vacancies`)) 
+  
+org_vacancy_count_mean_median_SD_byRegion
+
+
+
+
+
+```
+
+#Region
+#3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+```{r}
+#use lubridate?
+
+#try Month first, searching for "01" or "02"
+
+
+```
+
+#Region
+#4) Add box plots and Histograms.
+```{r}
+#4) Add box plots and histograms. 
+
+#region
+#f-4)   
+
+#1) How long are vacancies
+#Data Prep
+hist_prep_data <- jobvite_staffing_vacancies %>%
+  mutate("Vacancy Length in Days" = total_days_vacancy) %>%
+  select(region.x, `Vacancy Length in Days`) 
+hist_prep_data  
+
+#Austin
+Austin_Region <- hist_prep_data %>%
+  filter(region.x == "AUSTIN REGION")
+Austin_Region 
+
+hist(Austin_Region$`Vacancy Length in Days`)
+
+#El Paso
+El_Paso_Region <- hist_prep_data %>%
+  filter(region.x == "EL PASO REGION")
+El_Paso_Region 
+
+hist(El_Paso_Region$`Vacancy Length in Days`)
+
+#Greater Houston
+Greater_Houston_Region <- hist_prep_data %>%
+  filter(region.x == "GREATER HOUSTON REGION")
+Greater_Houston_Region
+
+hist(Greater_Houston_Region$`Vacancy Length in Days`)
+
+#Lower Valley RGV
+Lower_Valley_RGV <- hist_prep_data %>%
+  filter(region.x == "LOWER VALLEY RGV")
+Lower_Valley_RGV
+
+hist(Lower_Valley_RGV$`Vacancy Length in Days`)
+
+#Upper Valley RGV
+Upper_Valley_RGV <- hist_prep_data %>%
+  filter(region.x == "UPPER VALLEY RGV")
+Upper_Valley_RGV 
+
+hist(Upper_Valley_RGV$`Vacancy Length in Days`)
+
+#Mid Valley RGV
+Mid_Valley_RGV <- hist_prep_data %>%
+  filter(region.x == "MID VALLEY RGV")
+Mid_Valley_RGV 
+
+hist(Mid_Valley_RGV$`Vacancy Length in Days`)
+
+#Permian Basin Region
+Permian_Basin_Region <- hist_prep_data %>%
+  filter(region.x == "PERMIAN BASIN REGION")
+Permian_Basin_Region 
+
+hist(Permian_Basin_Region$`Vacancy Length in Days`)
+
+#San Antonio
+San_Antonio_Region <- hist_prep_data %>%
+  filter(region.x == "SAN ANTONIO REGION")
+San_Antonio_Region 
+
+hist(San_Antonio_Region$`Vacancy Length in Days`)
+
+#Tarrant County
+Tarrant_County_Region <- hist_prep_data %>%
+  filter(region.x == "TARRANT COUNTY REGION")
+Tarrant_County_Region
+
+hist(Tarrant_County_Region$`Vacancy Length in Days`)
+
+#EXAMPLE Historgram
+# not_first_yr <- data1 %>%
+#   group_by(EmployeeID, FirstYearTeacher) %>%
+#   filter(FirstYearTeacher == 0) %>%
+#   summarize(Percent_Mastery = mean(Mastery, na.rm = TRUE))
+# not_first_yr #approx. 1124 Non-first year teachers in our dataset
+# 
+# hist(not_first_yr$Percent_Mastery)
+
+#-----------------------------------
+
+#2) count of vacancies - bar chart
+# region_vacancy_count <-jobvite_staffing_vacancies %>%
+#   mutate(Region = region.x) %>%
+#   filter(Region == "AUSTIN REGION" |
+#            Region == "EL PASO REGION" |
+#            Region == "GREATER HOUSTON REGION" |
+#            Region == "LOWER VALLEY RGV"|
+#            Region == "UPPER VALLEY RGV"|
+#            Region == "MID VALLEY RGV" |
+#            Region == "PERMIAN BASIN REGION" |
+#            Region == "SAN ANTONIO REGION" |
+#            Region == "TARRANT COUNTY REGION") %>%
+#   select(Region) %>%
+#   group_by(Region)  %>%
+#   summarise(`Number of Vacancies` = n()) 
+
+#dataset name for counts
+region_vacancy_count
+
+plot_vacancy_count <- ggplot(region_vacancy_count, 
+                             aes(x = `Number of Vacancies`, 
+                                 y = Region, 
+                                 fill = Region)) + 
+  geom_bar(stat = "identity") +
+ 
+  scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+   theme(legend.position="none") +
+  labs(
+    #x= "Number of Staffing Vacancies",
+      # y ="Region",
+       title = "Number of Staffing Vacancies by Region",
+       subtitle = "for SY 23-24")
+
+plot_vacancy_count
+
+
+
+
+#-------------------------
+#BOXPLOTS
+#B - adding gitter
+p_box_all_subjects_2021 <- data_2021_master %>%
+  filter(Subject != "NA" | Subject != "Technology") %>%
+  ggplot(aes(x= `Year of Teaching at IDEA`,
+             y = `Percent of Students Passing`, 
+             #fill = as.factor(FirstYearTeacher),
+             color =`Year of Teaching at IDEA`)) +
+geom_boxplot(outlier.shape = NA, 
+             alpha = .25,) +
+  geom_jitter(size= 1, alpha =.75, width = .05) +
+ 
+  #facet_grid(Subject~`Year of Teaching at IDEA`, 
+  #           scales = "free_y",
+              
+ #            ) +
+  labs(title= "20-21 SY: Median Passing Rate for All Subjects Combined")
+p_box_all_subjects_2021
+
+```
+

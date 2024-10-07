@@ -24,6 +24,107 @@ g) region-subject
 #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
 #4) Add box plots and histograms. 
 
+
+#CHECKLIST - (Both VACANCIES and FMLA outputs)
+
+#VACANCIES
+a) subject    (col: course credit type)
+  #1) How long are vacancies (median and mean and SD)? 
+  #2) How many vacancies (median, mean and SD)?
+  #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+  #4) Add box plots and histograms. 
+
+
+b) **grade
+  #1) How long are vacancies (median and mean and SD)?
+  #2) How many vacancies (median, mean and SD)?
+  #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+  #4) Add box plots and histograms. 
+
+c) **grade-subject
+  #1) How long are vacancies (median and mean and SD)?
+  #2) How many vacancies (median, mean and SD)?
+  #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+  #4) Add box plots and histograms. 
+
+
+d) campus
+  #1) How long are vacancies (median and mean and SD)?
+  #2) How many vacancies (median, mean and SD)?
+  #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+  #4) Add box plots and histograms. 
+
+
+e) campus-subject
+  #1) How long are vacancies (median and mean and SD)?
+  #2) How many vacancies (median, mean and SD)?
+  #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+  #4) Add box plots and histograms. 
+
+
+f) region
+ YES #1) How long are vacancies (median and mean and SD)?
+ YES #2) How many vacancies (median, mean and SD)?
+  #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+ BOX left #4) Add box plots and histograms. 
+
+
+g) region-subject
+  #1) How long are vacancies (median and mean and SD)?
+  #2) How many vacancies (median, mean and SD)?
+  #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+  #4) Add box plots and histograms. 
+
+
+#FMLA
+a) subject    (col: course credit type)
+ YES #1) How long are vacancies (median and mean and SD)?
+ YES #2) How many vacancies (median, mean and SD)?
+  #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+ BAR #4) Add box plots and histograms. 
+
+
+b) **grade
+  #1) How long are vacancies (median and mean and SD)?
+  #2) How many vacancies (median, mean and SD)?
+  #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+  #4) Add box plots and histograms. 
+
+c) **grade-subject
+  #1) How long are vacancies (median and mean and SD)?
+  #2) How many vacancies (median, mean and SD)?
+  #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+  #4) Add box plots and histograms. 
+
+
+d) campus
+  #1) How long are vacancies (median and mean and SD)?
+  #2) How many vacancies (median, mean and SD)?
+  #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+  #4) Add box plots and histograms. 
+
+
+e) campus-subject
+  #1) How long are vacancies (median and mean and SD)?
+  #2) How many vacancies (median, mean and SD)?
+  #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+  #4) Add box plots and histograms. 
+
+
+f) region
+  #1) How long are vacancies (median and mean and SD)?
+  #2) How many vacancies (median, mean and SD)?
+  #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+  #4) Add box plots and histograms. 
+
+
+g) region-subject
+  #1) How long are vacancies (median and mean and SD)?
+  #2) How many vacancies (median, mean and SD)?
+  #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+  #4) Add box plots and histograms. 
+
+
 # how to install ideadata package
 https://rdrr.io/github/idea-analytics/ideadata/f/README.Rmd
 ``` {r install, eval=FALSE}
@@ -130,7 +231,7 @@ schools_FMLA
 schools_region_FMLA <- left_join(schools_FMLA, region, by = "region_id", copy = TRUE)
 schools_region_FMLA
 
-#--------------------------
+#Median, Mean, Mode: FMLA
 region_FMLA_median_mean_sd <-schools_region_FMLA %>%
   mutate(Region = RegionDescription) %>%
   filter(Region == "Austin" |
@@ -191,6 +292,36 @@ org_vacancy_count_mean_median_SD_byRegion <- region_vacancy_count %>%
             `SD Over Regions` = sd(`Number of Vacancies`)) 
   
 org_vacancy_count_mean_median_SD_byRegion
+
+
+#---------------------------------------------
+
+#f-2 (region)
+region_fmla_count <-schools_region_FMLA %>%
+ mutate(Region = RegionDescription) %>%
+  filter(Region == "Austin" |
+           Region == "El Paso" |
+           Region == "Greater Houston Area" |
+           Region == "Lower Valley"|
+           Region == "Upper Valley"|
+           Region == "Mid Valley" |
+           Region == "Permian Basin" |
+           Region == "West San Antonio" |
+           Region == "East San Antonio"  |
+           Region == "Tarrant County") %>%
+  filter(total_days_out >0) %>%
+  select(Region) %>%
+  group_by(Region)  %>%
+  summarise(`Number of Leaves for FMLA` = n())
+region_fmla_count
+
+
+org_fmla_count_mean_median_SD_byRegion <- region_fmla_count %>%
+  summarise(`Median Over Regions` = median(`Number of Leaves for FMLA`),
+            `Mean Over Regions` = mean(`Number of Leaves for FMLA`),
+            `SD Over Regions` = sd(`Number of Leaves for FMLA`)) 
+  
+org_fmla_count_mean_median_SD_byRegion
 
 
 
@@ -295,7 +426,13 @@ hist(Tarrant_County_Region$`Vacancy Length in Days`)
 # 
 # hist(not_first_yr$Percent_Mastery)
 
-#-----------------------------------
+```
+
+#barchart (vacancy count)
+```{r}
+#BAR
+#vacancy counts
+
 
 #2) count of vacancies - bar chart
 # region_vacancy_count <-jobvite_staffing_vacancies %>%
@@ -316,9 +453,10 @@ hist(Tarrant_County_Region$`Vacancy Length in Days`)
 #dataset name for counts
 region_vacancy_count
 
+
 plot_vacancy_count <- ggplot(region_vacancy_count, 
                              aes(x = `Number of Vacancies`, 
-                                 y = Region, 
+                                 y = reorder(Region, -`Number of Vacancies`),
                                  fill = Region)) + 
   geom_bar(stat = "identity") +
  
@@ -330,17 +468,71 @@ plot_vacancy_count <- ggplot(region_vacancy_count,
    theme(legend.position="none") +
   labs(
     #x= "Number of Staffing Vacancies",
-      # y ="Region",
+      y ="Region",
        title = "Number of Staffing Vacancies by Region",
        subtitle = "for SY 23-24")
 
 plot_vacancy_count
 
+#EXAMPLE CODE
+#REF: https://bookdown.org/dli/rguide/bar-graph.html#ggplot2-bar-graph
 
+# ggplot(data = IB, aes(x = reorder(Browser, -Users), 
+#                            y = Users, fill = Browser)) + 
+#    geom_bar(stat = "identity") + 
+#    labs(title = "2018 Internet Browser Users (in millions)",
+#         x = "Internet Browser", y = "Users")
+
+#----------------------------------------------
+#BAR
+#FMLA counts
+
+# region_fmla_count <-schools_region_FMLA %>%
+#  mutate(Region = RegionDescription) %>%
+#   filter(Region == "Austin" |
+#            Region == "El Paso" |
+#            Region == "Greater Houston Area" |
+#            Region == "Lower Valley"|
+#            Region == "Upper Valley"|
+#            Region == "Mid Valley" |
+#            Region == "Permian Basin" |
+#            Region == "West San Antonio" |
+#            Region == "East San Antonio"  |
+#            Region == "Tarrant County") %>%
+#   filter(total_days_out >0) %>%
+#   select(Region) %>%
+#   group_by(Region)  %>%
+#   summarise(`Number of Leaves for FMLA` = n())
+
+#data for graph
+region_fmla_count
+
+plot_fmla_count <- ggplot(region_fmla_count, 
+                             aes(x = `Number of Leaves for FMLA`, 
+                                 y = reorder(Region, -`Number of Leaves for FMLA`),
+                                 fill = Region)) + 
+  geom_bar(stat = "identity") +
+ 
+  scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+   theme(legend.position="none") +
+  labs(
+    #x= "Number of Staffing Vacancies",
+      y ="Region",
+       title = "Number of Teacher Leaves from FMLA Vacancies",
+       subtitle = "by Region for SY 23-24")
+
+plot_fmla_count
+
+```
 
 
 #-------------------------
 #BOXPLOTS
+```{r}
 #B - adding gitter
 p_box_all_subjects_2021 <- data_2021_master %>%
   filter(Subject != "NA" | Subject != "Technology") %>%

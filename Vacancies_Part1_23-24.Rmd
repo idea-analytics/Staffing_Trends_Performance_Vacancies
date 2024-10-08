@@ -342,12 +342,13 @@ org_fmla_count_mean_median_SD_byRegion
 #Region
 #4) Add box plots and Histograms.
 ```{r}
-#4) Add box plots and histograms. 
-
+#4) Add box plots and histograms.  
 #region
 #f-4)   
 
-#1) How long are vacancies
+#1) How long are vacancies/FMLA
+
+#VACANCY
 #Data Prep
 hist_prep_data <- jobvite_staffing_vacancies %>%
   mutate("Vacancy Length in Days" = total_days_vacancy) %>%
@@ -425,6 +426,93 @@ hist(Tarrant_County_Region$`Vacancy Length in Days`)
 # not_first_yr #approx. 1124 Non-first year teachers in our dataset
 # 
 # hist(not_first_yr$Percent_Mastery)
+
+
+#---------------------------------
+#FMLA
+schools_region_FMLA
+
+hist_prep_region_fmla_length <- schools_region_FMLA %>%
+  mutate(Region = RegionDescription) %>%
+  mutate(`Length of FMLA in Days` = total_days_out) %>%
+  filter(Region == "Austin" |
+            Region == "El Paso" |
+            Region == "Greater Houston Area" |
+            Region == "Lower Valley"|
+            Region == "Upper Valley"|
+            Region == "Mid Valley" |
+            Region == "Permian Basin" |
+            Region == "West San Antonio" |
+            Region == "East San Antonio"  |
+            Region == "Tarrant County") %>%
+   filter(total_days_out >0) %>%
+   select(Region, `Length of FMLA in Days`) 
+hist_prep_region_fmla_length
+  
+
+#facet_wrap(~ align + gender)
+#Austin
+`Austin` <- hist_prep_region_fmla_length %>%
+  filter(Region == "Austin")
+`Austin`
+hist(`Austin`$`Length of FMLA in Days`)
+
+#El Paso
+`El Paso` <- hist_prep_region_fmla_length %>%
+  filter(Region == "El Paso")
+`El Paso`
+hist(`El Paso`$`Length of FMLA in Days`)
+
+#Greater Houston Area
+`Greater Houston Area` <- hist_prep_region_fmla_length %>%
+  filter(Region == "Greater Houston Area")
+`Greater Houston Area`
+hist(`Greater Houston Area`$`Length of FMLA in Days`)
+
+#Lower Valley RGV
+`Lower Valley` <- hist_prep_region_fmla_length %>%
+  filter(Region == "Lower Valley")
+`Lower Valley`
+hist(`Lower Valley`$`Length of FMLA in Days`)
+
+#Upper Valley RGV
+`Upper Valley` <- hist_prep_region_fmla_length %>%
+  filter(Region == "Upper Valley")
+`Upper Valley`
+hist(`Upper Valley`$`Length of FMLA in Days`)
+
+#Mid Valley RGV
+`Mid Valley` <- hist_prep_region_fmla_length %>%
+  filter(Region == "Mid Valley")
+`Mid Valley`
+hist(`Mid Valley`$`Length of FMLA in Days`)
+
+#Permian Basin
+`Permian Basin` <- hist_prep_region_fmla_length %>%
+  filter(Region == "Permian Basin")
+`Permian Basin`
+hist(`Permian Basin`$`Length of FMLA in Days`)
+
+#West San Antonio
+`West San Antonio` <- hist_prep_region_fmla_length %>%
+  filter(Region == "West San Antonio")
+`West San Antonio`
+hist(`West San Antonio`$`Length of FMLA in Days`)
+
+#East San Antonio
+`East San Antonio` <- hist_prep_region_fmla_length %>%
+  filter(Region == "East San Antonio")
+`East San Antonio`
+hist(`East San Antonio`$`Length of FMLA in Days`)
+
+
+#Tarrant County
+`Tarrant County` <- hist_prep_region_fmla_length %>%
+  filter(Region == "Tarrant County")
+`Tarrant County`
+hist(`Tarrant County`$`Length of FMLA in Days`)
+
+
 
 ```
 
@@ -605,7 +693,7 @@ campus_median_mean_sd
 
 #------------------------------------------------------
 
-#f-1) region - FMLA
+#d-1) campus - FMLA
 
 #Add Regions to the FMLA data
 #get school number and region from schools and regions tables, join to FMLA table 
@@ -696,7 +784,7 @@ org_vacancy_count_mean_median_SD_byCampus
 
 #---------------------------------------------
 
-#f-2 (region)
+#2 (campus)
 campus_fmla_count <-schools_region_FMLA %>%
  mutate(Region = RegionDescription) %>%
   filter(Region == "Austin" |

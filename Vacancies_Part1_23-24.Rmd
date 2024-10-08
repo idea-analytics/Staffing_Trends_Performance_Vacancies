@@ -342,8 +342,7 @@ org_fmla_count_mean_median_SD_byRegion
 #Region
 #4) Add box plots and Histograms.
 ```{r}
-#4) Add box plots and histograms. 
-
+#4) Add box plots and histograms.  
 #region
 #f-4)   
 

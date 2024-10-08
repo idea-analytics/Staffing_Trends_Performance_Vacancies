@@ -29,10 +29,10 @@ g) region-subject
 
 #VACANCIES
 a) subject    (col: course credit type)
-  #1) How long are vacancies (median and mean and SD)? 
-  #2) How many vacancies (median, mean and SD)?
+ YES #1) How long are vacancies (median and mean and SD)? 
+ YES #2) How many vacancies (median, mean and SD)?
   #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
-  #4) Add box plots and histograms. 
+BAR/HIST  #4) Add box plots and histograms. 
 
 
 b) **grade
@@ -49,10 +49,10 @@ c) **grade-subject
 
 
 d) campus
-  #1) How long are vacancies (median and mean and SD)?
-  #2) How many vacancies (median, mean and SD)?
+  YES #1) How long are vacancies (median and mean and SD)?
+  YES #2) How many vacancies (median, mean and SD)?
   #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
-  #4) Add box plots and histograms. 
+ BAR  #4) Add box plots and histograms. 
 
 
 e) campus-subject
@@ -66,7 +66,7 @@ f) region
  YES #1) How long are vacancies (median and mean and SD)?
  YES #2) How many vacancies (median, mean and SD)?
   #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
- BOX left #4) Add box plots and histograms. 
+ BAR/Hist #4) Add box plots and histograms. 
 
 
 g) region-subject
@@ -81,7 +81,7 @@ a) subject    (col: course credit type)
  YES #1) How long are vacancies (median and mean and SD)?
  YES #2) How many vacancies (median, mean and SD)?
   #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
- BAR #4) Add box plots and histograms. 
+ BAR/hist #4) Add box plots and histograms. 
 
 
 b) **grade
@@ -98,10 +98,10 @@ c) **grade-subject
 
 
 d) campus
-  #1) How long are vacancies (median and mean and SD)?
-  #2) How many vacancies (median, mean and SD)?
+  YES #1) How long are vacancies (median and mean and SD)?
+  YES #2) How many vacancies (median, mean and SD)?
   #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
-  #4) Add box plots and histograms. 
+  BAR #4) Add box plots and histograms. 
 
 
 e) campus-subject
@@ -112,10 +112,10 @@ e) campus-subject
 
 
 f) region
-  #1) How long are vacancies (median and mean and SD)?
-  #2) How many vacancies (median, mean and SD)?
+  YES #1) How long are vacancies (median and mean and SD)?
+  YES #2) How many vacancies (median, mean and SD)?
   #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
-  #4) Add box plots and histograms. 
+  BAR/hist #4) Add box plots and histograms. 
 
 
 g) region-subject
@@ -429,6 +429,7 @@ hist(Tarrant_County_Region$`Vacancy Length in Days`)
 ```
 
 #barchart (vacancy count)
+#region
 ```{r}
 #BAR
 #vacancy counts
@@ -507,7 +508,7 @@ plot_vacancy_count
 #data for graph
 region_fmla_count
 
-plot_fmla_count <- ggplot(region_fmla_count, 
+plot_fmla_count_region <- ggplot(region_fmla_count, 
                              aes(x = `Number of Leaves for FMLA`, 
                                  y = reorder(Region, -`Number of Leaves for FMLA`),
                                  fill = Region)) + 
@@ -525,14 +526,17 @@ plot_fmla_count <- ggplot(region_fmla_count,
        title = "Number of Teacher Leaves from FMLA Vacancies",
        subtitle = "by Region for SY 23-24")
 
-plot_fmla_count
+plot_fmla_count_region
 
 ```
 
 
 #-------------------------
 #BOXPLOTS
+#F) region
 ```{r}
+
+#SAMPLE CODE
 #B - adding gitter
 p_box_all_subjects_2021 <- data_2021_master %>%
   filter(Subject != "NA" | Subject != "Technology") %>%
@@ -552,4 +556,725 @@ geom_boxplot(outlier.shape = NA,
 p_box_all_subjects_2021
 
 ```
+
+#D) Campus
+
+```{r}
+#look at data
+courses_tm_fmla_staff   #FMLA data (number of days off for FMLA)
+jobvite_staffing_vacancies 
+
+
+#use "campus_upper" for the campus name
+
+```
+
+#D) Campus - 
+#1) how long were vacancies/FMLA
+```{r}
+#1) How long are vacancies (median and mean and SD)?
+
+#f-1) region - VACANCY
+campus_median_mean_sd <-jobvite_staffing_vacancies %>%
+  mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  mutate(Campus = campus_upper) %>%
+    filter(Campus != "HQ RGV") %>%
+    filter(Campus != "HQ SAN ANTONIO") %>% 
+    filter(Campus != "HQ TARRANT COUNTY") %>%
+  select(Campus, total_days_vacancy) %>%
+  group_by(Campus)  %>%
+  summarise(Median = median(total_days_vacancy),
+            Mean = mean(total_days_vacancy),
+            SD = sd(total_days_vacancy)) 
+  # count()
+campus_median_mean_sd
+
+
+#change data to numeric
+# jobvite_staffing_vacancies$employee_id <- as.numeric(jobvite_staffing_vacancies$employee_id)
+# jobvite_staffing_vacancies$total_days_vacancy <- as.numeric(jobvite_staffing_vacancies$total_days_vacancy)
+
+#------------------------------------------------------
+
+#f-1) region - FMLA
+
+#Add Regions to the FMLA data
+#get school number and region from schools and regions tables, join to FMLA table 
+schools <- ideadata::get_schools() %>%
+  mutate(school_number = SchoolNumber) %>%
+  select(school_number, RegionAltID) %>%
+  collect() 
+schools
+
+region <- get_table(.table_name = "Regions", .database_name = "PROD1", 
+        .schema = "Schools", .server_name = "RGVPDSD-DWPRD1") %>%          #[RGVPDSD-DWPRD1].[PROD1].[Schools].[Regions]
+  mutate(region_id = RegionID) %>%
+  select(region_id, RegionDescription, State)
+region
+
+#join data
+schools_FMLA <- left_join(courses_tm_fmla_staff, schools, by = "school_number") %>%
+  mutate(region_id = RegionAltID)
+schools_FMLA
+
+schools_region_FMLA <- left_join(schools_FMLA, region, by = "region_id", copy = TRUE)
+schools_region_FMLA
+
+#Median, Mean, Mode: FMLA
+campus_FMLA_median_mean_sd <-schools_region_FMLA %>%
+  mutate(Region = RegionDescription) %>%
+  filter(Region == "Austin" |
+           Region == "El Paso" |
+           Region == "Greater Houston Area" |
+           Region == "Lower Valley"|
+           Region == "Upper Valley"|
+           Region == "Mid Valley" |
+           Region == "Permian Basin" |
+           Region == "West San Antonio" |
+           Region == "East San Antonio"  |
+           Region == "Tarrant County") %>%
+  # filter(campus != "HQ RGV" |                       #remove 3 HQ's from campus name, since we only want actual schools
+  #          campus != "HQ SAN ANTONIO" |
+  #          campus != "HQ TARRANT COUNTY") %>%
+  mutate(Campus = campus) %>%
+  select(Campus, total_days_out) %>%
+  filter(total_days_out >0) %>%
+  group_by(Campus)  %>%
+  summarise(Median = median(total_days_out),
+            Mean = mean(total_days_out),
+            SD = sd(total_days_out)) 
+campus_FMLA_median_mean_sd
+
+
+```
+
+#D) Campus
+#2) Counts - how many vacancies/FMLA leaves
+
+```{r}
+#CAMPUS
+
+#2) How many vacancies are there? Count
+#f-2 (campus)
+campus_vacancy_count <-jobvite_staffing_vacancies %>%
+  mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+   mutate(Campus = campus_upper) %>%
+    filter(Campus != "HQ RGV") %>%
+    filter(Campus != "HQ SAN ANTONIO") %>% 
+    filter(Campus != "HQ TARRANT COUNTY") %>%
+  select(Campus, total_days_vacancy) %>%
+  group_by(Campus)  %>%
+  summarise(`Number of Vacancies` = n()) 
+campus_vacancy_count
+
+
+org_vacancy_count_mean_median_SD_byCampus <- campus_vacancy_count %>%
+  summarise(`Median Over Campuses` = median(`Number of Vacancies`),
+            `Mean Over Campuses` = mean(`Number of Vacancies`),
+            `SD Over Campuses` = sd(`Number of Vacancies`)) 
+  
+org_vacancy_count_mean_median_SD_byCampus
+
+
+#---------------------------------------------
+
+#f-2 (region)
+campus_fmla_count <-schools_region_FMLA %>%
+ mutate(Region = RegionDescription) %>%
+  filter(Region == "Austin" |
+           Region == "El Paso" |
+           Region == "Greater Houston Area" |
+           Region == "Lower Valley"|
+           Region == "Upper Valley"|
+           Region == "Mid Valley" |
+           Region == "Permian Basin" |
+           Region == "West San Antonio" |
+           Region == "East San Antonio"  |
+           Region == "Tarrant County") %>%
+  filter(total_days_out >0) %>%
+   mutate(Campus = campus) %>%
+    filter(Campus != "HQ RGV") %>%
+    filter(Campus != "HQ SAN ANTONIO") %>% 
+    filter(Campus != "HQ TARRANT COUNTY") %>%
+  select(Campus) %>%
+  group_by(Campus)  %>%
+  summarise(`Number of Leaves for FMLA` = n())
+campus_fmla_count
+
+
+org_fmla_count_mean_median_SD_byCampus <- campus_fmla_count %>%
+  summarise(`Median Over Campuses` = median(`Number of Leaves for FMLA`),
+            `Mean Over Campuses` = mean(`Number of Leaves for FMLA`),
+            `SD Over Campuses` = sd(`Number of Leaves for FMLA`)) 
+  
+org_fmla_count_mean_median_SD_byCampus
+
+
+
+
+```
+
+#D) Campus
+#4) Histograms/graphs
+
+```{r}
+#Data Prep for campus histograms
+hist_prep_data_campus <- jobvite_staffing_vacancies %>%
+  mutate("Vacancy Length in Days" = total_days_vacancy) %>%
+  mutate(Campus = campus_upper) %>%
+   mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  select(Campus, `Vacancy Length in Days`) 
+hist_prep_data_campus
+
+
+
+#facet_wrap(~ align + gender)
+#Austin
+Austin_Region <- hist_prep_data %>%
+  filter(region.x == "AUSTIN REGION")
+Austin_Region 
+
+hist(Austin_Region$`Vacancy Length in Days`)
+
+#El Paso
+El_Paso_Region <- hist_prep_data %>%
+  filter(region.x == "EL PASO REGION")
+El_Paso_Region 
+
+hist(El_Paso_Region$`Vacancy Length in Days`)
+
+#Greater Houston
+Greater_Houston_Region <- hist_prep_data %>%
+  filter(region.x == "GREATER HOUSTON REGION")
+Greater_Houston_Region
+
+hist(Greater_Houston_Region$`Vacancy Length in Days`)
+
+#Lower Valley RGV
+Lower_Valley_RGV <- hist_prep_data %>%
+  filter(region.x == "LOWER VALLEY RGV")
+Lower_Valley_RGV
+
+hist(Lower_Valley_RGV$`Vacancy Length in Days`)
+
+#Upper Valley RGV
+Upper_Valley_RGV <- hist_prep_data %>%
+  filter(region.x == "UPPER VALLEY RGV")
+Upper_Valley_RGV 
+
+hist(Upper_Valley_RGV$`Vacancy Length in Days`)
+
+#Mid Valley RGV
+Mid_Valley_RGV <- hist_prep_data %>%
+  filter(region.x == "MID VALLEY RGV")
+Mid_Valley_RGV 
+
+hist(Mid_Valley_RGV$`Vacancy Length in Days`)
+
+#Permian Basin Region
+Permian_Basin_Region <- hist_prep_data %>%
+  filter(region.x == "PERMIAN BASIN REGION")
+Permian_Basin_Region 
+
+hist(Permian_Basin_Region$`Vacancy Length in Days`)
+
+#San Antonio
+San_Antonio_Region <- hist_prep_data %>%
+  filter(region.x == "SAN ANTONIO REGION")
+San_Antonio_Region 
+
+hist(San_Antonio_Region$`Vacancy Length in Days`)
+
+#Tarrant County
+Tarrant_County_Region <- hist_prep_data %>%
+  filter(region.x == "TARRANT COUNTY REGION")
+Tarrant_County_Region
+
+hist(Tarrant_County_Region$`Vacancy Length in Days`)
+
+```
+
+#Campus
+#4) Bar - Vacancy, FMLA 
+```{r}
+#data for graph
+campus_fmla_count
+
+#vacancy - campus
+
+
+
+
+
+#-------------------------------
+#FMLA  - campus
+campus_fmla_count
+
+plot_fmla_count_campus <- ggplot(campus_fmla_count, 
+                             aes(x = `Number of Leaves for FMLA`, 
+                                 y = reorder(Campus, -`Number of Leaves for FMLA`),
+                                 fill = Campus)) + 
+  geom_bar(stat = "identity") +
+ 
+  scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+   theme(legend.position="none") +
+  labs(
+    #x= "Number of Staffing Vacancies",
+      y ="Campus",
+       title = "Number of Teacher Leaves from FMLA",
+       subtitle = "by Campus for SY 23-24")
+
+plot_fmla_count_campus
+
+```
+
+
+#A) SUBJECT
+
+```{r}
+#look at the tables in R
+courses_tm_fmla_staff   #FMLA data (number of days off for FMLA)
+jobvite_staffing_vacancies   #number of days vacancy
+#jobvite
+
+```
+
+#A) subject 
+#clean the data/prep the subject column "job_title" to be subject
+```{r}
+
+#vacancies data
+
+subject <- jobvite_staffing_vacancies %>%
+   mutate("Vacancy Length in Days" = total_days_vacancy) %>%
+  mutate(Campus = campus_upper) %>%
+  mutate(Subject = job_title) %>%
+   mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  filter(Subject != "Executive Campus Leadership") %>%
+   mutate(Campus = campus_upper) %>%
+    filter(Campus != "HQ RGV") %>%
+    filter(Campus != "HQ SAN ANTONIO") %>% 
+    filter(Campus != "HQ TARRANT COUNTY") %>%
+  select(employee_id, Subject, "Vacancy Length in Days")      #add in "campus_upper" to get campus name, "region.x" to get region name 
+subject
+
+
+#distinct subjects
+subject_distinct <- subject %>%
+  select(Subject) %>%
+  distinct()
+subject_distinct
+
+#social studides
+#math
+#science
+#english language arts
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject$Subject[subject$Subject == "Teaching - Math"] <- "Math"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject$Subject[subject$Subject == "Teaching - Science"] <- "Science"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject$Subject[subject$Subject == "Teaching - English Language Arts"] <- "English Language Arts"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject$Subject[subject$Subject == "Teaching - Social Studies"] <- "Social Studies"
+
+
+#Change data from character to numeric (col Hired)
+#job_1920$Hired <- as.numeric(job_1920$Hired)
+
+#Change data from character to numeric (col Hired)
+subject$Subject <- as.character(subject$Subject)
+subject
+
+
+#distinct subjects
+subject_distinct2 <- subject %>%
+  select(Subject) %>%
+  distinct()
+subject_distinct2
+
+```
+
+
+#A) Subject - 
+#1) how long were vacancies/FMLA
+```{r}
+#1) How long are vacancies (median and mean and SD)?
+
+#A-1) Subject - VACANCY
+subject_median_mean_sd <- subject %>%
+  select(Subject, `Vacancy Length in Days`) %>%
+  #filter(Subject != "English Language Arts") %>%
+  group_by(Subject)  %>%
+  summarise(Median = median(`Vacancy Length in Days`),
+            Mean = mean(`Vacancy Length in Days`),
+            SD = sd(`Vacancy Length in Days`)) 
+  # count()
+subject_median_mean_sd
+
+#------------------------------------------------------
+#A-1) Subject - FMLA
+
+#Add Regions to the FMLA data
+#get school number and region from schools and regions tables, join to FMLA table 
+schools <- ideadata::get_schools() %>%
+  mutate(school_number = SchoolNumber) %>%
+  select(school_number, RegionAltID) %>%
+  collect() 
+schools
+
+region <- get_table(.table_name = "Regions", .database_name = "PROD1", 
+        .schema = "Schools", .server_name = "RGVPDSD-DWPRD1") %>%          #[RGVPDSD-DWPRD1].[PROD1].[Schools].[Regions]
+  mutate(region_id = RegionID) %>%
+  select(region_id, RegionDescription, State)
+region
+
+#join data
+schools_FMLA <- left_join(courses_tm_fmla_staff, schools, by = "school_number") %>%
+  mutate(region_id = RegionAltID)
+schools_FMLA
+
+schools_region_FMLA <- left_join(schools_FMLA, region, by = "region_id", copy = TRUE)
+schools_region_FMLA
+
+#Median, Mean, Mode: FMLA
+subject_FMLA_median_mean_sd <-schools_region_FMLA %>%
+  mutate(Region = RegionDescription) %>%
+  filter(Region == "Austin" |
+           Region == "El Paso" |
+           Region == "Greater Houston Area" |
+           Region == "Lower Valley"|
+           Region == "Upper Valley"|
+           Region == "Mid Valley" |
+           Region == "Permian Basin" |
+           Region == "West San Antonio" |
+           Region == "East San Antonio"  |
+           Region == "Tarrant County") %>%
+  # filter(campus != "HQ RGV" |                       #remove 3 HQ's from campus name, since we only want actual schools
+  #          campus != "HQ SAN ANTONIO" |
+  #          campus != "HQ TARRANT COUNTY") %>%
+  mutate(Subject =course_credit_type) %>%
+  filter(total_days_out > 0) %>%
+  select(employee_id, Subject, total_days_out)
+subject_FMLA_median_mean_sd
+  
+#distinct subjects
+subject_distinct_fmla <- subject_FMLA_median_mean_sd %>%
+  select(Subject) %>%
+  distinct()
+subject_distinct_fmla
+
+#social studides
+#math
+#science
+#english language arts
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject_FMLA_median_mean_sd$Subject[campus_FMLA_median_mean_sd$Subject == "MATH"] <- "Math"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject_FMLA_median_mean_sd$Subject[campus_FMLA_median_mean_sd$Subject == "SCI"] <- "Science"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject_FMLA_median_mean_sd$Subject[campus_FMLA_median_mean_sd$Subject == "ELA"] <- "English Language Arts"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject_FMLA_median_mean_sd$Subject[campus_FMLA_median_mean_sd$Subject == "SS"] <- "Social Studies"
+
+
+#Change data from character to numeric (col Hired)
+subject_FMLA_median_mean_sd$Subject <- as.character(campus_FMLA_median_mean_sd$Subject)
+subject_FMLA_median_mean_sd
+
+
+#distinct subjects
+subject_distinct2_FMLA <- subject %>%
+  select(Subject) %>%
+  distinct()
+subject_distinct2_FMLA
+
+#-----------------------------
+#summary stats - FMLA/Subject
+subject_FMLA_median_mean_sd_chart <- subject_FMLA_median_mean_sd %>%
+  select(Subject, total_days_out) %>%
+  filter(total_days_out >0) %>%
+  group_by(Subject)  %>%
+  summarise(Median = median(total_days_out),
+            Mean = mean(total_days_out),
+            SD = sd(total_days_out)) 
+subject_FMLA_median_mean_sd_chart
+
+```
+
+#A) Subject
+#2) Counts - how many vacancies/FMLA leaves
+
+```{r}
+#SUBJECT
+
+#2) How manyare there? Count
+#A-2 (Subject)
+
+#VACANCY
+subject_vacancy_count <-subject %>%
+  select(Subject, `Vacancy Length in Days`) %>%
+  group_by(Subject)  %>%
+  summarise(`Number of Vacancies` = n()) 
+subject_vacancy_count
+
+
+org_vacancy_count_mean_median_SD_bySubject <- subject_vacancy_count %>%
+  summarise(`Median Over Subjects` = median(`Number of Vacancies`),
+            `Mean Over Subjects` = mean(`Number of Vacancies`),
+            `SD Over Subjects` = sd(`Number of Vacancies`)) 
+  
+org_vacancy_count_mean_median_SD_bySubject
+
+
+#---------------------------------------------
+
+#a-2 (subject)
+#FMLA
+subject_fmla_count <-subject_FMLA_median_mean_sd %>%
+  #mutate(`Number of Days of FMLA` = total_days_out) %>%
+  select(Subject) %>%
+  group_by(Subject)  %>%
+  summarise(`Number of Leaves for FMLA` = n())
+subject_fmla_count
+
+
+org_fmla_count_mean_median_SD_bySubject <- subject_fmla_count %>%
+  summarise(`Median Over Subject` = median(`Number of Leaves for FMLA`),
+            `Mean Over Subject` = mean(`Number of Leaves for FMLA`),
+            `SD Over Subject` = sd(`Number of Leaves for FMLA`)) 
+  
+org_fmla_count_mean_median_SD_bySubject
+
+
+
+
+```
+#A) subject
+#4) histograms
+
+```{r}
+#Data prep for Subjects histograms
+
+#vacancies data
+
+subject
+
+
+hist_prep_data_subject_VAC <- subject %>%
+  # mutate(Campus = campus_upper) %>%
+  #  mutate(Region = region.x) %>%
+  # filter(Region == "AUSTIN REGION" |
+  #          Region == "EL PASO REGION" |
+  #          Region == "GREATER HOUSTON REGION" |
+  #          Region == "LOWER VALLEY RGV"|
+  #          Region == "UPPER VALLEY RGV"|
+  #          Region == "MID VALLEY RGV" |
+  #          Region == "PERMIAN BASIN REGION" |
+  #          Region == "SAN ANTONIO REGION" |
+  #          Region == "TARRANT COUNTY REGION") %>%
+  select(Subject, `Vacancy Length in Days`) 
+hist_prep_data_subject_VAC
+
+
+
+#facet_wrap(~ align + gender)
+#MATH
+`Math` <- hist_prep_data_subject_VAC %>%
+  filter(Subject == "Math")
+`Math`
+hist(`Math`$`Vacancy Length in Days`)
+
+#SCIENCE
+`Science` <- hist_prep_data_subject_VAC %>%
+  filter(Subject == "Science")
+`Science`
+hist(`Science`$`Vacancy Length in Days`)
+#MATH
+
+`English Language Arts` <- hist_prep_data_subject_VAC %>%
+  filter(Subject == "English Language Arts")
+`English Language Arts`
+hist(`English Language Arts`$`Vacancy Length in Days`)
+
+#MATH
+`Social Studies` <- hist_prep_data_subject_VAC %>%
+  filter(Subject == "Social Studies")
+`Social Studies`
+hist(`Social Studies`$`Vacancy Length in Days`)
+
+
+
+#------------------------------------
+
+#FMLA data
+
+hist_prep_data_subject_FMLA <- subject_FMLA_median_mean_sd %>%
+  mutate("Total Days of FMLA" = total_days_out) %>%
+  # mutate(Campus = campus_upper) %>%
+  #  mutate(Region = region.x) %>%
+  # filter(Region == "AUSTIN REGION" |
+  #          Region == "EL PASO REGION" |
+  #          Region == "GREATER HOUSTON REGION" |
+  #          Region == "LOWER VALLEY RGV"|
+  #          Region == "UPPER VALLEY RGV"|
+  #          Region == "MID VALLEY RGV" |
+  #          Region == "PERMIAN BASIN REGION" |
+  #          Region == "SAN ANTONIO REGION" |
+  #          Region == "TARRANT COUNTY REGION") %>%
+  select(Subject, `Total Days of FMLA`) 
+hist_prep_data_subject_FMLA
+
+
+
+#facet_wrap(~ align + gender)
+#MATH
+Math <- hist_prep_data_subject_FMLA %>%
+  filter(Subject == "Math")
+Math
+hist(Math$`Total Days of FMLA`)
+
+#SCIENCE
+Science <- hist_prep_data_subject_FMLA %>%
+  filter(Subject == "Science")
+Science
+hist(Science$`Total Days of FMLA`)
+#MATH
+
+English_Language_Arts <- hist_prep_data_subject_FMLA %>%
+  filter(Subject == "English Language Arts")
+English_Language_Arts
+hist(English_Language_Arts$`Total Days of FMLA`)
+
+#MATH
+Social_Studies <- hist_prep_data_subject_FMLA %>%
+  filter(Subject == "Social Studies")
+Social_Studies
+hist(Social_Studies$`Total Days of FMLA`)
+
+```
+
+
+#4) BAR
+#A) Subject 
+```{r}
+
+#VACANCY - subject
+#dataset name for counts
+subject_vacancy_count
+
+
+plot_vacancy_count_subject <- ggplot(subject_vacancy_count, 
+                             aes(x = `Number of Vacancies`, 
+                                 y = reorder(Subject, -`Number of Vacancies`),
+                                 fill = Subject)) + 
+  geom_bar(stat = "identity") +
+ 
+  scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+   theme(legend.position="none") +
+  labs(
+    #x= "Number of Staffing Vacancies",
+      y ="Subject",
+       title = "Number of Staffing Vacancies by Subject",
+       subtitle = "for SY 23-24")
+
+plot_vacancy_count_subject
+
+
+#--------------------
+
+#FMLA - subject
+subject_fmla_count 
+
+plot_fmla_count_subject <- ggplot(subject_fmla_count, 
+                             aes(x = `Number of Leaves for FMLA`, 
+                                 y = reorder(Subject, -`Number of Leaves for FMLA`),
+                                 fill = Subject)) + 
+  geom_bar(stat = "identity") +
+ 
+  scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+   theme(legend.position="none") +
+  labs(
+    #x= "Number of Staffing Vacancies",
+      y ="Subject",
+       title = "Number of Teacher Leaves from FMLA",
+       subtitle = "by Subject for SY 23-24")
+
+plot_fmla_count_subject
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

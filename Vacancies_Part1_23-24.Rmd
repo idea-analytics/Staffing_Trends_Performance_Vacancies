@@ -31,7 +31,7 @@ g) region-subject
 a) subject    (col: course credit type)
  YES #1) How long are vacancies (median and mean and SD)? 
  YES #2) How many vacancies (median, mean and SD)?
-  #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+  YES #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
 BAR/HIST  #4) Add box plots and histograms. 
 
 
@@ -65,7 +65,7 @@ e) campus-subject
 f) region
  YES #1) How long are vacancies (median and mean and SD)?
  YES #2) How many vacancies (median, mean and SD)?
-  #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+  YES #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
  BAR/Hist #4) Add box plots and histograms. 
 
 
@@ -662,6 +662,13 @@ jobvite_staffing_vacancies
 ```{r}
 #1) How long are vacancies (median and mean and SD)?
 
+distinct_campus <- jobvite_staffing_vacancies %>%
+ mutate(Campus = campus_upper) %>%
+    filter(Campus == "HQ RGV" |
+           Campus == "HQ SAN ANTONIO"|
+           Campus == "HQ TARRANT COUNTY") 
+distinct_campus
+
 #f-1) region - VACANCY
 campus_median_mean_sd <-jobvite_staffing_vacancies %>%
   mutate(Region = region.x) %>%
@@ -730,9 +737,6 @@ campus_FMLA_median_mean_sd <-schools_region_FMLA %>%
            Region == "West San Antonio" |
            Region == "East San Antonio"  |
            Region == "Tarrant County") %>%
-  # filter(campus != "HQ RGV" |                       #remove 3 HQ's from campus name, since we only want actual schools
-  #          campus != "HQ SAN ANTONIO" |
-  #          campus != "HQ TARRANT COUNTY") %>%
   mutate(Campus = campus) %>%
   select(Campus, total_days_out) %>%
   filter(total_days_out >0) %>%
@@ -798,10 +802,7 @@ campus_fmla_count <-schools_region_FMLA %>%
            Region == "East San Antonio"  |
            Region == "Tarrant County") %>%
   filter(total_days_out >0) %>%
-   mutate(Campus = campus) %>%
-    filter(Campus != "HQ RGV") %>%
-    filter(Campus != "HQ SAN ANTONIO") %>% 
-    filter(Campus != "HQ TARRANT COUNTY") %>%
+   mutate(Campus = campus) %>%hj
   select(Campus) %>%
   group_by(Campus)  %>%
   summarise(`Number of Leaves for FMLA` = n())

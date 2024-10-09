@@ -1353,7 +1353,89 @@ plot_fmla_count_subject
 
 
 
+#REGION-SUBJECT
 
+```{r}
+
+#1) How long are vacancies (median and mean and SD)?
+
+#vacancy data
+
+#region-subject
+subject_region <- jobvite_staffing_vacancies %>%
+   mutate("Vacancy Length in Days" = total_days_vacancy) %>%
+  mutate(Campus = campus_upper) %>%
+  mutate(Subject = job_title) %>%
+   mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  filter(Subject != "Executive Campus Leadership") %>%
+  select(employee_id, Region, Subject, "Vacancy Length in Days")      #add in "campus_upper" to get campus name, "region.x" to get region name 
+subject_region
+
+#change names of subjects to exclude "teacher" 
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject_region$Subject[subject_region$Subject == "Teaching - Math"] <- "Math"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject_region$Subject[subject_region$Subject == "Teaching - Science"] <- "Science"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject_region$Subject[subject_region$Subject == "Teaching - English Language Arts"] <- "English Language Arts"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject_region$Subject[subject_region$Subject == "Teaching - Social Studies"] <- "Social Studies"
+
+
+#Change data from character to numeric (col Hired)
+#job_1920$Hired <- as.numeric(job_1920$Hired)
+
+#Change data from character to numeric (col Hired)
+subject_region$Subject <- as.character(subject_region$Subject)
+subject_region
+
+
+#distinct subjects
+subject_region_distinct2 <- subject_region %>%
+  select(Subject) %>%
+  distinct()
+subject_region_distinct2
+
+#------------------
+#1) how long?
+
+#subject-region - VACANCY
+region_subject_median_mean_sd <-subject_region %>%  #(df "subject_region" from above that was cleaned and filtered for region, subject)
+  # filter(Region == "AUSTIN REGION" |
+  #          Region == "EL PASO REGION" |
+  #          Region == "GREATER HOUSTON REGION" |
+  #          Region == "LOWER VALLEY RGV"|
+  #          Region == "UPPER VALLEY RGV"|
+  #          Region == "MID VALLEY RGV" |
+  #          Region == "PERMIAN BASIN REGION" |
+  #          Region == "SAN ANTONIO REGION" |
+  #          Region == "TARRANT COUNTY REGION") %>%
+  select(Region, Subject, `Vacancy Length in Days`) %>%
+  group_by(Region, Subject)  %>%
+   summarise(Median = median(`Vacancy Length in Days`),
+             Mean = mean(`Vacancy Length in Days`),
+             SD = sd(`Vacancy Length in Days`)) 
+
+region_subject_median_mean_sd
+
+
+
+
+
+
+```
 
 
 

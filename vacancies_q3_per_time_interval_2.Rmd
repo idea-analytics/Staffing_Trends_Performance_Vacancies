@@ -767,8 +767,6 @@ l_region_sem
 #-------------------------------
 #CAMPUS
 
-
-
 #--------------------------
 #SEMESTER
 #region
@@ -809,9 +807,510 @@ l_subject_sem <- vacancy_interval_counts_sem_subjects %>%
        subtitle = "for Each Semester for SY 23-24")
 
 l_subject_sem
+#-------------------------------
+
+#FMLA - semester/Region
+fmla_time <- join_data_all %>%
+  
 
 ```
 
+# this is for Quarter interval (uses helper function from previous chunk)
+# Quarter
+
+```{r}
+# uses helper function "addVacancyIntervalCol" defined in earlier chunk
+
+# Quarter
+# definition of quarters based on 2023-24 RGV academic calendar
+# https://ideapublicschools.org/wp-content/uploads/2023/03/2023-2024-AcademicCalendar_RGV.pdf
+#   Quarter 1: Aug  1 2023 - Oct  5, 2023
+#   Quarter 2: Oct  6 2023 - Jan  5 2024
+#   Quarter 3: Jan  8 2024 - Mar 22 2024
+#   Quarter 4: Mar 25 2024 - May 24 2024
+
+quarter_intervals_23_24 = data.frame(
+  label =          c("Q1",         "Q2",         "Q3",         "Q4"),
+  start_interval = c("2023-08-01", "2023-10-06", "2024-01-08", "2024-03-25"),
+  end_interval =   c("2023-10-05", "2024-01-05", "2024-03-22", "2024-05-24")
+)
+quarter_intervals_23_24$start_interval <- as.Date(quarter_intervals_23_24$start_interval)
+quarter_intervals_23_24$end_interval <- as.Date(quarter_intervals_23_24$end_interval)
+quarter_intervals_23_24
+
+# now use interval list: loop thru and add columns to vacancies table
+
+# data frame to work on
+vacancies_quarters <- jobvite_staffing_vacancies
+
+for (i in 1:nrow(quarter_intervals_23_24))
+{
+  #print(quarter_intervals_23_24[i, "start_interval"])
+  vacancies_quarters <- addVacancyIntervalCol(vacancies_quarters, quarter_intervals_23_24[i,"start_interval"], quarter_intervals_23_24[i,"end_interval"], quarter_intervals_23_24[i,"label"])
+}
+vacancies_quarters
+
+# col labels containing the vacancy intervals
+quarter_intervals_23_24["label"]
+
+# count vacancies per interval
+
+#-----------------------------
+#OUTPUT of Quarters, with various groupings 
+
+#overall (no groupings) (quarters only)
+vacancy_interval_counts_quarters <- vacancies_quarters %>%
+  #select(all_of(quarter_intervals_23_24[["label"]]))
+   summarise(across(all_of(quarter_intervals_23_24[["label"]]),sum))
+
+vacancy_interval_counts_quarters
+
+#-----------------------
+#REGION 
+#quarters
+vacancy_interval_counts_quarters_region <- vacancies_quarters %>%
+  mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  group_by(Region) %>%
+  #select(all_of(month_intervals_23_24[["label"]]))
+   summarise(across(all_of(quarter_intervals_23_24[["label"]]),sum))
+
+vacancy_interval_counts_quarters_region
+
+#-----------------------------
+#CAMPUS
+
+
+
+
+#---------------------
+#Subject
+
+#prep Subject data for quarters
+subject_vac_quarters <- vacancies_quarters %>%
+  mutate("Vacancy Length in Days" = total_days_vacancy) %>%
+  mutate(Campus = campus_upper) %>%
+  mutate(Subject = job_title) %>%
+  mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  filter(Subject != "Executive Campus Leadership") 
+subject_vac_quarters
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject_vac_quarters$Subject[subject_vac_quarters$Subject == "Teaching - Math"] <- "Math"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject_vac_quarters$Subject[subject_vac_quarters$Subject == "Teaching - Science"] <- "Science"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject_vac_quarters$Subject[subject_vac_quarters$Subject == "Teaching - English Language Arts"] <- "English Language Arts"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject_vac_quarters$Subject[subject_vac_quarters$Subject == "Teaching - Social Studies"] <- "Social Studies"
+subject_vac_quarters
+
+
+#Change data from character to numeric (col Hired)
+subject_vac_quarters$Subject <- as.character(subject_vac_quarters$Subject)
+subject_vac_quarters
+
+#Subject - quarter - OUTPUT
+vacancy_interval_counts_quarters_subject <- subject_vac_quarters %>%
+  mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  group_by(Subject) %>%
+  summarise(across(all_of(quarter_intervals_23_24[["label"]]),sum))
+
+vacancy_interval_counts_quarters_subject #data looks good
+
+
+```
+
+
+
+
+
+#GRAPHS
+#Time series graph
+#REF: https://clauswilke.com/dataviz/time-series.html
+
+
+#QUARTER
+```{r}
+
+#QUARTERS
+#region
+
+#pivot_longer - (to make data in correct format for time-series line graphs)
+vacancy_interval_counts_quarters_region_long <- vacancy_interval_counts_quarters_region %>%
+pivot_longer(!Region, names_to = "Quarter", values_to = "Count")
+vacancy_interval_counts_quarters_region_long
+
+
+#libraries
+library(ideacolors)
+library(ideadata)
+
+#line graph
+l_region_quarters <- vacancy_interval_counts_quarters_region_long %>%
+  ggplot(aes(x=Quarter, y=Count, group = Region, color = Region)) +
+ geom_line() +
+    #scale_color_viridis(discrete = TRUE) +
+    #ggtitle("Number of Vacancies for Each Quarter by Subject") +
+    #theme_ipsum() +
+    #ylab("Number of Vacancies SY 23-24")
+
+ scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+   #theme(legend.position="none") +             #removes legend  (REF:https://r-charts.com/ggplot2/legend/ )
+  labs(
+    #x= "Number of Staffing Vacancies",
+      y ="Number of Vacancies",
+       title = "Number of Vacancies by Region",
+       subtitle = "for Each Quarter for SY 23-24")
+
+l_region_quarters
+
+#-------------------------------
+#CAMPUS
+
+
+
+#--------------------------
+#SEMESTER
+#region
+
+#pivot_longer - (to make data in correct format for time-series line graphs)
+vacancy_interval_counts_quarters_subject_long <- vacancy_interval_counts_quarters_subject %>%
+pivot_longer(!Subject, names_to = "Quarter", values_to = "Count")
+vacancy_interval_counts_quarters_subject_long
+
+#libraries
+library(ideacolors)
+library(ideadata)
+
+#line graph
+l_subject_quarters <- vacancy_interval_counts_quarters_subject_long %>%
+  ggplot(aes(x=Quarter, y=Count, group = Subject, color = Subject)) +
+ geom_line() +
+    #scale_color_viridis(discrete = TRUE) +
+    #ggtitle("Number of Vacancies for Each Quarter by Subject") +
+    #theme_ipsum() +
+    #ylab("Number of Vacancies SY 23-24")
+
+ scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+   #theme(legend.position="none") +             #removes legend  (REF:https://r-charts.com/ggplot2/legend/ )
+  labs(
+    #x= "Number of Staffing Vacancies",
+      y ="Number of Vacancies",
+       title = "Number of Vacancies by Subject",
+       subtitle = "for Each Quarter for SY 23-24")
+
+l_subject_quarters
+
+```
+ 
+ #FMLA
+
+#load vacancies from CSV
+```{r}
+# load from CSV
+
+courses_tm_fmla_staff
+# fix data types for date columns
+courses_tm_fmla_staff$work_start_date <- as.Date(courses_tm_fmla_staff$work_start_date)
+courses_tm_fmla_staff$work_end_date <- as.Date(courses_tm_fmla_staff$work_end_date)
+courses_tm_fmla_staff$leave_start_date <- as.Date(courses_tm_fmla_staff$leave_start_date)
+courses_tm_fmla_staff$leave_end_date <- as.Date(courses_tm_fmla_staff$leave_end_date)
+courses_tm_fmla_staff$missing_begining_start_date <- as.Date(courses_tm_fmla_staff$missing_begining_start_date)
+courses_tm_fmla_staff$missing_begining_end_date <- as.Date(courses_tm_fmla_staff$missing_begining_end_date)
+courses_tm_fmla_staff$missing_ending_start_date <- as.Date(courses_tm_fmla_staff$missing_ending_start_date)
+courses_tm_fmla_staff$missing_ending_end_date <- as.Date(courses_tm_fmla_staff$missing_ending_end_date)
+
+glimpse(courses_tm_fmla_staff)
+courses_tm_fmla_staff
+
+# TEMP
+# look at FMLA course_name
+fmla_course_names <- unique(courses_tm_fmla_staff$course_name)
+fmla_course_names
+
+
+```
+
+
+# investigate FMLA grouping (sum of multiple FMLA entries)
+```{r}
+some_total_days_out <- courses_tm_fmla_staff %>%
+  filter(total_days_out > 0)
+#some_total_days_out
+
+some_fmla_days_out <- courses_tm_fmla_staff %>%
+  filter(fmla_days_out > 0)
+
+# temp, calculate days between leave_start_date (i.e. first out) and leave_end_date (i.e. last return to work) to see if earlier data had multiple fmla segments that were summed together
+some_fmla_days_out_TEMP <- some_fmla_days_out %>%
+  mutate( days_first_leave_to_last_rtw = as.numeric(difftime(ymd(leave_end_date), 
+                                                         ymd(leave_start_date), units = "days")))
+
+some_fmla_days_out_TEMP
+
+# find any entries where there's a difference, i.e. implying that the original fmla data had multiple fmla absences (before munge script grouped_by employee_id and summed them together) 
+some_fmla_days_out_TEMP_has_multi_leave <- some_fmla_days_out_TEMP %>%
+  filter(fmla_days_out < days_first_leave_to_last_rtw) %>% 
+  select(leave_start_date, leave_end_date, fmla_days_out, days_first_leave_to_last_rtw)
+
+some_fmla_days_out_TEMP_has_multi_leave
+# apparently only 2 employees with multiple fmla absences (note: the original munge script pre-filters out any fmla absences shorter than 45 days)
+#
+# leave_start_date  leave_end_date  fmla_days_out   days_first_leave_to_last_rtw
+# 2023-08-14        2024-01-25	    98              164	
+# 2023-07-01        2024-06-30	    363             365	
+```
+
+### FMLA time intervals
+
+# HELPER function for FMLA leave
+```{r}
+
+# Helper Function: checks the FMLA leave dates in the data frame (cols: "leave_start_date" and "leave_end_date") and adds a TRUE/FALSE (or NA) column for whether that FMLA segment has any overlap with the provided interval_start and interval_end (if no leave, then output NA).
+# note: an FMLA segment counts toward a specific interval (e.g. month of Oct) if any portion of the FMLA segment occurs in the interval
+# in other words:
+#       IF leave_start is inside the interval
+#       OR leave_end is inside the interval
+#       OR interval is fully inside of the FMLA segment (i.e. leave_start is before the interval AND leave_end is after the interval) 
+
+addFMLAIntervalCol <- function(df, interval_start, interval_end, new_col_label)
+{
+  mutate(df, !!new_col_label := 
+                             # leave_start is inside the interval
+                             (interval_start <= df$leave_start_date & df$leave_start_date < interval_end)
+                            # leave_end is inside the interval
+                           | (interval_start <= df$leave_end_date & df$leave_end_date < interval_end)
+                           # interval is fully inside of the FMLA segment
+                           | (df$leave_start_date < interval_start & df$leave_end_date >= interval_end)
+                           )
+}
+
+
+# DEMO usage on single manually defined interval
+# BETTER usage with lists/loops in later chunks
+
+# data frame to work on
+fmla_demo_start <- courses_tm_fmla_staff
+
+# focus only on ones with FMLA
+fmla_demo_some_days_out <- fmla_demo_start %>%
+  filter(fmla_days_out > 0)
+
+
+# demo call function, for a month of Oct interval
+fmla_demo_some_days_out_Oct <- addFMLAIntervalCol(fmla_demo_some_days_out, as.Date("2023-10-01"), as.Date("2023-11-01"), "Oct")
+
+# check output
+fmla_demo_some_days_out_Oct
+```
+
+# FMLA intervals by MONTH
+```{r}
+# uses helper function "addFMLAIntervalCol" defined in earlier chunk
+
+month_intervals_23_24 = data.frame(
+  # label = character(), # will populate in next step based on dates
+  start_interval = seq.Date(from = as.Date("2023-07-01"), to = as.Date("2024-06-01"), by = "month"),
+  end_interval = seq.Date(from = as.Date("2023-08-01"), to = as.Date("2024-07-01"), by = "month")
+)
+# add "label" column, with 3 letter month abbrev (e.g. "Feb") ... year implied (include in plot title/labels)
+month_intervals_23_24 <- month_intervals_23_24 %>%
+    mutate( label = format(month_intervals_23_24$start_interval, "%b"))
+
+month_intervals_23_24
+
+
+# now use interval list: loop thru and add columns to fmla table
+
+# data frame to work on
+#fmla_by_month <- courses_tm_fmla_staff
+fmla_by_month <- join_data_all
+
+for (i in 1:nrow(month_intervals_23_24))
+{
+  #print(month_intervals_23_24[i, "start_interval"])
+  fmla_by_month <- addFMLAIntervalCol(fmla_by_month, month_intervals_23_24[i,"start_interval"], month_intervals_23_24[i,"end_interval"], month_intervals_23_24[i,"label"])
+}
+fmla_by_month
+
+# col labels containing the vacancy intervals
+month_intervals_23_24["label"]
+
+
+#
+# count FMLA absences per interval
+#
+
+
+# overall (org wide, no grouping)
+fmla_by_month_counts <- fmla_by_month %>%
+  # select(all_of(month_intervals_23_24[["label"]])) %>%
+  # no grouping (i.e. single overall group), just sum only the interval columns
+  summarise(across(all_of(month_intervals_23_24[["label"]]), ~sum(.x, na.rm=TRUE)))
+fmla_by_month_counts
+
+
+# example grouping: Region
+fmla_by_month_counts_region <- fmla_by_month %>%
+  group_by(Region) %>%
+  summarise(across(all_of(month_intervals_23_24[["label"]]), ~sum(.x, na.rm=TRUE))) %>%
+  ungroup()
+fmla_by_month_counts_region
+fmla_by_month
+
+#------------------
+#graph
+#month-region
+
+
+#prep the data
+#pivot_longer - (to make data in correct format for time-series line graphs)
+fmla_interval_counts_months_region <- fmla_by_month_counts_region %>%
+pivot_longer(!Region, names_to = "Month", values_to = "Count")
+fmla_interval_counts_months_region
+
+
+#put numbers ahead of month name (so plots in order)
+fmla_interval_counts_months_region$Month[fmla_interval_counts_months_region$Month == "Jul"] <- "01 Jul"
+fmla_interval_counts_months_region$Month[fmla_interval_counts_months_region$Month == "Aug"] <- "02 Aug"
+fmla_interval_counts_months_region$Month[fmla_interval_counts_months_region$Month == "Sep"] <- "03 Sep"
+fmla_interval_counts_months_region$Month[fmla_interval_counts_months_region$Month == "Oct"] <- "04 Oct"
+fmla_interval_counts_months_region$Month[fmla_interval_counts_months_region$Month == "Nov"] <- "05 Nov"
+fmla_interval_counts_months_region$Month[fmla_interval_counts_months_region$Month == "Dec"] <- "06 Dec"
+fmla_interval_counts_months_region$Month[fmla_interval_counts_months_region$Month == "Jan"] <- "07 Jan"
+fmla_interval_counts_months_region$Month[fmla_interval_counts_months_region$Month == "Feb"] <- "08 Feb"
+fmla_interval_counts_months_region$Month[fmla_interval_counts_months_region$Month == "Mar"] <- "09 Mar"
+fmla_interval_counts_months_region$Month[fmla_interval_counts_months_region$Month == "Apr"] <- "10 Apr"
+fmla_interval_counts_months_region$Month[fmla_interval_counts_months_region$Month == "May"] <- "11 May"
+fmla_interval_counts_months_region$Month[fmla_interval_counts_months_region$Month == "Jun"] <- "12 Jun"
+fmla_interval_counts_months_region
+
+
+#line graph
+l_region_month_fmla <- fmla_interval_counts_months_region %>%
+  ggplot(aes(x=Month, y=Count, group = Region, color = Region)) +
+ geom_line() +
+    #scale_color_viridis(discrete = TRUE) +
+    #ggtitle("Number of Vacancies for Each Month by Subject") +
+    #theme_ipsum() +
+    #ylab("Number of Vacancies SY 23-24")
+
+ scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+   #theme(legend.position="none") +             #removes legend  (REF:https://r-charts.com/ggplot2/legend/ )
+  labs(
+    #x= "Number of Staffing Vacancies",
+      y ="Number of Leaves From FMLA",
+       title = "Number of Leaves From FMLA Per Month",
+       subtitle = "by Region for SY 23-24")
+
+l_region_month_fmla
+
+
+
+
+
+
+```
+
+
+# FMLA intervals by week
+
+```{r}
+# uses helper function "addFMLAIntervalCol" defined in earlier chunk
+
+# choosing to define week as Mon -> Mon (semi-arbitrary choice)
+# first week interval Mon 2023-07-03 up to Mon 2023-07-10
+# last week interval Mon 2024-06-03 up to Mon 2024-06-10
+week_intervals_23_24 = data.frame(
+  # label = character(), # will populate in next step based on dates
+  start_interval = seq.Date(from = as.Date("2023-07-03"), to = as.Date("2024-06-03"), by = "week"),
+  end_interval = seq.Date(from = as.Date("2023-07-10"), to = as.Date("2024-06-10"), by = "week")
+)
+# add "label" column, with " month/day (e.g. "7/03") ... Note: in plot axis label mention "week of Monday <>"
+week_intervals_23_24 <- week_intervals_23_24 %>%
+    mutate( label = format(week_intervals_23_24$start_interval, "%m/%d"))
+
+week_intervals_23_24
+
+# now use interval list: loop thru and add columns to fmla table
+
+# data frame to work on
+fmla_by_week <- courses_tm_fmla_staff
+
+
+for (i in 1:nrow(week_intervals_23_24))
+{
+  #print(week_intervals_23_24[i, "start_interval"])
+  fmla_by_week <- addFMLAIntervalCol(fmla_by_week, week_intervals_23_24[i,"start_interval"], week_intervals_23_24[i,"end_interval"], week_intervals_23_24[i,"label"])
+}
+fmla_by_week
+
+# col labels containing the vacancy intervals
+week_intervals_23_24["label"]
+
+#
+# count FMLA absences per interval
+#
+
+
+# overall (org wide, no grouping)
+fmla_by_week_counts <- fmla_by_week %>%
+  # select(all_of(week_intervals_23_24[["label"]])) %>%
+  # no grouping (i.e. single overall group), just sum only the interval columns
+  summarise(across(all_of(week_intervals_23_24[["label"]]), ~sum(.x, na.rm=TRUE)))
+fmla_by_week_counts
+
+
+# example grouping: campus_type
+fmla_by_week_counts_campus_type <- fmla_by_week %>%
+  group_by(campus_type) %>%
+  summarise(across(all_of(week_intervals_23_24[["label"]]), ~sum(.x, na.rm=TRUE))) %>%
+  ungroup()
+fmla_by_week_counts_campus_type
+
+```
 
 
 

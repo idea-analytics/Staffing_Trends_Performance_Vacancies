@@ -10,12 +10,13 @@ output: html_notebook
 Include central tendency and variation by subject, grade, grade-subject, campus, campus-subject, region, region-subject
 
 a) subject    (col: course credit type)          
-b) **grade 
-c) **grade-subject
+b) grade 
+c) grade-subject
 d) campus
 e) campus-subject
 f) region
 g) region-subject
+
 
 
 
@@ -35,17 +36,17 @@ a) subject    (col: course credit type)
 BAR/HIST  #4) Add box plots and histograms. 
 
 
-b) **grade
-  #1) How long are vacancies (median and mean and SD)?
-  #2) How many vacancies (median, mean and SD)?
+b) grade
+ YES #1) How long are vacancies (median and mean and SD)?
+ YES #2) How many vacancies (median, mean and SD)?
   #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
-  #4) Add box plots and histograms. 
+ BAR #4) Add box plots and histograms. 
 
-c) **grade-subject
-  #1) How long are vacancies (median and mean and SD)?
-  #2) How many vacancies (median, mean and SD)?
+c) grade-subject
+  YES #1) How long are vacancies (median and mean and SD)?
+  YES #2) How many vacancies (median, mean and SD)?
   #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
-  #4) Add box plots and histograms. 
+  BAR #4) Add box plots and histograms. 
 
 
 d) campus
@@ -56,10 +57,10 @@ d) campus
 
 
 e) campus-subject
-  #1) How long are vacancies (median and mean and SD)?
-  #2) How many vacancies (median, mean and SD)?
-  #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
-  #4) Add box plots and histograms. 
+  YES #1) How long are vacancies (median and mean and SD)?
+  YES #2) How many vacancies (median, mean and SD)?
+ #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+  BAR #4) Add box plots and histograms. 
 
 
 f) region
@@ -70,10 +71,10 @@ f) region
 
 
 g) region-subject
-  #1) How long are vacancies (median and mean and SD)?
-  #2) How many vacancies (median, mean and SD)?
+ YES #1) How long are vacancies (median and mean and SD)?
+ YES #2) How many vacancies (median, mean and SD)?
   #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
-  #4) Add box plots and histograms. 
+ BAR #4) Add box plots and histograms. 
 
 
 #FMLA
@@ -119,10 +120,10 @@ f) region
 
 
 g) region-subject
-  #1) How long are vacancies (median and mean and SD)?
-  #2) How many vacancies (median, mean and SD)?
+ YES #1) How long are vacancies (median and mean and SD)?
+ YES #2) How many vacancies (median, mean and SD)?
   #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
-  #4) Add box plots and histograms. 
+ BAR #4) Add box plots and histograms. 
 
 
 # how to install ideadata package
@@ -620,8 +621,8 @@ plot_fmla_count_region
 
 
 #-------------------------
-#BOXPLOTS
-#F) region
+#REGION
+#Boxplot
 ```{r}
 
 #SAMPLE CODE
@@ -645,8 +646,7 @@ p_box_all_subjects_2021
 
 ```
 
-#D) Campus
-
+#CAMPUS
 ```{r}
 #look at data
 courses_tm_fmla_staff   #FMLA data (number of days off for FMLA)
@@ -657,7 +657,7 @@ jobvite_staffing_vacancies
 
 ```
 
-#D) Campus - 
+#CAMPUS 
 #1) how long were vacancies/FMLA
 ```{r}
 #1) How long are vacancies (median and mean and SD)?
@@ -1355,6 +1355,7 @@ plot_fmla_count_subject
 
 #REGION-SUBJECT
 
+#1) how long?  (vacancies/fmla)
 ```{r}
 
 #1) How long are vacancies (median and mean and SD)?
@@ -1429,8 +1430,30 @@ region_subject_median_mean_sd <-subject_region %>%  #(df "subject_region" from a
              SD = sd(`Vacancy Length in Days`)) 
 
 region_subject_median_mean_sd
+```
 
 
+#REGION-SUBJECT
+#2) how many? counts (vacancy/fmla)
+
+```{r}
+#2) How manyare there? Count
+#A-2 (Subject)
+
+#VACANCY
+region_subject_vacancy_count <-subject_region %>%
+  select(Region, Subject, `Vacancy Length in Days`) %>%
+  group_by(Region, Subject)  %>%
+  summarise(`Number of Vacancies` = n()) 
+region_subject_vacancy_count
+
+
+org_vacancy_count_mean_median_SD_bySubject_region <- region_subject_vacancy_count %>%
+  summarise(`Median Over Region & Subject` = median(`Number of Vacancies`),
+            `Mean Over Region & Subject` = mean(`Number of Vacancies`),
+            `SD Over Region & Subject` = sd(`Number of Vacancies`)) 
+  
+org_vacancy_count_mean_median_SD_bySubject_region
 
 
 
@@ -1438,14 +1461,486 @@ region_subject_median_mean_sd
 ```
 
 
+#GRAPHS
+#Region-Subject
+
+#BAR
+```{r}
+
+#VACANCY     (region-subject)
+#dataset name for counts
+region_subject_vacancy_count
+
+#Bar plot
+plot_vacancy_count_subject_reg <- ggplot(region_subject_vacancy_count, 
+                             aes(x = `Number of Vacancies`, 
+                                 y = reorder(Region, -`Number of Vacancies`),
+                                 fill = Subject)) + 
+  geom_bar(stat = "identity",
+           position = "dodge") +
+ 
+  scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +      #adds a grid to the background (instead of keeping it blank white)
+  #guides(fill = "none", color = "none") +
+  # theme(legend.position="none") +      #removes legend
+  labs(
+    #x= "Number of Staffing Vacancies",
+      y ="Region",
+       title = "Number of Staffing Vacancies by Region & Subject",
+       subtitle = "for SY 23-24")
+
+plot_vacancy_count_subject_reg
+
+```
+
+
+#CAMPUS-SUBJECT
+```{r}
+#1) How long are vacancies (median and mean and SD)?
+library(dplyr)
+#Campus-subject
+subject_camp <- jobvite_staffing_vacancies %>%
+   mutate("Vacancy Length in Days" = total_days_vacancy) %>%
+  mutate(Campus = campus_upper) %>%
+  mutate(Subject = job_title) %>%
+   mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  filter(Subject != "Executive Campus Leadership") %>%
+    filter(Campus != "HQ RGV") %>%
+    filter(Campus != "HQ SAN ANTONIO") %>% 
+    filter(Campus != "HQ TARRANT COUNTY") %>%
+  select(employee_id, Campus, Subject, `Vacancy Length in Days`)      #add in "campus_upper" to get campus name, "region.x" to get region name 
+subject_camp
+
+#change names of subjects to exclude "teacher" 
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject_camp$Subject[subject_camp$Subject == "Teaching - Math"] <- "Math"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject_camp$Subject[subject_camp$Subject == "Teaching - Science"] <- "Science"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject_camp$Subject[subject_camp$Subject == "Teaching - English Language Arts"] <- "English Language Arts"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject_camp$Subject[subject_camp$Subject == "Teaching - Social Studies"] <- "Social Studies"
+
+
+#Change data from character to numeric (col Hired)
+#job_1920$Hired <- as.numeric(job_1920$Hired)
+
+#Change data from character to numeric (col Hired)
+subject_camp$Subject <- as.character(subject_camp$Subject)
+subject_camp
+
+#Campus-Subject    - VACANCY
+#how long?
+campus_subject_median_mean_sd <-subject_camp %>%
+  group_by(Campus, Subject)  %>%
+  summarise(Median = median(`Vacancy Length in Days`),
+            Mean = mean(`Vacancy Length in Days`),
+            SD = sd(`Vacancy Length in Days`)) 
+  # count()
+campus_subject_median_mean_sd
+
+
+#change data to numeric
+# jobvite_staffing_vacancies$employee_id <- as.numeric(jobvite_staffing_vacancies$employee_id)
+# jobvite_staffing_vacancies$total_days_vacancy <- as.numeric(jobvite_staffing_vacancies$total_days_vacancy)
+
+
+
+```
+
+#CAMPUS-SUBJECT
+#2) how many? counts (vacancy/fmla)
+
+```{r}
+#2) How manyare there? Count
+#Campus-subject
+
+
+#data
+subject_camp
+
+#VACANCY
+camp_subject_vacancy_count <-subject_camp %>%
+  select(Campus, Subject, `Vacancy Length in Days`) %>%
+  group_by(Campus, Subject)  %>%
+  summarise(`Number of Vacancies` = n()) 
+camp_subject_vacancy_count
+
+
+#not meaningful 
+
+# org_vacancy_count_mean_median_SD_bySubject_campus <- camp_subject_vacancy_count %>%
+#   summarise(`Median Over Campus & Subject` = median(`Number of Vacancies`),
+#             `Mean Over Campus & Subject` = mean(`Number of Vacancies`),
+#             `SD Over Campus & Subject` = sd(`Number of Vacancies`)) 
+#   
+# org_vacancy_count_mean_median_SD_bySubject_campus
+
+```
+
+#4) BAR
+#A) Subject 
+```{r}
+
+#CAMPUS-SUBJECT
+
+#vacancy
+
+#dataset name for counts
+camp_subject_vacancy_count
+
+
+plot_vacancy_count_subject_camp <- ggplot(camp_subject_vacancy_count, 
+                             aes(x = `Number of Vacancies`, 
+                                 y = reorder(Campus, -`Number of Vacancies`),
+                                 fill = Subject)) + 
+  geom_bar(stat = "identity") +
+ 
+  scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+  # theme(legend.position="none") +       #removes legend
+  labs(
+    #x= "Number of Staffing Vacancies",
+      y ="Campus",
+       title = "Number of Staffing Vacancies by Campus",
+       subtitle = "and Subject for SY 23-24")
+
+plot_vacancy_count_subject_camp
+
+```
+
+
+#GRADE
+
+# (grade, grade-subject)
+#clean the grade data 
+```{r}
+#vacancy data
+jobvite_staffing_vacancies
+
+grades_data <- jobvite_staffing_vacancies %>%
+select(employee_id, region.x, campus_upper, department, job_title, total_days_vacancy)
+grades_data
+
+
+grade_data <- grades_data %>%
+     mutate(`Vacancy Length in Days` = total_days_vacancy) %>%
+  mutate(Campus = campus_upper) %>%
+  mutate(Subject = job_title) %>%
+   mutate(Region = region.x) %>%
+  mutate(Grade = department) %>%
+   filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  filter(Subject != "Executive Campus Leadership") %>%
+    filter(Campus != "HQ RGV") %>%
+    filter(Campus != "HQ SAN ANTONIO") %>%
+    filter(Campus != "HQ TARRANT COUNTY") %>%
+    select(employee_id, Region, Campus, Grade, Subject, `Vacancy Length in Days`)
+grade_data
+
+#change names of subjects to exclude "teacher" 
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_data$Subject[grade_data$Subject == "Teaching - Math"] <- "Math"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_data$Subject[grade_data$Subject == "Teaching - Science"] <- "Science"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_data$Subject[grade_data$Subject == "Teaching - English Language Arts"] <- "English Language Arts"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_data$Subject[grade_data$Subject == "Teaching - Social Studies"] <- "Social Studies"
+
+grade_data
+
+#Change data from character to numeric (col Hired)
+grade_data$Subject <- as.character(grade_data$Subject)
+grade_data
+
+#----------------------------
+
+#change department to grade
+
+#distinct Grades
+grade_distinct <- grade_data %>%
+  select(Grade) %>%
+  distinct()
+grade_distinct
+
+# Teacher: 1-5 Social Studies				
+# Teacher: 1-5 Math				
+# Teacher: 9-12 Science				
+# Teacher: 9-12 Social Studies				
+# Teacher: 9-12 Math				
+# Teacher: 1-5 ELA				
+# Teacher: 6-8 Social Studies				
+# Teacher: 6-8 ELA				
+# Teacher: 9-12 ELA				
+# Teacher: 1-5 Social Studies/Science
+# Teacher: 6-8 Math				
+# Teacher: 6-8 Science				
+# Teacher: 1-5 Science				
+# Teacher: 6-8 Social Studies/Science				
+# Teacher: 1-5 ELA/Social Studies		         #15 grade bins		
+ 
+
+
+#change grades to exclude "teacher" and "sci/math/ela/ss"
+
+#elementary
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_data$Grade[grade_data$Grade == "Teacher: 1-5 Social Studies"] <- "1-5"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_data$Grade[grade_data$Grade == "Teacher: 1-5 Math"] <- "1-5"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_data$Grade[grade_data$Grade == "Teacher: 1-5 ELA"] <- "1-5"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_data$Grade[grade_data$Grade == "Teacher: 1-5 Science"] <- "1-5"
+
+#middle
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_data$Grade[grade_data$Grade == "Teacher: 6-8 Social Studies"] <- "6-8"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_data$Grade[grade_data$Grade == "Teacher: 6-8 Math"] <- "6-8"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_data$Grade[grade_data$Grade == "Teacher: 6-8 ELA"] <- "6-8"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_data$Grade[grade_data$Grade == "Teacher: 6-8 Science"] <- "6-8"
+
+#high school
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_data$Grade[grade_data$Grade == "Teacher: 9-12 Social Studies"] <- "9-12"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_data$Grade[grade_data$Grade == "Teacher: 9-12 Math"] <- "9-12"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_data$Grade[grade_data$Grade == "Teacher: 9-12 ELA"] <- "9-12"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_data$Grade[grade_data$Grade == "Teacher: 9-12 Science"] <- "9-12"
+
+#other combos
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_data$Grade[grade_data$Grade == "Teacher: 1-5 ELA/Social Studies"] <- "1-5"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_data$Grade[grade_data$Grade == "Teacher: 1-5 Social Studies/Science"] <- "1-5"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_data$Grade[grade_data$Grade == "Teacher: 6-8 Social Studies/Science"] <- "6-8"
+
+grade_data_final <- grade_data
+grade_data_final
+
+
+```
+
+
+#GRADE
+
+#1) how long (vac/FMLA)
+```{r}
+#GRADE    - VACANCY
+#1) how long?
+
+#data
+grade_data_final
+
+#length vac
+grade_median_mean_sd <-grade_data_final %>%
+  select(Grade, `Vacancy Length in Days`) %>%
+  group_by(Grade)  %>%
+  summarise(Median = median(`Vacancy Length in Days`),
+            Mean = mean(`Vacancy Length in Days`),
+            SD = sd(`Vacancy Length in Days`)) 
+  # count()
+grade_median_mean_sd
+
+
+```
+#GRADE
+#2) how many? counts (vacancy/fmla)
+
+```{r}
+#2) How manyare there? Count
+#GRADE
+
+
+#data
+grade_data_final
+
+#VACANCY
+grade_vacancy_count <-grade_data_final %>%
+  select(Grade, `Vacancy Length in Days`) %>%
+  group_by(Grade)  %>%
+  summarise(`Number of Vacancies` = n()) 
+grade_vacancy_count
+
+
+
+ org_vacancy_count_mean_median_SD_byGrade <- grade_vacancy_count %>%
+   summarise(`Median Over Grade` = median(`Number of Vacancies`),
+             `Mean Over Grade` = mean(`Number of Vacancies`),
+             `SD Over Grade` = sd(`Number of Vacancies`)) 
+   
+ org_vacancy_count_mean_median_SD_byGrade
+
+```
+
+#4) BAR
+#GRADE 
+```{r}
+
+#GRADE
+
+#vacancy
+
+#dataset name for counts
+grade_data_final
+grade_vacancy_count
+
+plot_vacancy_count_subject_camp <- ggplot(grade_vacancy_count, 
+                             aes(x = `Number of Vacancies`, 
+                                 y = reorder(Grade, -`Number of Vacancies`),
+                                 fill = Grade)) + 
+  geom_bar(stat = "identity") +
+ 
+  scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+   theme(legend.position="none") +       #removes legend
+  labs(
+    #x= "Number of Staffing Vacancies",
+      y ="Grade",
+       title = "Number of Staffing Vacancies by Grade",
+       subtitle = "for SY 23-24")
+
+plot_vacancy_count_subject_camp
+
+```
+
+#GRADE-SUBJECT
+
+#1) how long (vac/FMLA)
+```{r}
+#GRADE-subject    - VACANCY
+#1) how long?
+
+#data
+grade_sub_data_final <- grade_data_final
+
+#length vac
+grade_sub_median_mean_sd <-grade_sub_data_final %>%
+  select(Grade, Subject, `Vacancy Length in Days`) %>%
+  group_by(Grade, Subject)  %>%
+  summarise(Median = median(`Vacancy Length in Days`),
+            Mean = mean(`Vacancy Length in Days`),
+            SD = sd(`Vacancy Length in Days`)) 
+  # count()
+grade_sub_median_mean_sd
+
+
+```
+
+#GRADE-subject
+#2) how many? counts (vacancy/fmla)
+
+```{r}
+#2) How manyare there? Count
+#GRADE-subject
+
+
+#data
+grade_data_final
+
+#VACANCY
+grade_sub_vacancy_count <-grade_data_final %>%
+  select(Grade, Subject, `Vacancy Length in Days`) %>%
+  group_by(Grade, Subject)  %>%
+  summarise(`Number of Vacancies` = n()) 
+grade_sub_vacancy_count
+
+
+
+ org_vacancy_count_mean_median_SD_byGrade <- grade_vacancy_count %>%
+   summarise(`Median Over Grade` = median(`Number of Vacancies`),
+             `Mean Over Grade` = mean(`Number of Vacancies`),
+             `SD Over Grade` = sd(`Number of Vacancies`)) 
+   
+ org_vacancy_count_mean_median_SD_byGrade
+
+```
 
 
 
 
 
+#4) BAR
+#GRADE 
+```{r}
 
+#GRADE
 
+#vacancy
 
+#dataset name for counts
+grade_data_final
+grade_sub_vacancy_count
 
+plot_vacancy_count_subject_grade_camp <- ggplot(grade_sub_vacancy_count, 
+                             aes(x = `Number of Vacancies`, 
+                                 y = reorder(Grade, -`Number of Vacancies`),
+                                 fill = Subject)) + 
+  geom_bar(stat = "identity",
+           position = "dodge") +   #unstacks the bars; remove this to have stacked bars.
+ 
+  scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+   #theme(legend.position="none") +       #removes legend
+  labs(
+    #x= "Number of Staffing Vacancies",
+      y ="Grade",
+       title = "Number of Staffing Vacancies by Grade",
+       subtitle = "and Subject for SY 23-24")
+
+plot_vacancy_count_subject_grade_camp
+
+```
 
 

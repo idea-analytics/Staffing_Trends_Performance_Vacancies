@@ -1,0 +1,819 @@
+---
+title: "time intervals"
+output: html_notebook
+---
+
+# Sample data frame to check chunk output style
+```{r}
+Name <- c("Jon", "Bill", "Maria", "Ben", "Tina")
+Age <- c(23, 41, 32, 58, 26)
+
+df <- data.frame(Name, Age)
+
+df
+```
+
+
+Vacancies
+Part 1 Include central tendency and variation by subject, grade, grade-subject, campus, campus-subject, region, region-subject
+
+a) subject    (col: course credit type)
+b) grade 
+c) grade-subject
+d) campus
+e) campus-subject
+f) region
+g) region-subject
+
+#1) How long are vacancies (median and mean and SD)?
+#2) How many vacancies (median, mean and SD)?
+#3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
+#4) Add box plots and histograms.
+
+
+---------
+FOCUS of this experiment code is on q#3, will try to work out proof-of-concept on "month" time intervals
+------
+
+```{r}
+#library(janitor)
+library(tidyverse)
+library(lubridate)
+
+```
+
+load vacancies from CSV
+#read from actual Idea tables with edison scripts
+```{r}
+# load from CSV
+#jobvite_staffing_vacancies <- read.csv("data/export_from_maura/jobvite_staffing_vacancies_export_2024-10-06.csv", header=TRUE)
+
+# fix data types for date columns
+jobvite_staffing_vacancies$hire_date <- as.Date(jobvite_staffing_vacancies$hire_date, tryFormats = c("%m/%d/%y"))
+jobvite_staffing_vacancies$work_start_date <- as.Date(jobvite_staffing_vacancies$work_start_date)
+jobvite_staffing_vacancies$work_end_date <- as.Date(jobvite_staffing_vacancies$work_end_date)
+jobvite_staffing_vacancies$termination_date <- as.Date(jobvite_staffing_vacancies$termination_date)
+jobvite_staffing_vacancies$job_most_recent_open_date <- as.Date(jobvite_staffing_vacancies$job_most_recent_open_date)
+jobvite_staffing_vacancies$vacancy_begining_start_date <- as.Date(jobvite_staffing_vacancies$vacancy_begining_start_date)
+jobvite_staffing_vacancies$vacancy_begining_end_date <- as.Date(jobvite_staffing_vacancies$vacancy_begining_end_date)
+jobvite_staffing_vacancies$total_days_vacancy <- as.numeric(jobvite_staffing_vacancies$total_days_vacancy)
+
+#jobvite_staffing_vacancies
+#glimpse(jobvite_staffing_vacancies)
+
+# limit to fewer/relevant columns for purposes of interval experiments
+jobvite_staffing_vacancies_trimmed <- jobvite_staffing_vacancies %>%
+  select(vacancy_begining_start_date, vacancy_begining_end_date, total_days_vacancy)
+
+glimpse(jobvite_staffing_vacancies_trimmed)
+
+```
+
+
+q3 time intervals
+
+
+# temporary code experiment with single hardcoded interval stored in variable
+#DO NOT USE THIS CODE CHUNK (was initial experiment without a helper function)
+```{r}
+
+#vacancies_exp1 <- jobvite_staffing_vacancies_trimmed
+vacancies_exp1 <- jobvite_staffing_vacancies
+
+# experiment with single hardcoded interval
+interval_start = as.Date("2023-08-01")
+interval_end = as.Date("2023-08-08")
+new_col_label = "8/01 to 8/08"
+
+
+# note: a vacancy counts toward a specific interval (e.g. month of Oct) if any portion of the vacancy occurs in the interval
+# in other words:
+#       IF vacancy_start is inside the interval
+#       OR vacancy_end is inside the interval
+#       OR interval is fully inside of the vacancy (i.e. vacancy_start is before the interval AND vacancy_end is after the interval) 
+vacancies_exp1 <- mutate(vacancies_exp1, !!new_col_label := 
+                             # vacancy_start is inside the interval
+                             (interval_start <= vacancies_exp1$vacancy_begining_start_date & vacancies_exp1$vacancy_begining_start_date < interval_end)
+                            # vacancy_end is inside the interval
+                           | (interval_start <= vacancies_exp1$vacancy_begining_end_date & vacancies_exp1$vacancy_begining_end_date < interval_end)
+                           # interval is fully inside of the vacancy
+                           | (vacancies_exp1$vacancy_begining_start_date < interval_start & vacancies_exp1$vacancy_begining_end_date >= interval_end)
+                           )
+vacancies_exp1
+                             
+
+```
+
+# temporary code experiment with helper function for interval check - practice
+---------
+#this helper function is one of the key parts of the code, but the DEMO usage underneath is still temporary.
+#  ... actual usage for month and week intervals is in following chunks
+```{r}
+
+
+# Helper Function: checks the vacancies in the data frame (cols: "vacancy_begining_start_date" and "vacancy_begining_end_date") and adds a TRUE/FALSE column for whether that vacancy has any overlap with the provided interval_start and interval_end.
+# note: a vacancy counts toward a specific interval (e.g. month of Oct) if any portion of the vacancy occurs in the interval
+# in other words:
+#       IF vacancy_start is inside the interval
+#       OR vacancy_end is inside the interval
+#       OR interval is fully inside of the vacancy (i.e. vacancy_start is before the interval AND vacancy_end is after the interval) 
+
+addVacancyIntervalCol <- function(df, interval_start, interval_end, new_col_label)
+{
+  mutate(df, !!new_col_label := 
+                             # vacancy_start is inside the interval
+                             (interval_start <= df$vacancy_begining_start_date & df$vacancy_begining_start_date < interval_end)
+                            # vacancy_end is inside the interval
+                           | (interval_start <= df$vacancy_begining_end_date & df$vacancy_begining_end_date < interval_end)
+                           # interval is fully inside of the vacancy
+                           | (df$vacancy_begining_start_date < interval_start & df$vacancy_begining_end_date >= interval_end)
+                           )
+}
+
+
+# DEMO usage on single manually defined interval
+# BETTER usage with lists/loops in later chunks
+
+# data frame to work on
+#vacancies_exp2 <- jobvite_staffing_vacancies_trimmed
+vacancies_exp2 <- jobvite_staffing_vacancies
+
+
+# experiment with function call with single hardcoded interval
+interval_start = as.Date("2023-08-01")
+interval_end = as.Date("2023-08-08")
+new_col_label = "8/01 to 8/08"
+
+# note picked out 8/01 to 8/08 as a test-case interval since there were vacancy rows/results in the data that would validate each part of the helper function logic (i.e. start vacancy in interval, end vacancy in interval, and overlap full interval)
+
+# call function
+vacancies_exp2 <- addVacancyIntervalCol(vacancies_exp2, interval_start, interval_end, new_col_label)
+vacancies_exp2 <- addVacancyIntervalCol(vacancies_exp2, as.Date("2023-08-08"), as.Date("2023-08-15"), "8/08 to 8/15")
+
+# check output
+vacancies_exp2
+
+
+```
+
+experiment, making list of intervals and labels
+# this is for month interval (use helper function from previous chunk)
+# MONTH
+
+```{r}
+# uses helper function "addVacancyIntervalCol" defined in earlier chunk
+
+month_intervals_23_24 = data.frame(
+  # label = character(), # will populate in next step based on dates
+  start_interval = seq.Date(from = as.Date("2023-07-01"), to = as.Date("2024-06-01"), by = "month"),
+  end_interval = seq.Date(from = as.Date("2023-08-01"), to = as.Date("2024-07-01"), by = "month")
+)
+# add "label" column, with 3 letter month abbrev (e.g. "Feb") ... year implied (include in plot title/labels)
+month_intervals_23_24 <- month_intervals_23_24 %>%
+    mutate( label = format(month_intervals_23_24$start_interval, "%b"))
+
+month_intervals_23_24
+
+
+# now use interval list: loop thru and add columns to vacancies table
+
+# data frame to work on
+#vacancies_exp3 <- jobvite_staffing_vacancies_trimmed
+vacancies_exp3 <- jobvite_staffing_vacancies
+
+for (i in 1:nrow(month_intervals_23_24))
+{
+  #print(month_intervals_23_24[i, "start_interval"])
+  vacancies_exp3 <- addVacancyIntervalCol(vacancies_exp3, month_intervals_23_24[i,"start_interval"], month_intervals_23_24[i,"end_interval"], month_intervals_23_24[i,"label"])
+}
+vacancies_exp3
+
+# col labels containing the vacancy intervals
+month_intervals_23_24["label"]
+
+
+#
+# count vacancies per interval
+#
+list(month_intervals_23_24["label"])
+
+#-----------------------------
+#OUTPUT of Months, with various groupings 
+
+#overall (no groupings) (months only)
+vacancy_interval_counts_months <- vacancies_exp3 %>%
+  # TODO: other grouping, eg. by region
+  #select(all_of(month_intervals_23_24[["label"]]))
+   summarise(across(all_of(month_intervals_23_24[["label"]]),sum))
+
+vacancy_interval_counts_months
+
+#Region
+vacancy_interval_counts_months_region <- vacancies_exp3 %>%
+  # TODO: other grouping, eg. by region
+  mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  group_by(Region) %>%
+  #select(all_of(month_intervals_23_24[["label"]]))
+   summarise(across(all_of(month_intervals_23_24[["label"]]),sum))
+
+vacancy_interval_counts_months_region
+
+#--------------------------------------
+#CAMPUS
+
+
+
+
+
+#--------------------------
+#SUBJECT
+
+#prep Subject data for Month
+subject <- vacancies_exp3 %>%
+  # TODO: other grouping, eg. by region
+   mutate("Vacancy Length in Days" = total_days_vacancy) %>%
+  mutate(Campus = campus_upper) %>%
+  mutate(Subject = job_title) %>%
+   mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  filter(Subject != "Executive Campus Leadership") 
+subject
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject$Subject[subject$Subject == "Teaching - Math"] <- "Math"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject$Subject[subject$Subject == "Teaching - Science"] <- "Science"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject$Subject[subject$Subject == "Teaching - English Language Arts"] <- "English Language Arts"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject$Subject[subject$Subject == "Teaching - Social Studies"] <- "Social Studies"
+
+#Change data from character to numeric (col Hired)
+#job_1920$Hired <- as.numeric(job_1920$Hired)
+
+#Change data from character to numeric (col Hired)
+subject$Subject <- as.character(subject$Subject)
+subject
+
+#distinct subjects
+subject_distinct2 <- subject %>%
+  select(Subject) %>%
+  distinct()
+subject_distinct2
+
+
+#Month/Subject - OUTPUT
+vacancy_interval_counts_months_subject <- subject %>%
+group_by(Subject) %>%
+  #select(all_of(month_intervals_23_24[["label"]]))
+   summarise(across(all_of(month_intervals_23_24[["label"]]),sum))
+
+vacancy_interval_counts_months_subject
+
+```
+
+#MONTH
+#GRAPH
+#MONTH
+```{r}
+#month- REGION
+
+#region data
+vacancy_interval_counts_months_region
+
+#pivot_longer - (to make data in correct format for time-series line graphs)
+vacancy_interval_counts_months_region <- vacancy_interval_counts_months_region %>%
+pivot_longer(!Region, names_to = "Month", values_to = "Count")
+vacancy_interval_counts_months_region
+
+
+#put numbers ahead of month name (so plots in order)
+vacancy_interval_counts_months_region$Month[vacancy_interval_counts_months_region$Month == "Jul"] <- "01 Jul"
+vacancy_interval_counts_months_region$Month[vacancy_interval_counts_months_region$Month == "Aug"] <- "02 Aug"
+vacancy_interval_counts_months_region$Month[vacancy_interval_counts_months_region$Month == "Sep"] <- "03 Sep"
+vacancy_interval_counts_months_region$Month[vacancy_interval_counts_months_region$Month == "Oct"] <- "04 Oct"
+vacancy_interval_counts_months_region$Month[vacancy_interval_counts_months_region$Month == "Nov"] <- "05 Nov"
+vacancy_interval_counts_months_region$Month[vacancy_interval_counts_months_region$Month == "Dec"] <- "06 Dec"
+vacancy_interval_counts_months_region$Month[vacancy_interval_counts_months_region$Month == "Jan"] <- "07 Jan"
+vacancy_interval_counts_months_region$Month[vacancy_interval_counts_months_region$Month == "Feb"] <- "08 Feb"
+vacancy_interval_counts_months_region$Month[vacancy_interval_counts_months_region$Month == "Mar"] <- "09 Mar"
+vacancy_interval_counts_months_region$Month[vacancy_interval_counts_months_region$Month == "Apr"] <- "10 Apr"
+vacancy_interval_counts_months_region$Month[vacancy_interval_counts_months_region$Month == "May"] <- "11 May"
+vacancy_interval_counts_months_region$Month[vacancy_interval_counts_months_region$Month == "Jun"] <- "12 Jun"
+
+
+
+#libraries
+library(ideacolors)
+library(ideadata)
+
+#line graph
+l_region_subject <- vacancy_interval_counts_months_region %>%
+  ggplot(aes(x=Month, y=Count, group = Region, color = Region)) +
+ geom_line() +
+    #scale_color_viridis(discrete = TRUE) +
+    #ggtitle("Number of Vacancies for Each Month by Subject") +
+    #theme_ipsum() +
+    #ylab("Number of Vacancies SY 23-24")
+
+ scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+   #theme(legend.position="none") +             #removes legend  (REF:https://r-charts.com/ggplot2/legend/ )
+  labs(
+    #x= "Number of Staffing Vacancies",
+      y ="Number of Vacancies",
+       title = "Number of Vacancies by Region",
+       subtitle = "for Each Month for SY 23-24")
+
+l_region_subject
+
+
+
+
+
+
+
+#-------------------------------------
+#month- subject data
+vacancy_interval_counts_months_subject
+
+
+#pivot_longer - (to make data in correct format for time-series line graphs)
+vac_interval_counts_months_subject <- vacancy_interval_counts_months_subject %>%
+pivot_longer(!Subject, names_to = "Month", values_to = "Count")
+vac_interval_counts_months_subject
+
+#put numbers ahead of month name (so plots in order)
+vac_interval_counts_months_subject$Month[vac_interval_counts_months_subject$Month == "Jul"] <- "01 Jul"
+vac_interval_counts_months_subject$Month[vac_interval_counts_months_subject$Month == "Aug"] <- "02 Aug"
+vac_interval_counts_months_subject$Month[vac_interval_counts_months_subject$Month == "Sep"] <- "03 Sep"
+vac_interval_counts_months_subject$Month[vac_interval_counts_months_subject$Month == "Oct"] <- "04 Oct"
+vac_interval_counts_months_subject$Month[vac_interval_counts_months_subject$Month == "Nov"] <- "05 Nov"
+vac_interval_counts_months_subject$Month[vac_interval_counts_months_subject$Month == "Dec"] <- "06 Dec"
+vac_interval_counts_months_subject$Month[vac_interval_counts_months_subject$Month == "Jan"] <- "07 Jan"
+vac_interval_counts_months_subject$Month[vac_interval_counts_months_subject$Month == "Feb"] <- "08 Feb"
+vac_interval_counts_months_subject$Month[vac_interval_counts_months_subject$Month == "Mar"] <- "09 Mar"
+vac_interval_counts_months_subject$Month[vac_interval_counts_months_subject$Month == "Apr"] <- "10 Apr"
+vac_interval_counts_months_subject$Month[vac_interval_counts_months_subject$Month == "May"] <- "11 May"
+vac_interval_counts_months_subject$Month[vac_interval_counts_months_subject$Month == "Jun"] <- "12 Jun"
+
+vac_interval_counts_months_subject 
+library(ideacolors)
+library(ideadata)
+
+#line graph
+l_month_subject <- vac_interval_counts_months_subject %>%
+  ggplot(aes(x=Month, y=Count, group = Subject, color = Subject)) +
+ geom_line() +
+    #scale_color_viridis(discrete = TRUE) +
+    #ggtitle("Number of Vacancies for Each Month by Subject") +
+    #theme_ipsum() +
+    #ylab("Number of Vacancies SY 23-24")
+
+ scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+   #theme(legend.position="none") +             #removes legend  (REF:https://r-charts.com/ggplot2/legend/ )
+  labs(
+    #x= "Number of Staffing Vacancies",
+      y ="Number of Vacancies",
+       title = "Number of Vacancies by Subject",
+       subtitle = "for Each Month for SY 23-24")
+
+l_month_subject
+
+#--------------------------------------------
+#EXAMPLE CODE
+#REF: https://r-graph-gallery.com/line-chart-several-groups-ggplot2.html
+#https://r-graph-gallery.com/line-chart-several-groups-ggplot2.html
+
+# library(ggplot2)
+# library(babynames) # provide the dataset: a dataframe called babynames
+# library(dplyr)
+# library(hrbrthemes)
+# library(viridis)
+# 
+# # Keep only 3 names
+# don <- babynames %>% 
+#   filter(name %in% c("Ashley", "Patricia", "Helen")) %>%
+#   filter(sex=="F")
+# don
+# # Plot
+# don %>%
+#   ggplot( aes(x=year, y=n, group=name, color=name)) +
+#     geom_line() +
+#     scale_color_viridis(discrete = TRUE) +
+#     ggtitle("Popularity of American names in the previous 30 years") +
+#     theme_ipsum() +
+#     ylab("Number of babies born")
+
+```
+
+
+
+#WEEK
+
+# experiment: by week intervals
+#this is for week interval (use helper function from previous chunk)
+```{r}
+# uses helper function "addVacancyIntervalCol" defined in earlier chunk
+
+# choosing to define week as Mon -> Mon (semi-arbitrary choice)
+# first week interval Mon 2023-07-03 up to Mon 2023-07-10
+# last week interval Mon 2024-06-03 up to Mon 2024-06-10
+week_intervals_23_24 = data.frame(
+  # label = character(), # will populate in next step based on dates
+  start_interval = seq.Date(from = as.Date("2023-07-03"), to = as.Date("2024-06-03"), by = "week"),
+  end_interval = seq.Date(from = as.Date("2023-07-10"), to = as.Date("2024-06-10"), by = "week")
+)
+# add "label" column, with " month/day (e.g. "7/03") ... Note: in plot axis label mention "week of Monday <>"
+week_intervals_23_24 <- week_intervals_23_24 %>%
+    mutate( label = format(week_intervals_23_24$start_interval, "%m/%d"))
+
+week_intervals_23_24
+
+
+# now use interval list: loop thru and add columns to vacancies table
+
+# data frame to work on
+#vacancies_exp4 <- jobvite_staffing_vacancies_trimmed
+vacancies_exp4 <- jobvite_staffing_vacancies
+
+for (i in 1:nrow(week_intervals_23_24))
+{
+  #print(month_intervals_23_24[i, "start_interval"])
+  vacancies_exp4 <- addVacancyIntervalCol(vacancies_exp4, week_intervals_23_24[i,"start_interval"], week_intervals_23_24[i,"end_interval"], week_intervals_23_24[i,"label"])
+}
+vacancies_exp4
+
+# col labels containing the vacancy intervals
+week_intervals_23_24["label"]
+
+
+#
+# count vacancies per interval
+#
+list(week_intervals_23_24["label"])
+
+#------------------
+#OUTPUT by Week (and groupings)
+
+vacancy_interval_counts_weeks_overall <- vacancies_exp4 %>%
+  # TODO: other grouping, eg. by region
+  #select(all_of(month_intervals_23_24[["label"]]))
+  summarise(across(all_of(week_intervals_23_24[["label"]]),sum))
+
+vacancy_interval_counts_weeks_overall
+
+#REGION  - week
+vacancy_interval_counts_weeks_region <- vacancies_exp4 %>%
+  # TODO: other grouping, eg. by region
+  #select(all_of(month_intervals_23_24[["label"]]))
+  mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  group_by(Region) %>%
+  summarise(across(all_of(week_intervals_23_24[["label"]]),sum))
+
+vacancy_interval_counts_weeks_region
+
+#-----------------
+#CAMPUS - week
+
+
+
+#--------------------
+# SUBJECT - week
+
+#prep Subject data for Month
+subject <- vacancies_exp4 %>%
+  # TODO: other grouping, eg. by region
+   mutate("Vacancy Length in Days" = total_days_vacancy) %>%
+  mutate(Campus = campus_upper) %>%
+  mutate(Subject = job_title) %>%
+   mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  filter(Subject != "Executive Campus Leadership") 
+subject
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject$Subject[subject$Subject == "Teaching - Math"] <- "Math"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject$Subject[subject$Subject == "Teaching - Science"] <- "Science"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject$Subject[subject$Subject == "Teaching - English Language Arts"] <- "English Language Arts"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject$Subject[subject$Subject == "Teaching - Social Studies"] <- "Social Studies"
+
+#Change data from character to numeric (col Hired)
+#job_1920$Hired <- as.numeric(job_1920$Hired)
+
+#Change data from character to numeric (col Hired)
+subject$Subject <- as.character(subject$Subject)
+subject
+
+#Subject - week - OUTPUT
+vacancy_interval_counts_weeks_subject <- subject %>%
+  # TODO: other grouping, eg. by region
+  #select(all_of(month_intervals_23_24[["label"]]))
+  mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  group_by(Subject) %>%
+  summarise(across(all_of(week_intervals_23_24[["label"]]),sum))
+
+vacancy_interval_counts_weeks_subject
+
+```
+
+
+
+experiment, making list of intervals and labels
+# this is for Semester interval (use helper function from previous chunk)
+# SEMESTER
+
+```{r}
+# uses helper function "addVacancyIntervalCol" defined in earlier chunk
+
+#SEMESTER
+semester_intervals_23_24 = data.frame(
+  # label = character(), # will populate in next step based on dates
+  start_interval = c("2023-08-01", "2024-01-02"),
+  end_interval = c("2023-12-15", "2024-05-24"),
+  label = c("Fall Semester", "Spring Semester")                 
+  )
+
+# now use interval list: loop thru and add columns to vacancies table
+
+# data frame to work on
+#vacancies_exp3 <- jobvite_staffing_vacancies_trimmed
+vacancies_exp_sem <- jobvite_staffing_vacancies
+
+for (i in 1:nrow(semester_intervals_23_24))
+{
+  #print(month_intervals_23_24[i, "start_interval"])
+  vacancies_exp_sem <- addVacancyIntervalCol(vacancies_exp_sem, semester_intervals_23_24[i,"start_interval"], semester_intervals_23_24[i,"end_interval"], semester_intervals_23_24[i,"label"])
+}
+vacancies_exp_sem
+
+# col labels containing the vacancy intervals
+semester_intervals_23_24["label"]
+
+# count vacancies per interval
+list(semester_intervals_23_24["label"])
+
+#-----------------------------
+#OUTPUT of Months, with various groupings 
+#SEMESTER
+
+#overall (no groupings) (months only)
+vacancy_interval_counts_sem <- vacancies_exp_sem %>%
+  # TODO: other grouping, eg. by region
+  #select(all_of(month_intervals_23_24[["label"]]))
+   summarise(across(all_of(semester_intervals_23_24[["label"]]),sum))
+
+vacancy_interval_counts_sem
+
+#-----------------------
+#REGION 
+#semester
+vacancy_interval_counts_sem_region <- vacancies_exp_sem %>%
+  # TODO: other grouping, eg. by region
+  mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  group_by(Region) %>%
+  #select(all_of(month_intervals_23_24[["label"]]))
+   summarise(across(all_of(semester_intervals_23_24[["label"]]),sum))
+
+vacancy_interval_counts_sem_region
+
+#-----------------------------
+#CAMPUS
+
+
+
+
+#---------------------
+#Subject
+
+#prep Subject data for Month
+subject <- vacancies_exp_sem %>%
+  # TODO: other grouping, eg. by region
+   mutate("Vacancy Length in Days" = total_days_vacancy) %>%
+  mutate(Campus = campus_upper) %>%
+  mutate(Subject = job_title) %>%
+   mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  filter(Subject != "Executive Campus Leadership") 
+subject
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject$Subject[subject$Subject == "Teaching - Math"] <- "Math"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject$Subject[subject$Subject == "Teaching - Science"] <- "Science"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject$Subject[subject$Subject == "Teaching - English Language Arts"] <- "English Language Arts"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+subject$Subject[subject$Subject == "Teaching - Social Studies"] <- "Social Studies"
+subject
+
+
+#Change data from character to numeric (col Hired)
+subject$Subject <- as.character(subject$Subject)
+subject
+
+#Subject - week - OUTPUT
+vacancy_interval_counts_sem_subject <- subject %>%
+  # TODO: other grouping, eg. by region
+  #select(all_of(month_intervals_23_24[["label"]]))
+  mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  group_by(Subject) %>%
+  summarise(across(all_of(semester_intervals_23_24[["label"]]),sum))
+
+vacancy_interval_counts_sem_subject #data looks good
+
+
+
+
+
+
+
+
+```
+#GRAPHS
+#Time series graph
+#REF: https://clauswilke.com/dataviz/time-series.html
+```{r}
+
+#SEMESTER
+#region
+
+#pivot_longer - (to make data in correct format for time-series line graphs)
+vacancy_interval_counts_sem_region <- vacancy_interval_counts_sem_region %>%
+pivot_longer(!Region, names_to = "Semester", values_to = "Count")
+vacancy_interval_counts_sem_region
+
+
+# #put numbers ahead of month name (so plots in order)
+# vacancy_interval_counts_sem_region$Semester[vacancy_interval_counts_sem_region$Semester == "Jul"] <- "01 Jul"
+# vacancy_interval_counts_sem_region$Semester[vacancy_interval_counts_sem_region$Semester == "Aug"] <- "02 Aug"
+# 
+
+
+
+#libraries
+library(ideacolors)
+library(ideadata)
+
+#line graph
+l_region_sem <- vacancy_interval_counts_sem_region %>%
+  ggplot(aes(x=Semester, y=Count, group = Region, color = Region)) +
+ geom_line() +
+    #scale_color_viridis(discrete = TRUE) +
+    #ggtitle("Number of Vacancies for Each Month by Subject") +
+    #theme_ipsum() +
+    #ylab("Number of Vacancies SY 23-24")
+
+ scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+   #theme(legend.position="none") +             #removes legend  (REF:https://r-charts.com/ggplot2/legend/ )
+  labs(
+    #x= "Number of Staffing Vacancies",
+      y ="Number of Vacancies",
+       title = "Number of Vacancies by Region",
+       subtitle = "for Each Semester for SY 23-24")
+
+l_region_sem
+
+#-------------------------------
+#CAMPUS
+
+
+
+#--------------------------
+#SEMESTER
+#region
+
+#pivot_longer - (to make data in correct format for time-series line graphs)
+vacancy_interval_counts_sem_subjects <- vacancy_interval_counts_sem_subject %>%
+pivot_longer(!Subject, names_to = "Semester", values_to = "Count")
+vacancy_interval_counts_sem_subjects
+
+
+# #put numbers ahead of month name (so plots in order)
+# vacancy_interval_counts_sem_region$Semester[vacancy_interval_counts_sem_region$Semester == "Jul"] <- "01 Jul"
+# vacancy_interval_counts_sem_region$Semester[vacancy_interval_counts_sem_region$Semester == "Aug"] <- "02 Aug"
+
+#libraries
+library(ideacolors)
+library(ideadata)
+
+#line graph
+l_subject_sem <- vacancy_interval_counts_sem_subjects %>%
+  ggplot(aes(x=Semester, y=Count, group = Subject, color = Subject)) +
+ geom_line() +
+    #scale_color_viridis(discrete = TRUE) +
+    #ggtitle("Number of Vacancies for Each Month by Subject") +
+    #theme_ipsum() +
+    #ylab("Number of Vacancies SY 23-24")
+
+ scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+   #theme(legend.position="none") +             #removes legend  (REF:https://r-charts.com/ggplot2/legend/ )
+  labs(
+    #x= "Number of Staffing Vacancies",
+      y ="Number of Vacancies",
+       title = "Number of Vacancies by Subject",
+       subtitle = "for Each Semester for SY 23-24")
+
+l_subject_sem
+
+```
+
+
+
+

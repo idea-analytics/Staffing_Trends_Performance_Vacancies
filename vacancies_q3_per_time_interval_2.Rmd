@@ -45,8 +45,6 @@ library(lubridate)
 load vacancies from CSV
 #read from actual Idea tables with edison scripts
 ```{r}
-# load from CSV
-#jobvite_staffing_vacancies <- read.csv("data/export_from_maura/jobvite_staffing_vacancies_export_2024-10-06.csv", header=TRUE)
 
 # fix data types for date columns
 jobvite_staffing_vacancies$hire_date <- as.Date(jobvite_staffing_vacancies$hire_date, tryFormats = c("%m/%d/%y"))

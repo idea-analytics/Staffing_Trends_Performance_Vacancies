@@ -152,8 +152,6 @@ courses_tm_fmla_staff   #FMLA data (number of days off for FMLA)
 jobvite_staffing_vacancies   #number of days vacancy
 #jobvite
 
-
-
 #write to csv
 #write.csv(courses_tm_fmla_staff,"C:\\Users\\maura.carter\\Documents\\GitHub\\Staffing_Trends_Performance_Vacancies\\courses_tm_fmla_staff.csv", row.names = FALSE)
 
@@ -162,8 +160,6 @@ jobvite_staffing_vacancies   #number of days vacancy
 #read into R from a .csv
 # jobvite_staffing_vacancies2 <- read.csv("C:\\Users\\maura.carter\\Documents\\GitHub\\Staffing_Trends_Performance_Vacancies\\jobvite_staffing_vacancies.csv", header = TRUE)
 # jobvite_staffing_vacancies2
-
-
 
 ```
 
@@ -330,15 +326,7 @@ org_fmla_count_mean_median_SD_byRegion
 
 ```
 
-#Region
-#3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
-```{r}
-#use lubridate?
 
-#try Month first, searching for "01" or "02"
-
-
-```
 
 #Region
 #4) Add box plots and Histograms.
@@ -624,25 +612,54 @@ plot_fmla_count_region
 #REGION
 #Boxplot
 ```{r}
+#data
+region_fmla_count
+region_vacancy_count
 
-#SAMPLE CODE
-#B - adding gitter
-p_box_all_subjects_2021 <- data_2021_master %>%
-  filter(Subject != "NA" | Subject != "Technology") %>%
-  ggplot(aes(x= `Year of Teaching at IDEA`,
-             y = `Percent of Students Passing`, 
+#prep the data
+region_vac <-jobvite_staffing_vacancies %>%
+  mutate(Region = region.x) %>%
+  mutate(`Number of Days of Vacancy` = total_days_vacancy) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  select(Region, `Number of Days of Vacancy`) 
+
+region_vac
+
+
+#Region - vacancy
+#Add gitter
+p_box_region_vacancy_count <- region_vac %>%
+  ggplot(aes(x= `Number of Days of Vacancy`,
+             y = Region, 
              #fill = as.factor(FirstYearTeacher),
-             color =`Year of Teaching at IDEA`)) +
+             color =`Region`)) +
 geom_boxplot(outlier.shape = NA, 
              alpha = .25,) +
   geom_jitter(size= 1, alpha =.75, width = .05) +
- 
-  #facet_grid(Subject~`Year of Teaching at IDEA`, 
-  #           scales = "free_y",
-              
- #            ) +
-  labs(title= "20-21 SY: Median Passing Rate for All Subjects Combined")
-p_box_all_subjects_2021
+
+  scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+  theme(legend.position="none") +         #removes the legend
+  labs(
+    #x= "Number of Staffing Vacancies",
+      #y ="Region",
+       title = "Number of Days of Vacancy by Region",
+       subtitle = "for SY 23-24")
+
+
+p_box_region_vacancy_count
+
 
 ```
 
@@ -947,6 +964,10 @@ plot_fmla_count_campus <- ggplot(campus_fmla_count,
 plot_fmla_count_campus
 
 ```
+
+
+
+
 
 
 #A) SUBJECT
@@ -1351,6 +1372,53 @@ plot_fmla_count_subject
 
 ```
 
+#BOXPLOT
+#SUBJECT
+```{r}
+
+#data
+#vacancy data
+subject
+
+
+#prep the data
+subject_vac <-subject %>%
+  select(Subject, `Vacancy Length in Days`) 
+
+subject_vac
+
+
+#Subject - vacancy
+#Add gitter
+p_box_subject_vacancy_count <- subject_vac %>%
+  ggplot(aes(x= `Vacancy Length in Days`,
+             y = Subject, 
+             #fill = as.factor(FirstYearTeacher),
+             color =`Subject`)) +
+geom_boxplot(outlier.shape = NA, 
+             alpha = .25,) +
+  geom_jitter(size= 1, alpha =.75, width = .05) +
+
+  scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+  theme(legend.position="none") +         #removes the legend
+  labs(
+    #x= "Number of Staffing Vacancies",
+      #y ="Region",
+       title = "Number of Days of Vacancy by Subject",
+       subtitle = "for SY 23-24")
+
+p_box_subject_vacancy_count
+
+
+
+
+
+```
+
 
 
 #REGION-SUBJECT
@@ -1494,6 +1562,56 @@ plot_vacancy_count_subject_reg <- ggplot(region_subject_vacancy_count,
 plot_vacancy_count_subject_reg
 
 ```
+
+
+#BOXPLOT
+#REGION-SUBJECT
+```{r}
+
+#data
+#vacancy data
+subject_region
+
+
+#prep the data
+subject_region_vac <-subject_region %>%
+  select(Region, Subject, `Vacancy Length in Days`) 
+subject_region_vac
+
+
+#Subject - vacancy
+#Add gitter
+p_box_subject_vacancy_count <- subject_region_vac %>%
+  ggplot(aes(x= `Vacancy Length in Days`,
+             y = Region, 
+             #fill = as.factor(FirstYearTeacher),
+             fill =`Subject`,
+             color = Subject)) +
+geom_boxplot(outlier.shape = NA, 
+             alpha = .25,) +
+  geom_jitter(size= 1, alpha =.75, width = .05) +
+
+  scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+ # theme(legend.position="none") +         #removes the legend
+  labs(
+    #x= "Number of Staffing Vacancies",
+      #y ="Region",
+       title = "Number of Days of Vacancy by Region",
+       subtitle = "for all Subjects SY 23-24")
+
+p_box_subject_vacancy_count
+
+
+
+
+
+```
+
+
 
 
 #CAMPUS-SUBJECT

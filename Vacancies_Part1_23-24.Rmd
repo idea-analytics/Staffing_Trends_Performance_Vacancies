@@ -149,8 +149,8 @@ source("munge/merge_data.R")
 
 
 #look at the tables in R
-courses_tm_fmla_staff   #FMLA data (number of days off for FMLA)
-jobvite_staffing_vacancies   #number of days vacancy
+courses_tm_fmla_staff   #FMLA data (number of days off for FMLA)  #7081
+jobvite_staffing_vacancies   #number of days vacancy   #872
 #jobvite
 
 #write to csv
@@ -161,6 +161,12 @@ jobvite_staffing_vacancies   #number of days vacancy
 #read into R from a .csv
 # jobvite_staffing_vacancies2 <- read.csv("C:\\Users\\maura.carter\\Documents\\GitHub\\Staffing_Trends_Performance_Vacancies\\jobvite_staffing_vacancies.csv", header = TRUE)
 # jobvite_staffing_vacancies2
+
+
+join_time_cols <- left_join(grade_fmla_data, courses_tm_fmla_staff, by = "employee_id") %>%
+  mutate(`Total Days FMLA` = total_days_out) %>%
+  select(employee_id, Grade, Subject, Region, Campus, leave_start_date, leave_end_date, fmla_days_out, total_days_out)
+join_time_cols
 
 ```
 
@@ -2150,6 +2156,106 @@ grade_median_mean_sd <-grade_data_final %>%
   # count()
 grade_median_mean_sd
 
+#---------------------
+#fmla
+
+#prep the data
+schools_region_FMLA
+
+grade_fmla_data <- schools_region_FMLA %>%
+  mutate(Region = RegionDescription) %>%
+  mutate(Campus = campus) %>%
+  mutate(`Total Days FMLA` = total_days_out) %>%
+  filter(Region == "Austin" |
+           Region == "El Paso" |
+           Region == "Greater Houston Area" |
+           Region == "Lower Valley"|
+           Region == "Upper Valley"|
+           Region == "Mid Valley" |
+           Region == "Permian Basin" |
+           Region == "West San Antonio" |
+           Region == "East San Antonio"  |
+           Region == "Tarrant County") %>%
+  mutate(Subject =course_credit_type) %>%
+  filter(total_days_out > 0) %>%
+  select(employee_id, Subject, course_name, course_credit_type, campus_type, Region, Campus, `Total Days FMLA`, leave_start_date, leave_end_date)
+grade_fmla_data
+  
+#distinct subjects
+subject_distinct_fmla <- subject_FMLA_median_mean %>%
+  select(Subject) %>%
+  distinct()
+subject_distinct_fmla
+
+#social studides
+#math
+#science
+#english language arts
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_fmla_data$Subject[grade_fmla_data$Subject == "MATH"] <- "Math"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_fmla_data$Subject[grade_fmla_data$Subject == "SCI"] <- "Science"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_fmla_data$Subject[grade_fmla_data$Subject == "ELA"] <- "English Language Arts"
+
+#when col "Subject" is "teaching - social studies" replace it with "social studies".
+grade_fmla_data$Subject[grade_fmla_data$Subject == "SS"] <- "Social Studies"
+
+
+#Change data from character to numeric (col Hired)
+grade_fmla_data$Subject <- as.character(grade_fmla_data$Subject)
+grade_fmla_data
+
+schools_region_FMLA
+#distinct course_names
+course_name_distinct <- grade_fmla_data %>%
+  select(course_name) %>%
+  distinct()
+course_name_distinct
+
+#write to csv, change course-name to "grade" manually, based on "course_name" and "campus_type".
+write.csv(grade_fmla_data,"C:\\Users\\maura.carter\\Documents\\GitHub\\Staffing_Trends_Performance_Vacancies\\grade_fmla_data.csv", row.names = FALSE)
+
+
+#1) how long? (fmla)
+
+#data
+grade_data_final
+
+#length vac
+grade_median_mean_sd_fmla <-grade_fmla_data_bins %>%
+  select(Grade, `Total Days FMLA`) %>%
+  group_by(Grade)  %>%
+  summarise(Median = median(`Total Days FMLA`),
+            Mean = mean(`Total Days FMLA`),
+            SD = sd(`Total Days FMLA`)) 
+  # count()
+grade_median_mean_sd_fmla
+
+
+#----------------------------------------
+
+#join the grade_fmla_data to cleaned_grades table
+grade_fmla_data
+grade_fmla_data_bins
+
+
+grade_fmla_data_bins_cols <- grade_fmla_data_bins %>%
+  select(course_name, Grade) %>%
+  group_by(course_name, Grade) %>%
+  distinct(course_name) %>%
+  ungroup()
+grade_fmla_data_bins_cols
+
+join_data_all <- left_join(grade_fmla_data, grade_fmla_data_bins_cols, by = "course_name")
+join_data_all
+
+
+#write to csv, change course-name to "grade" manually, based on "course_name" and "campus_type".
+write.csv(join_data_all,"C:\\Users\\maura.carter\\Documents\\GitHub\\Staffing_Trends_Performance_Vacancies\\join_data_all.csv", row.names = FALSE)
 
 ```
 #GRADE
@@ -2162,6 +2268,7 @@ grade_median_mean_sd
 
 #data
 grade_data_final
+
 
 #VACANCY
 grade_vacancy_count <-grade_data_final %>%
@@ -2178,6 +2285,31 @@ grade_vacancy_count
              `SD Over Grade` = sd(`Number of Vacancies`)) 
    
  org_vacancy_count_mean_median_SD_byGrade
+ 
+#---------------------------------
+#FMLA
+#grade
+ 
+#bring in the data from csv
+grade_fmla <- grade_fmla_data_bins 
+grade_fmla
+
+#2) how many?
+grade_fmla_count <-grade_fmla %>%
+  select(Grade, `Total Days FMLA`) %>%
+  mutate(`Total FMLA` = `Total Days FMLA`) %>%
+  group_by(Grade)  %>%
+  summarise(`Total FMLA` = n()) 
+grade_fmla_count
+
+
+
+ org_fmla_count_mean_median_SD_byGrade <- grade_fmla_count %>%
+   summarise(`Median Over Grade` = median(`Total FMLA`),
+             `Mean Over Grade` = mean(`Total FMLA`),
+             `SD Over Grade` = sd(`Total FMLA`)) 
+   
+ org_fmla_count_mean_median_SD_byGrade
 
 ```
 
@@ -2212,6 +2344,31 @@ plot_vacancy_count_subject_camp <- ggplot(grade_vacancy_count,
        subtitle = "for SY 23-24")
 
 plot_vacancy_count_subject_camp
+#fmla
+
+#data
+grade_fmla
+
+plot_fmla_grade_count <- ggplot(grade_fmla_count, 
+                             aes(x = `Total FMLA`, 
+                                 y = reorder(Grade, -`Total FMLA`),
+                                 fill = Grade)) + 
+  geom_bar(stat = "identity") +
+ 
+  scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+ #  theme(legend.position="none") +          #removes the legend
+  labs(
+    #x= "Number of FMLA Leaves",
+      y ="Grade",
+       title = "Number of Leaves from FMLA by Grade",
+       subtitle = "for SY 23-24")
+
+plot_fmla_grade_count
+
 
 ```
 
@@ -2235,6 +2392,22 @@ grade_sub_median_mean_sd <-grade_sub_data_final %>%
   # count()
 grade_sub_median_mean_sd
 
+
+#--------------------
+#fmla
+#grade_subject
+
+grade_fmla
+
+#length of fmla
+grade_sub_median_mean_sd_fmla <-grade_fmla %>%
+  select(Grade, Subject, `Total Days FMLA`) %>%
+  group_by(Grade, Subject)  %>%
+  summarise(Median = median(`Total Days FMLA`),
+            Mean = mean(`Total Days FMLA`),
+            SD = sd(`Total Days FMLA`)) 
+  # count()
+grade_sub_median_mean_sd_fmla
 
 ```
 
@@ -2264,6 +2437,22 @@ grade_sub_vacancy_count
              `SD Over Grade` = sd(`Number of Vacancies`)) 
    
  org_vacancy_count_mean_median_SD_byGrade
+ 
+ #----------------------
+ #fmla
+ 
+ #grade-subject
+ #counts/ how many leaves?
+ 
+ #data
+ grade_fmla
+
+grade_sub_fmla_count <-grade_fmla %>%
+  select(Grade, Subject, `Total Days FMLA`) %>%
+  group_by(Grade, Subject)  %>%
+  summarise(`Total Days FMLA` = n()) 
+grade_sub_fmla_count
+
 
 ```
 
@@ -2272,12 +2461,14 @@ grade_sub_vacancy_count
 
 
 #4) BAR
-#GRADE 
+#GRADE-SUBJECT
 ```{r}
 
 #GRADE
 
 #vacancy
+
+#grade-subject
 
 #dataset name for counts
 grade_data_final
@@ -2303,6 +2494,36 @@ plot_vacancy_count_subject_grade_camp <- ggplot(grade_sub_vacancy_count,
        subtitle = "and Subject for SY 23-24")
 
 plot_vacancy_count_subject_grade_camp
+
+
+#----------------------------
+#fmla
+#grade-subject
+
+#data
+grade_sub_fmla_count
+
+plot_fmla_count_subject_grade <- ggplot(grade_sub_fmla_count, 
+                             aes(x = `Total Days FMLA`, 
+                                 y = reorder(Grade, -`Total Days FMLA`),
+                                 fill = Subject)) + 
+  geom_bar(stat = "identity",
+           position = "dodge") +   #unstacks the bars; remove this to have stacked bars.
+ 
+  scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+   #theme(legend.position="none") +       #removes legend
+  labs(
+    x= "Number of Leaves From FMLA",
+      y ="Grade",
+       title = "Number of Leaves From FMLA by Grade",
+       subtitle = "& Subject for SY 23-24")
+
+plot_fmla_count_subject_grade
+
 
 ```
 

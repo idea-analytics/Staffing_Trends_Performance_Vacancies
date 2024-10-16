@@ -1,0 +1,35 @@
+---
+title: "STAAR & Accountability Data"
+author: Maura Carter
+date: 10/15/2024
+output: html_notebook
+---
+
+#schools rating data
+
+```{r}
+
+ratings_data <- IDEA_Public_Schools_Campus_A_F_Results_2024_Verified
+
+ratings_data
+
+```
+
+
+
+#STAAR data
+```{r}
+#STAAR data
+library(ideadata)
+library(ideadata)
+library(dplyr)
+
+staar_data <-   get_table(.table_name = "STAAR", .database_name = "Dashboard", .schema = "dbo", .server_name = "RGVPDRA-DASQL") %>%
+  select(AdminDate, LocalStudentID, StudentID, GradeLevel, SchoolYear, TestVersion, RawScore, ScaleScore, LevelII, LevelIII, LevelIIFinal, BestRecord, Percentile, Growth) %>%
+  filter(SchoolYear == "2023-2024")
+  collect() 
+staar_data
+
+
+
+```

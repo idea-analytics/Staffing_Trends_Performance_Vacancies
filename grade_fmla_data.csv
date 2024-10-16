@@ -1,0 +1,860 @@
+employee_id,Subject,course_name,Grade,course_credit_type,campus_type,Region,Campus,Total Days FMLA
+91945,Science,"Science, Grade 4",4th,SCI,Academy,East San Antonio,Carver,99
+91945,Social Studies,"Social Studies, Grade 4",4th,SS,Academy,East San Antonio,Carver,99
+17477,Science,AP Biology,9th - 12th ,SCI,College Prep,Mid Valley,Quest,45
+23077,English Language Arts,AP English Language and Composition,9th - 12th ,ELA,College Prep,Mid Valley,Quest,83
+101107,Science,AP Computer Science Principles,9th - 12th ,SCI,College Prep,Mid Valley,Edinburg,184
+9118,Math,AP Precalculus,9th - 12th ,MATH,College Prep,Mid Valley,San Juan,117
+95210,English Language Arts,AP English Language and Composition,9th - 12th ,ELA,College Prep,Mid Valley,San Juan,58
+94698,Math,Advanced Geometry,9th - 12th ,MATH,College Prep,Mid Valley,San Juan,3
+101066,Math,Advanced Geometry,9th - 12th ,MATH,College Prep,West San Antonio,Brackenridge,177
+87407,Science,Pre-AP Biology,9th - 12th ,SCI,College Prep,West San Antonio,Brackenridge,64
+101066,Math,Advanced Algebra 2,9th - 12th ,MATH,College Prep,West San Antonio,Brackenridge,177
+7614,English Language Arts,"Reading, Grade 1",1st,ELA,Academy,Upper Valley,Mission,91
+7614,Science,"Science, Grade 1",2nd,SCI,Academy,Upper Valley,Mission,91
+7614,Social Studies,"Social Studies, Grade 1",1st,SS,Academy,Upper Valley,Mission,91
+12199,Math,Advanced Algebra 2,9th - 12th ,MATH,College Prep,West San Antonio,Brackenridge,243
+94818,English Language Arts,AP English Language and Composition,9th - 12th ,ELA,College Prep,Lower Valley,Riverview,9
+101101,Science,Pre-AP Chemistry,9th - 12th ,SCI,College Prep,Lower Valley,Riverview,184
+12199,Math,AP Calculus AB,9th - 12th ,MATH,College Prep,West San Antonio,Brackenridge,243
+100949,English Language Arts,AP English Literature and Composition,9th - 12th ,ELA,College Prep,West San Antonio,Brackenridge,156
+12199,Math,AP Statistics,9th - 12th ,MATH,College Prep,West San Antonio,Brackenridge,243
+68954,Science,AP Environmental Science,9th - 12th ,SCI,College Prep,West San Antonio,Brackenridge,72
+12199,Math,Advanced Precalculus,9th - 12th ,MATH,College Prep,West San Antonio,Brackenridge,243
+25470,Math,Advanced Algebra 2,9th - 12th ,MATH,College Prep,East San Antonio,Carver,252
+68954,Science,Advanced Physics,9th - 12th ,SCI,College Prep,West San Antonio,Brackenridge,72
+16204,English Language Arts,"English Language Arts, Grade 2",2nd,ELA,Academy,Mid Valley,Edinburg,106
+101108,Science,"Science, Grade 4",4th,SCI,Academy,Mid Valley,Edinburg,184
+100871,English Language Arts,"Advanced English Language Arts, Grade 6",6th,ELA,College Prep,Greater Houston Area,Spears,149
+91240,Math,"Advanced Mathematics, Grade 7 Pre-Algebr",7th,MATH,College Prep,Greater Houston Area,Spears,300
+95516,Science,"Advanced Science, Grade 8-Composite",8th,SCI,College Prep,Austin,Montopolis,100
+95457,English Language Arts,"Advanced English Language Arts, Grade 8",8th,ELA,College Prep,Austin,Montopolis,93
+19814,English Language Arts,"English Language Arts, Grade 5",5th,ELA,Academy,Lower Valley,Riverview,104
+95270,Social Studies,"Social Studies, Grade 5",5th,SS,Academy,Lower Valley,Riverview,65
+86075,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,Lower Valley,Riverview,86
+86075,Social Studies,Humanities ,1st - 5th ,SS,Academy,Lower Valley,Riverview,86
+86075,Math,Mathematics ,1st - 5th ,MATH,Academy,Lower Valley,Riverview,86
+86075,Science,Science ,1st - 5th ,SCI,Academy,Lower Valley,Riverview,86
+86650,English Language Arts,"Reading, Kindergarten",K,ELA,Academy,Mid Valley,Pharr,50
+86180,English Language Arts,"Reading, Kindergarten",K,ELA,Academy,Mid Valley,Pharr,63
+16882,English Language Arts,"Reading, Grade 1",1st,ELA,Academy,Mid Valley,Pharr,48
+86650,English Language Arts,"English Language Arts, Kindergarten",K,ELA,Academy,Mid Valley,Pharr,50
+86180,English Language Arts,"English Language Arts, Kindergarten",K,ELA,Academy,Mid Valley,Pharr,63
+86650,Math,"Mathematics, Kindergarten",K,MATH,Academy,Mid Valley,Pharr,50
+86180,Math,"Mathematics, Kindergarten",K,MATH,Academy,Mid Valley,Pharr,63
+86650,Science,"Science, Kindergarten",K,SCI,Academy,Mid Valley,Pharr,50
+86180,Science,"Science, Kindergarten",K,SCI,Academy,Mid Valley,Pharr,63
+86650,Social Studies,"Social Studies, Kindergarten",K,SS,Academy,Mid Valley,Pharr,50
+86180,Social Studies,"Social Studies, Kindergarten",K,SS,Academy,Mid Valley,Pharr,63
+93076,Social Studies,"Advanced Social Studies, Grade 7-Texas H",7th,SS,College Prep,Upper Valley,Rio Grande City,84
+95417,Science,Computer Science I,9th - 12th ,SCI,College Prep,Tarrant County,Rise,93
+95417,Science,Computer Science II,9th - 12th ,SCI,College Prep,Tarrant County,Rise,93
+95399,Social Studies,AP Human Geography,9th - 12th ,SS,College Prep,Tarrant County,Rise,93
+101235,Science,Advanced Physics,9th - 12th ,SCI,College Prep,Tarrant County,Rise,219
+95418,Math,Advanced Algebra 2,9th - 12th ,MATH,College Prep,Tarrant County,Rise,93
+95339,English Language Arts,Pre-AP English II,9th - 12th ,ELA,College Prep,Tarrant County,Rise,86
+68403,Math,Advanced Algebra 1,9th - 12th ,MATH,College Prep,East San Antonio,Monterrey Park,90
+68403,Math,Advanced Algebra 2,9th - 12th ,MATH,College Prep,East San Antonio,Monterrey Park,90
+11474,English Language Arts,Reading Intervention-7th,7th,ELA,College Prep,Lower Valley,Riverview,81
+95236,English Language Arts,"English Language Arts, Grade 5",5th,ELA,Academy,Greater Houston Area,Hardy,58
+87871,Science,"Science, Grade 1",1st,SCI,Academy,Greater Houston Area,Hardy,91
+87871,Social Studies,"Social Studies, Grade 1",1st,SS,Academy,Greater Houston Area,Hardy,91
+92929,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,Greater Houston Area,Hardy,91
+92929,Math,Mathematics ,1st - 5th ,MATH,Academy,Greater Houston Area,Hardy,91
+92929,Science,Science ,1st - 5th ,SCI,Academy,Greater Houston Area,Hardy,91
+91261,Math,Advanced Algebra 2,9th - 12th ,MATH,College Prep,Upper Valley,Los Encinos,98
+92345,English Language Arts,Pre-AP English II,9th - 12th ,ELA,College Prep,Upper Valley,Los Encinos,300
+23961,English Language Arts,"Reading, Grade 1",1st,ELA,Academy,East San Antonio,Eastside,70
+23961,Math,"Mathematics, Grade 1",1st,MATH,Academy,East San Antonio,Eastside,70
+23961,Science,"Science, Grade 1",1st,SCI,Academy,East San Antonio,Eastside,70
+23961,Social Studies,"Social Studies, Grade 1",1st,SS,Academy,East San Antonio,Eastside,70
+60841,English Language Arts,Reading Intervention-3rd,3rd,ELA,Academy,Mid Valley,Elsa,57
+74395,Math,Math Intervention-4th,4th,MATH,Academy,Mid Valley,Elsa,84
+60841,English Language Arts,Reading Intervention-4th,4th,ELA,Academy,Mid Valley,Elsa,57
+74395,Math,Math Intervention-5th,5th,MATH,Academy,Mid Valley,Elsa,84
+60841,English Language Arts,Reading Intervention-5th,5th,ELA,Academy,Mid Valley,Elsa,57
+92219,Math,Mathematics ,1st - 5th ,MATH,Academy,Greater Houston Area,Hardy,62
+92219,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,Greater Houston Area,Hardy,62
+92219,Social Studies,Humanities ,1st - 5th ,SS,Academy,Greater Houston Area,Hardy,62
+92219,Science,Science ,1st - 5th ,SCI,Academy,Greater Houston Area,Hardy,62
+95204,Social Studies,"Advanced Social Studies, Gr 8-U.S. Histo",8th,SS,College Prep,Mid Valley,Pharr,58
+95136,Math,AP Precalculus,9th - 12th ,MATH,College Prep,Upper Valley,Mission,44
+94986,English Language Arts,Reading I,9th - 12th ,ELA,College Prep,West San Antonio,South Flores,30
+20444,Social Studies,AP US History,9th - 12th ,SS,College Prep,West San Antonio,South Flores,92
+94986,English Language Arts,Pre-AP English II,9th - 12th ,ELA,College Prep,West San Antonio,South Flores,30
+18132,Social Studies,AP US History,9th - 12th ,SS,College Prep,Mid Valley,Pharr,91
+95458,Science,Pre-AP Chemistry,9th - 12th ,SCI,College Prep,Mid Valley,Pharr,93
+100874,Science,Pre-AP Biology (8th Grade),8th,SCI,College Prep,Greater Houston Area,Lake Houston,149
+95431,English Language Arts,"Advanced English Language Arts, Grade 8",8th,ELA,College Prep,Greater Houston Area,Lake Houston,93
+93673,Social Studies,"Advanced Social Studies, Grade 7-Texas H",7th,SS,College Prep,Greater Houston Area,Lake Houston,53
+87285,English Language Arts,"Reading, Grade 1",1st,ELA,Academy,East San Antonio,Judson,95
+87285,English Language Arts,"English Language Arts, Grade 1",1st,ELA,Academy,East San Antonio,Judson,95
+87285,Math,"Mathematics, Grade 1",1st,MATH,Academy,East San Antonio,Judson,95
+87285,Science,"Science, Grade 1",1st,SCI,Academy,East San Antonio,Judson,95
+87285,Social Studies,"Social Studies, Grade 1",1st,SS,Academy,East San Antonio,Judson,95
+95401,Math,"Advanced Mathematics, Grade 6",6th,MATH,College Prep,Austin,Rundberg,86
+101078,Science,"Advanced Science, Grade 8-Composite",8th,SCI,College Prep,Austin,Rundberg,177
+94962,Science,"Advanced Science, Grade 6-Earth Science",6th,SCI,College Prep,Lower Valley,Weslaco Pike,30
+94962,Science,"Advanced Science, Grade 7-Life Science",7th,SCI,College Prep,Lower Valley,Weslaco Pike,30
+84056,English Language Arts,"Advanced English Language Arts, Grade 6",6th,ELA,College Prep,Austin,Round Rock Tech,61
+95554,Science,"Advanced Science, Grade 7-Life Science",7th,SCI,College Prep,Austin,Round Rock Tech,122
+86927,Math,"Mathematics, Grade 2",2nd,MATH,Academy,Mid Valley,Quest,86
+8493,Math,"Mathematics, Grade 4",4th,MATH,Academy,Mid Valley,Quest,94
+94961,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,Mid Valley,Quest,30
+94961,Math,Mathematics ,1st - 5th ,MATH,Academy,Mid Valley,Quest,30
+94961,Science,Science ,1st - 5th ,SCI,Academy,Mid Valley,Quest,30
+88181,Science,"Advanced Science, Grade 6-Earth Science",6th,SCI,College Prep,Upper Valley,Tres Lagos,76
+89086,English Language Arts,"Advanced English Language Arts, Grade 7",7th,ELA,College Prep,Upper Valley,Tres Lagos,65
+95074,English Language Arts,"Reading, Kindergarten",K,ELA,Academy,Austin,Kyle,38
+95074,English Language Arts,"English Language Arts, Kindergarten",K,ELA,Academy,Austin,Kyle,38
+101122,English Language Arts,"English Language Arts, Grade 3",3rd,ELA,Academy,Austin,Kyle,184
+95074,Math,"Mathematics, Kindergarten",K,MATH,Academy,Austin,Kyle,38
+95074,Science,"Science, Kindergarten",K,SCI,Academy,Austin,Kyle,38
+95074,Social Studies,"Social Studies, Kindergarten",K,SS,Academy,Austin,Kyle,38
+14909,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,Austin,Kyle,56
+14909,Social Studies,Humanities ,1st - 5th ,SS,Academy,Austin,Kyle,56
+14909,Math,Mathematics ,1st - 5th ,MATH,Academy,Austin,Kyle,56
+14909,Science,Science ,1st - 5th ,SCI,Academy,Austin,Kyle,56
+86987,English Language Arts,"Reading, Kindergarten",K,ELA,Academy,Austin,Parmer Park,93
+95553,English Language Arts,"Reading, Grade 1",1st,ELA,Academy,Austin,Parmer Park,122
+95072,English Language Arts,"Reading, Grade 2",2nd,ELA,Academy,Austin,Parmer Park,38
+86987,English Language Arts,"English Language Arts, Kindergarten",K,ELA,Academy,Austin,Parmer Park,93
+95553,English Language Arts,"English Language Arts, Grade 1",1st,ELA,Academy,Austin,Parmer Park,122
+95072,English Language Arts,"English Language Arts, Grade 2",2nd,ELA,Academy,Austin,Parmer Park,38
+86987,Math,"Mathematics, Kindergarten",K,MATH,Academy,Austin,Parmer Park,93
+86987,Science,"Science, Kindergarten",K,SCI,Academy,Austin,Parmer Park,93
+94933,Science,"Science, Grade 4",4th,SCI,Academy,Austin,Parmer Park,23
+86987,Social Studies,"Social Studies, Kindergarten",K,SS,Academy,Austin,Parmer Park,93
+94933,Social Studies,"Social Studies, Grade 4",4th,SS,Academy,Austin,Parmer Park,23
+86987,English Language Arts,Reading Intervention-K,K,ELA,Academy,Austin,Parmer Park,93
+94761,English Language Arts,"Advanced English Language Arts, Grade 6",6th,ELA,College Prep,Austin,Kyle,3
+95054,English Language Arts,"Advanced English Language Arts, Grade 8",8th,ELA,College Prep,Austin,Kyle,38
+91416,Science,"Science, Grade 5",5th,SCI,Academy,Tarrant County,Achieve,184
+84339,English Language Arts,English Language Arts - Grade 6 ,6th,ELA,College Prep,Tarrant County,Achieve,239
+84339,Social Studies,Humanities - Grade 6,6th,SS,College Prep,Tarrant County,Achieve,239
+84339,Math,Mathematics -Grade 6,6th,MATH,College Prep,Tarrant County,Achieve,239
+84339,Science,Science - Grade 6 ,6th,SCI,College Prep,Tarrant County,Achieve,239
+61728,English Language Arts,"Advanced English Language Arts, Grade 6",6th,ELA,College Prep,Mid Valley,Alamo,72
+93757,Science,"Advanced Science, Grade 7-Life Science",7th,SCI,College Prep,Mid Valley,Alamo,75
+93757,Social Studies,"Advanced Social Studies, Grade 7-Texas H",7th,SS,College Prep,Mid Valley,Alamo,75
+94740,Science,"Advanced Science, Grade 6-Earth Science",6th,SCI,College Prep,Tarrant County,Achieve,3
+94740,Science,"Advanced Science, Grade 7-Life Science",7th,SCI,College Prep,Tarrant County,Achieve,3
+61926,Math,"Mathematics, Grade 2",2nd,MATH,Academy,Mid Valley,Alamo,88
+61926,Science,"Science, Grade 2",2nd,SCI,Academy,Mid Valley,Alamo,88
+61926,Social Studies,"Social Studies, Grade 2",2nd,SS,Academy,Mid Valley,Alamo,88
+86605,Science,Pre-AP Chemistry,9th - 12th ,SCI,College Prep,El Paso,Horizon Vista,83
+86605,Science,"Advanced Science, Grade 7-Life Science",7th,SCI,College Prep,El Paso,Horizon Vista,83
+62499,English Language Arts,"Reading, Grade 2",2nd,ELA,Academy,West San Antonio,Ingram Hills,98
+88520,Math,"Mathematics, Grade 2",2nd,MATH,Academy,West San Antonio,Ingram Hills,167
+101287,Math,Mathematical Models With Applications,9th - 12th ,MATH,College Prep,East San Antonio,Converse,219
+101287,Math,Advanced Algebra 1,9th - 12th ,MATH,College Prep,East San Antonio,Converse,219
+101287,Math,Advanced Geometry,9th - 12th ,MATH,College Prep,East San Antonio,Converse,219
+13615,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,West San Antonio,Ingram Hills,136
+13615,Social Studies,Humanities ,1st - 5th ,SS,Academy,West San Antonio,Ingram Hills,136
+13615,Science,Science ,1st - 5th ,SCI,Academy,West San Antonio,Ingram Hills,136
+85865,Math,"Mathematics, Kindergarten",K,MATH,Academy,West San Antonio,Burke,96
+68958,Math,"Mathematics, Grade 3",3rd,MATH,Academy,West San Antonio,Burke,93
+90864,English Language Arts,Reading Intervention-6th,6th,ELA,College Prep,West San Antonio,Burke,70
+95109,Math,Math Intervention-6th,6th,MATH,College Prep,West San Antonio,Burke,44
+90864,English Language Arts,Reading Intervention-7th,7th,ELA,College Prep,West San Antonio,Burke,70
+95109,Math,Math Intervention-7th,7th,MATH,College Prep,West San Antonio,Burke,44
+95043,Math,"Advanced Mathematics, Grade 7 Pre-Algebr",7th,MATH,College Prep,West San Antonio,Burke,38
+20964,English Language Arts,"Advanced English Language Arts, Grade 7",7th,ELA,College Prep,West San Antonio,Burke,171
+95456,Math,"Advanced Mathematics, Grade 8-Algebra I",8th,MATH,College Prep,Tarrant County,Rise,93
+95059,Math,"Mathematics, Grade 2",2nd,MATH,Academy,West San Antonio,Robinson,38
+69316,Math,"Mathematics, Grade 3",3rd,MATH,Academy,West San Antonio,Robinson,76
+90862,Science,"Science, Grade 2",2nd,SCI,Academy,West San Antonio,Robinson,139
+62787,Math,AP Statistics,9th - 12th ,MATH,College Prep,Upper Valley,Tres Lagos,60
+88181,Science,AP Biology,9th - 12th ,SCI,College Prep,Upper Valley,Tres Lagos,76
+62787,Math,AP Calculus AB,9th - 12th ,MATH,College Prep,Upper Valley,Tres Lagos,60
+88875,Social Studies,AP U.S. Government,9th - 12th ,SS,College Prep,Upper Valley,Tres Lagos,86
+88181,Science,Pre-AP Biology,9th - 12th ,SCI,College Prep,Upper Valley,Tres Lagos,76
+24804,English Language Arts,"Reading, Grade 1",1st,ELA,Academy,Austin,Bluff Springs,75
+24804,English Language Arts,"English Language Arts, Grade 1",1st,ELA,Academy,Austin,Bluff Springs,75
+69585,English Language Arts,"English Language Arts, Grade 4",4th,ELA,Academy,Austin,Bluff Springs,122
+95301,Math,"Mathematics, Grade 1",1st,MATH,Academy,Austin,Bluff Springs,65
+95058,Math,"Mathematics, Grade 2",2nd,MATH,Academy,Austin,Bluff Springs,38
+95301,Science,"Science, Grade 1",1st,SCI,Academy,Austin,Bluff Springs,65
+95058,Science,"Science, Grade 2",2nd,SCI,Academy,Austin,Bluff Springs,38
+95058,Social Studies,"Social Studies, Grade 2",2nd,SS,Academy,Austin,Bluff Springs,38
+95044,Math,"Advanced Mathematics, Grade 6",6th,MATH,College Prep,West San Antonio,Robinson,38
+87065,Social Studies,"Advanced Social Studies, Grade 6-World H",6th,SS,College Prep,West San Antonio,Robinson,129
+86766,English Language Arts,"Advanced English Language Arts, Grade 8",8th,ELA,College Prep,West San Antonio,Robinson,84
+87065,Social Studies,"Advanced Social Studies, Grade 7-Texas H",7th,SS,College Prep,West San Antonio,Robinson,129
+12269,English Language Arts,Reading Intervention-6th,6th,ELA,College Prep,Mid Valley,Edinburg,99
+95056,Math,"Mathematics, Grade 1",1st,MATH,Academy,Austin,Pflugerville,38
+95534,Social Studies,"Social Studies, Grade 3",3rd,SS,Academy,Austin,Pflugerville,223
+12006,English Language Arts,"Reading, Kindergarten",K,ELA,Academy,Upper Valley,North Mission,81
+12006,English Language Arts,"English Language Arts, Kindergarten",K,ELA,Academy,Upper Valley,North Mission,81
+12006,Math,"Mathematics, Kindergarten",K,MATH,Academy,Upper Valley,North Mission,81
+73803,Math,"Mathematics, Grade 2",2nd,MATH,Academy,Upper Valley,North Mission,71
+60387,Math,"Mathematics, Grade 3",3rd,MATH,Academy,Upper Valley,North Mission,89
+12006,Science,"Science, Kindergarten",K,SCI,Academy,Upper Valley,North Mission,81
+73803,Science,"Science, Grade 2",2nd,SCI,Academy,Upper Valley,North Mission,71
+12006,Social Studies,"Social Studies, Kindergarten",K,SS,Academy,Upper Valley,North Mission,81
+73803,Social Studies,"Social Studies, Grade 2",2nd,SS,Academy,Upper Valley,North Mission,71
+23704,English Language Arts,"Reading, Grade 2",2nd,ELA,Academy,Upper Valley,McAllen,118
+23704,English Language Arts,"English Language Arts, Grade 2",2nd,ELA,Academy,Upper Valley,McAllen,118
+23704,Science,"Science, Grade 2",2nd,SCI,Academy,Upper Valley,McAllen,118
+23704,Social Studies,"Social Studies, Grade 2",2nd,SS,Academy,Upper Valley,McAllen,118
+100832,English Language Arts,"Advanced English Language Arts, Grade 7",7th,ELA,College Prep,Mid Valley,San Juan,142
+69118,Social Studies,"Advanced Social Studies, Gr 8-U.S. Histo",8th,SS,College Prep,Mid Valley,San Juan,49
+24384,Math,"Mathematics, Grade 1",1st,MATH,Academy,West San Antonio,Mays,153
+94325,Social Studies,"Social Studies, Grade 4",4th,SS,Academy,West San Antonio,Mays,31
+14612,Social Studies,AP US History,9th - 12th ,SS,College Prep,Mid Valley,Alamo,91
+12607,Social Studies,AP Human Geography,9th - 12th ,SS,College Prep,Mid Valley,Alamo,59
+94833,Science,AP Computer Science Principles,9th - 12th ,SCI,College Prep,Mid Valley,Alamo,9
+88449,Science,Pre-AP Chemistry,9th - 12th ,SCI,College Prep,Mid Valley,Alamo,52
+95326,Science,"Advanced Science, Grade 7-Life Science",7th,SCI,College Prep,East San Antonio,Walzem,72
+95272,Math,"Advanced Mathematics, Grade 7 Pre-Algebr",7th,MATH,College Prep,East San Antonio,Walzem,65
+92272,English Language Arts,"English Language Arts, Grade 2",2nd,ELA,Academy,West San Antonio,Brackenridge,69
+94824,English Language Arts,"English Language Arts, Grade 3",3rd,ELA,Academy,West San Antonio,Brackenridge,9
+95367,English Language Arts,"English Language Arts, Grade 5",5th,ELA,Academy,West San Antonio,Brackenridge,86
+23454,Math,"Mathematics, Grade 2",2nd,MATH,Academy,West San Antonio,Brackenridge,62
+12269,English Language Arts,Reading Intervention-7th,7th,ELA,College Prep,Mid Valley,Edinburg,99
+85492,English Language Arts,"Advanced English Language Arts, Grade 8",8th,ELA,College Prep,Mid Valley,Quest,82
+101069,Social Studies,"Advanced Social Studies, Grade 6-World H",6th,SS,College Prep,Greater Houston Area,Hardy,177
+94935,English Language Arts,"Advanced English Language Arts, Grade 6",6th,ELA,College Prep,Greater Houston Area,Hardy,23
+87887,Science,"Advanced Science, Grade 6-Earth Science",6th,SCI,College Prep,Greater Houston Area,Hardy,138
+68954,English Language Arts,Reading Intervention-6th,6th,ELA,College Prep,West San Antonio,Brackenridge,72
+68954,English Language Arts,Reading Intervention-7th,7th,ELA,College Prep,West San Antonio,Brackenridge,72
+68954,Science,Pre-AP Biology (8th Grade),8th,SCI,College Prep,West San Antonio,Brackenridge,72
+91816,Science,"Advanced Science, Grade 7-Life Science",7th,SCI,College Prep,Lower Valley,Frontier,105
+100925,Math,"Advanced Mathematics, Grade 7 Pre-Algebr",7th,MATH,College Prep,Lower Valley,Frontier,198
+95471,Math,"Advanced Mathematics, Grade 8-Algebra I",8th,MATH,College Prep,Tarrant County,Southeast,93
+88170,Math,"Mathematics, Grade 1",1st,MATH,Academy,Tarrant County,Rise,106
+69573,Science,"Science, Kindergarten",K,SCI,Academy,Tarrant County,Rise,27
+88170,Science,"Science, Grade 1",1st,SCI,Academy,Tarrant County,Rise,106
+101048,Social Studies,"Social Studies, Grade 1",1st,SS,Academy,Tarrant County,Rise,171
+95000,Math,"Advanced Mathematics, Grade 6",6th,MATH,College Prep,Mid Valley,Elsa,30
+95404,English Language Arts,"Reading, Grade 1",1st,ELA,Academy,Greater Houston Area,Lake Houston,93
+94794,Math,"Mathematics, Grade 5",5th,MATH,Academy,Greater Houston Area,Lake Houston,16
+95338,Science,"Science, Grade 4",4th,SCI,Academy,Greater Houston Area,Lake Houston,72
+70275,Math,AP Precalculus,9th - 12th ,MATH,College Prep,Lower Valley,Weslaco,142
+95338,Social Studies,"Social Studies, Grade 4",4th,SS,Academy,Greater Houston Area,Lake Houston,72
+70275,Math,AP Computer Science A - Math,9th - 12th ,MATH,College Prep,Lower Valley,Weslaco,142
+84831,English Language Arts,AP English Literature and Composition,9th - 12th ,ELA,College Prep,Lower Valley,Sports Park,59
+101021,Science,Pre-AP Biology,9th - 12th ,SCI,College Prep,Lower Valley,Sports Park,170
+101021,Science,Pre-AP Chemistry,9th - 12th ,SCI,College Prep,Lower Valley,Sports Park,170
+70104,English Language Arts,Pre-AP English I,9th - 12th ,ELA,College Prep,Lower Valley,Sports Park,99
+60361,English Language Arts,"English Language Arts, Grade 3",3rd,ELA,Academy,El Paso,Mesquite Hills,102
+100817,Math,"Mathematics, Grade 4",4th,MATH,Academy,El Paso,Mesquite Hills,136
+100817,Science,"Science, Grade 4",4th,SCI,Academy,El Paso,Mesquite Hills,136
+100817,Social Studies,"Social Studies, Grade 4",4th,SS,Academy,El Paso,Mesquite Hills,136
+101022,Social Studies,AP Microeconomics,9th - 12th ,SS,College Prep,Upper Valley,McAllen,170
+25287,Social Studies,AP U.S. Government,9th - 12th ,SS,College Prep,Upper Valley,McAllen,142
+94834,English Language Arts,"Reading, Grade 1",1st,ELA,Academy,Austin,Health Professions,16
+92784,English Language Arts,"English Language Arts, Grade 4",4th,ELA,Academy,Austin,Montopolis,54
+69043,Science,"Science, Kindergarten",K,SCI,Academy,Austin,Montopolis,102
+70643,Social Studies,"Social Studies, Grade 5",5th,SS,Academy,Austin,Montopolis,84
+95526,Social Studies,AP Human Geography,9th - 12th ,SS,College Prep,Austin,Parmer Park,100
+95248,Science,Pre-AP Chemistry,9th - 12th ,SCI,College Prep,Austin,Parmer Park,65
+94834,English Language Arts,"English Language Arts, Grade 1",1st,ELA,Academy,Austin,Health Professions,16
+94947,English Language Arts,"English Language Arts, Grade 5",5th,ELA,Academy,Austin,Health Professions,23
+94947,Social Studies,"Social Studies, Grade 5",5th,SS,Academy,Austin,Health Professions,23
+101130,English Language Arts,"Reading, Kindergarten",K,ELA,Academy,El Paso,Rio Vista,184
+91773,Science,"Advanced Science, Grade 6-Earth Science",6th,SCI,College Prep,El Paso,Rio Vista,84
+101186,Math,"Advanced Mathematics, Grade 7 Pre-Algebr",7th,MATH,College Prep,El Paso,Rio Vista,198
+101089,Math,"Advanced Mathematics, Grade 8-Algebra I",8th,MATH,College Prep,El Paso,Rio Vista,177
+101029,English Language Arts,"Reading, Kindergarten",K,ELA,Academy,El Paso,Rio Vista,164
+101130,English Language Arts,"English Language Arts, Kindergarten",K,ELA,Academy,El Paso,Rio Vista,184
+101029,English Language Arts,"English Language Arts, Kindergarten",K,ELA,Academy,El Paso,Rio Vista,164
+85930,English Language Arts,"English Language Arts, Grade 2",2nd,ELA,Academy,El Paso,Rio Vista,51
+101130,Math,"Mathematics, Kindergarten",K,MATH,Academy,El Paso,Rio Vista,184
+101029,Math,"Mathematics, Kindergarten",K,MATH,Academy,El Paso,Rio Vista,164
+84608,Science,"Science, Kindergarten",K,SCI,Academy,El Paso,Rio Vista,38
+85172,Science,"Science, Kindergarten",K,SCI,Academy,El Paso,Rio Vista,124
+101130,Social Studies,"Social Studies, Kindergarten",K,SS,Academy,El Paso,Rio Vista,184
+101029,Social Studies,"Social Studies, Kindergarten",K,SS,Academy,El Paso,Rio Vista,164
+95455,Science,"Science, Kindergarten",K,SCI,Academy,West San Antonio,South Flores,93
+21884,Science,"Science, Grade 1",1st,SCI,Academy,West San Antonio,South Flores,102
+95455,Social Studies,"Social Studies, Kindergarten",K,SS,Academy,West San Antonio,South Flores,93
+21884,Social Studies,"Social Studies, Grade 1",1st,SS,Academy,West San Antonio,South Flores,102
+95187,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,El Paso,Rio Vista,51
+95187,Social Studies,Humanities ,1st - 5th ,SS,Academy,El Paso,Rio Vista,51
+95187,Math,Mathematics ,1st - 5th ,MATH,Academy,El Paso,Rio Vista,51
+95187,Science,Science ,1st - 5th ,SCI,Academy,El Paso,Rio Vista,51
+85286,English Language Arts,"Reading, Grade 1",1st,ELA,Academy,East San Antonio,Converse,62
+68880,English Language Arts,"Reading, Grade 2",2nd,ELA,Academy,East San Antonio,Converse,61
+14537,Math,"Mathematics, Kindergarten",K,MATH,Academy,East San Antonio,Converse,95
+85344,Math,"Mathematics, Grade 2",2nd,MATH,Academy,East San Antonio,Converse,65
+91996,Science,"Science, Kindergarten",K,SCI,Academy,East San Antonio,Converse,100
+14537,Social Studies,"Social Studies, Kindergarten",K,SS,Academy,East San Antonio,Converse,95
+84144,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,East San Antonio,Converse,239
+84144,Social Studies,Humanities ,1st - 5th ,SS,Academy,East San Antonio,Converse,239
+84144,Math,Mathematics ,1st - 5th ,MATH,Academy,East San Antonio,Converse,239
+84144,Science,Science ,1st - 5th ,SCI,Academy,East San Antonio,Converse,239
+20682,Social Studies,AP U.S. Government,9th - 12th ,SS,College Prep,East San Antonio,Judson,109
+87379,English Language Arts,"Reading, Kindergarten",K,ELA,Academy,Tarrant County,Edgecliff,85
+87379,English Language Arts,"English Language Arts, Kindergarten",K,ELA,Academy,Tarrant County,Edgecliff,85
+87379,Math,"Mathematics, Kindergarten",K,MATH,Academy,Tarrant County,Edgecliff,85
+87379,Science,"Science, Kindergarten",K,SCI,Academy,Tarrant County,Edgecliff,85
+90279,Science,"Science, Grade 2",2nd,SCI,Academy,Tarrant County,Edgecliff,79
+87379,Social Studies,"Social Studies, Kindergarten",K,SS,Academy,Tarrant County,Edgecliff,85
+93572,Science,Science ,1st - 5th ,SCI,Academy,Tarrant County,Edgecliff,93
+19236,English Language Arts,"Advanced English Language Arts, Grade 6",6th,ELA,College Prep,West San Antonio,South Flores,86
+95663,Math,"Advanced Mathematics, Grade 8-Algebra I",8th,MATH,College Prep,West San Antonio,South Flores,136
+25594,Social Studies,"Advanced Social Studies, Gr 8-U.S. Histo",8th,SS,College Prep,West San Antonio,South Flores,161
+18835,English Language Arts,"Advanced English Language Arts, Grade 6",6th,ELA,College Prep,Upper Valley,Los Encinos,62
+18635,Math,Advanced Algebra 1,9th - 12th ,MATH,College Prep,Lower Valley,Robindale,93
+18635,Math,Advanced Geometry,9th - 12th ,MATH,College Prep,Lower Valley,Robindale,93
+95388,Science,Pre-AP Biology,9th - 12th ,SCI,College Prep,Lower Valley,Robindale,86
+95388,Science,Pre-AP Chemistry,9th - 12th ,SCI,College Prep,Lower Valley,Robindale,86
+61782,Math,Math Intervention-6th,6th,MATH,College Prep,Austin,Parmer Park,115
+61782,Math,Math Intervention-7th,7th,MATH,College Prep,Austin,Parmer Park,115
+101185,English Language Arts,"Advanced English Language Arts, Grade 6",6th,ELA,College Prep,Austin,Parmer Park,198
+101157,Science,"Advanced Science, Grade 8-Composite",8th,SCI,College Prep,Austin,Parmer Park,198
+94765,Math,"Advanced Mathematics, Grade 7 Pre-Algebr",7th,MATH,College Prep,Austin,Parmer Park,3
+95073,English Language Arts,"Advanced English Language Arts, Grade 7",7th,ELA,College Prep,Austin,Parmer Park,38
+95402,Social Studies,"Advanced Social Studies, Grade 7-Texas H",7th,SS,College Prep,Austin,Parmer Park,165
+95571,Social Studies,"Advanced Social Studies, Gr 8-U.S. Histo",8th,SS,College Prep,Austin,Parmer Park,122
+62787,Math,AP Precalculus,9th - 12th ,MATH,College Prep,Upper Valley,Tres Lagos,60
+62359,English Language Arts,Pre-AP English I,9th - 12th ,ELA,College Prep,Lower Valley,Harlingen,69
+87198,English Language Arts,Pre-AP English II,9th - 12th ,ELA,College Prep,Upper Valley,Rio Grande City,67
+2342,Science,"Science, Kindergarten",K,SCI,Academy,East San Antonio,Walzem,88
+94278,Science,"Science, Grade 1",1st,SCI,Academy,East San Antonio,Walzem,49
+94278,Social Studies,"Social Studies, Grade 1",1st,SS,Academy,East San Antonio,Walzem,49
+95023,Math,"Mathematics, Grade 4",4th,MATH,Academy,Tarrant County,Southeast,38
+100865,Science,"Science, Grade 4",4th,SCI,Academy,Tarrant County,Southeast,149
+61466,English Language Arts,"English Language Arts, Kindergarten",K,ELA,Academy,West San Antonio,Brackenridge,91
+73922,Science,Chemistry ,9th - 12th ,SCI,College Prep,Upper Valley,Tres Lagos,63
+73922,Math,Geometry ,9th - 12th ,MATH,College Prep,Upper Valley,Tres Lagos,63
+73922,English Language Arts,English II ,9th - 12th ,ELA,College Prep,Upper Valley,Tres Lagos,63
+73922,Social Studies,World History ,9th - 12th ,SS,College Prep,Upper Valley,Tres Lagos,63
+62787,Math,Advanced Precalculus,9th - 12th ,MATH,College Prep,Upper Valley,Tres Lagos,60
+101090,Social Studies,AP Human Geography,9th - 12th ,SS,College Prep,Upper Valley,Palmview,177
+95133,Math,Advanced Algebra 1,9th - 12th ,MATH,College Prep,Upper Valley,Palmview,44
+95133,Math,Advanced Geometry,9th - 12th ,MATH,College Prep,Upper Valley,Palmview,44
+86200,English Language Arts,"English Language Arts, Grade 1",1st,ELA,Academy,Upper Valley,Palmview,16
+21331,Science,"Science, Grade 1",1st,SCI,Academy,Upper Valley,Palmview,147
+21331,Math,"Mathematics, Grade 1",1st,MATH,Academy,Upper Valley,Palmview,147
+86200,English Language Arts,"Reading, Grade 1",1st,ELA,Academy,Upper Valley,Palmview,16
+88271,Social Studies,"Advanced Social Studies, Gr 8-U.S. Histo",8th,SS,College Prep,Upper Valley,Palmview,68
+95515,Math,AP Precalculus,9th - 12th ,MATH,College Prep,Mid Valley,Elsa,100
+68852,Social Studies,AP US History,9th - 12th ,SS,College Prep,Mid Valley,Elsa,48
+25210,Social Studies,AP World History,9th - 12th ,SS,College Prep,Mid Valley,Elsa,198
+91624,Science,Principles of Nursing Science,9th - 12th ,SCI,College Prep,Mid Valley,Elsa,104
+90901,English Language Arts,Pre-AP English II,9th - 12th ,ELA,College Prep,Mid Valley,Elsa,71
+95512,Social Studies,AP World History,9th - 12th ,SS,College Prep,West San Antonio,Ewing Halsell,100
+23837,Math,Advanced Geometry,9th - 12th ,MATH,College Prep,West San Antonio,Ewing Halsell,93
+19833,Social Studies,"Social Studies, Grade 4",4th,SS,Academy,Upper Valley,Palmview,85
+85182,English Language Arts,"English Language Arts, Kindergarten",K,ELA,Academy,Lower Valley,San Benito,56
+20538,Science,"Science, Grade 5",5th,SCI,Academy,Lower Valley,San Benito,321
+61473,Social Studies,"Social Studies, Grade 5",5th,SS,Academy,Lower Valley,San Benito,174
+6607,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,Lower Valley,San Benito,136
+6607,Social Studies,Humanities ,1st - 5th ,SS,Academy,Lower Valley,San Benito,136
+6607,Math,Mathematics ,1st - 5th ,MATH,Academy,Lower Valley,San Benito,136
+6607,English Language Arts,Reading,1st - 5th ,ELA,Academy,Lower Valley,San Benito,136
+61400,Science,"Science, Grade 3",3rd,SCI,Academy,Lower Valley,Weslaco Pike,108
+61400,Social Studies,"Social Studies, Grade 3",3rd,SS,Academy,Lower Valley,Weslaco Pike,108
+23454,English Language Arts,"English Language Arts, Grade 1",1st,ELA,Academy,West San Antonio,Brackenridge,62
+86216,English Language Arts,"Reading, Grade 1",1st,ELA,Academy,Lower Valley,Brownsville,52
+14416,English Language Arts,"Reading, Grade 2",2nd,ELA,Academy,Lower Valley,Brownsville,96
+86216,English Language Arts,"English Language Arts, Grade 1",1st,ELA,Academy,Lower Valley,Brownsville,52
+14416,English Language Arts,"English Language Arts, Grade 2",2nd,ELA,Academy,Lower Valley,Brownsville,96
+69995,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,Lower Valley,Brownsville,66
+69995,Social Studies,Humanities ,1st - 5th ,SS,Academy,Lower Valley,Brownsville,66
+69995,Math,Mathematics ,1st - 5th ,MATH,Academy,Lower Valley,Brownsville,66
+69995,Science,Science ,1st - 5th ,SCI,Academy,Lower Valley,Brownsville,66
+95237,Science,"Science, Kindergarten",K,SCI,Academy,Greater Houston Area,Spears,58
+22112,English Language Arts,"Reading, Grade 1",1st,ELA,Academy,Mid Valley,Owassa,106
+86693,English Language Arts,"English Language Arts, Grade 5",5th,ELA,Academy,Mid Valley,Owassa,106
+95113,Math,"Advanced Mathematics, Grade 6",6th,MATH,College Prep,Austin,Bluff Springs,51
+94912,Social Studies,"Advanced Social Studies, Grade 6-World H",6th,SS,College Prep,Austin,Bluff Springs,23
+95184,English Language Arts,"Advanced English Language Arts, Grade 6",6th,ELA,College Prep,Austin,Bluff Springs,51
+90930,Math,"Advanced Mathematics, Grade 7 Pre-Algebr",7th,MATH,College Prep,Austin,Bluff Springs,108
+95400,Math,"Advanced Mathematics, Grade 8-Algebra I",8th,MATH,College Prep,Austin,Bluff Springs,86
+92331,Math,Math Intervention-6th,6th,MATH,College Prep,East San Antonio,Carver,87
+92331,Math,Math Intervention-7th,7th,MATH,College Prep,East San Antonio,Carver,87
+91652,Math,"Advanced Mathematics, Grade 7 Pre-Algebr",7th,MATH,College Prep,East San Antonio,Carver,57
+101225,Science,"Advanced Science, Grade 7-Life Science",7th,SCI,College Prep,Austin,Pflugerville,205
+95506,Science,"Advanced Science, Grade 8-Composite",8th,SCI,College Prep,Austin,Pflugerville,100
+95507,English Language Arts,"Advanced English Language Arts, Grade 7",7th,ELA,College Prep,Austin,Pflugerville,100
+100992,English Language Arts,"Reading, Kindergarten",K,ELA,Academy,El Paso,Edgemere,164
+61113,English Language Arts,"Reading, Grade 2",2nd,ELA,Academy,El Paso,Edgemere,97
+100992,English Language Arts,"English Language Arts, Kindergarten",K,ELA,Academy,El Paso,Edgemere,164
+61113,English Language Arts,"English Language Arts, Grade 2",2nd,ELA,Academy,El Paso,Edgemere,97
+60333,English Language Arts,"English Language Arts, Grade 5",5th,ELA,Academy,El Paso,Edgemere,108
+100992,Math,"Mathematics, Kindergarten",K,MATH,Academy,El Paso,Edgemere,164
+95584,Math,"Mathematics, Grade 1",1st,MATH,Academy,El Paso,Edgemere,128
+84210,Science,"Science, Kindergarten",K,SCI,Academy,El Paso,Edgemere,86
+100992,Social Studies,"Social Studies, Kindergarten",K,SS,Academy,El Paso,Edgemere,164
+95584,Social Studies,"Social Studies, Grade 1",1st,SS,Academy,El Paso,Edgemere,128
+85894,Social Studies,"Social Studies, Grade 1",1st,SS,Academy,West San Antonio,Brackenridge,103
+85894,Science,"Science, Grade 1",1st,SCI,Academy,West San Antonio,Brackenridge,103
+23454,Math,"Mathematics, Grade 1",1st,MATH,Academy,West San Antonio,Brackenridge,62
+86626,English Language Arts,"Reading, Grade 2",2nd,ELA,Academy,Upper Valley,Los Encinos,74
+86626,English Language Arts,"English Language Arts, Grade 2",2nd,ELA,Academy,Upper Valley,Los Encinos,74
+19187,English Language Arts,"English Language Arts, Grade 3",3rd,ELA,Academy,Upper Valley,Los Encinos,69
+69801,Science,"Science, Grade 5",5th,SCI,Academy,Upper Valley,Los Encinos,84
+95239,English Language Arts,AP English Language and Composition,9th - 12th ,ELA,College Prep,El Paso,Rio Vista,58
+95108,Science,Principles of Nursing Science,9th - 12th ,SCI,College Prep,El Paso,Rio Vista,44
+95239,English Language Arts,Pre-AP English II,9th - 12th ,ELA,College Prep,El Paso,Rio Vista,58
+24037,Math,"Mathematics, Grade 3",3rd,MATH,Academy,West San Antonio,Ewing Halsell,76
+88131,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,West San Antonio,Ewing Halsell,104
+88131,Math,Mathematics ,1st - 5th ,MATH,Academy,West San Antonio,Ewing Halsell,104
+88131,Science,Science ,1st - 5th ,SCI,Academy,West San Antonio,Ewing Halsell,104
+69598,English Language Arts,"English Language Arts, Grade 3",3rd,ELA,Academy,Upper Valley,Tres Lagos,96
+69630,English Language Arts,"English Language Arts, Grade 4",4th,ELA,Academy,Upper Valley,Tres Lagos,91
+95040,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,Upper Valley,Tres Lagos,38
+87981,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,Upper Valley,Tres Lagos,87
+95040,Social Studies,Humanities ,1st - 5th ,SS,Academy,Upper Valley,Tres Lagos,38
+87981,Social Studies,Humanities ,1st - 5th ,SS,Academy,Upper Valley,Tres Lagos,87
+95040,Math,Mathematics ,1st - 5th ,MATH,Academy,Upper Valley,Tres Lagos,38
+87981,Math,Mathematics ,1st - 5th ,MATH,Academy,Upper Valley,Tres Lagos,87
+95040,Science,Science ,1st - 5th ,SCI,Academy,Upper Valley,Tres Lagos,38
+87981,Science,Science ,1st - 5th ,SCI,Academy,Upper Valley,Tres Lagos,87
+84080,English Language Arts,AP English Literature and Composition,9th - 12th ,ELA,College Prep,Mid Valley,Toros,89
+6560,Social Studies,AP U.S. Government,9th - 12th ,SS,College Prep,Mid Valley,Toros,100
+87271,Science,AP Computer Science Principles,9th - 12th ,SCI,College Prep,Mid Valley,Toros,50
+6560,Social Studies,AP Microeconomics,9th - 12th ,SS,College Prep,Mid Valley,Toros,100
+87271,Math,AP Calculus AB,9th - 12th ,MATH,College Prep,Mid Valley,Toros,50
+86465,English Language Arts,"Advanced English Language Arts, Grade 6",6th,ELA,College Prep,El Paso,Edgemere,172
+89281,Math,"Advanced Mathematics, Grade 7 Pre-Algebr",7th,MATH,College Prep,El Paso,Edgemere,286
+91058,English Language Arts,"Advanced English Language Arts, Grade 7",7th,ELA,College Prep,El Paso,Edgemere,63
+60972,Math,"Mathematics, Kindergarten",K,MATH,Academy,Mid Valley,Owassa,91
+60972,Social Studies,"Social Studies, Kindergarten",K,SS,Academy,Mid Valley,Owassa,91
+60972,Science,"Science, Kindergarten",K,SCI,Academy,Mid Valley,Owassa,91
+23794,Science,IB Biology SL-Year II,9th - 12th ,SCI,College Prep,Lower Valley,Frontier,92
+100847,English Language Arts,"Reading, Grade 2",2nd,ELA,Academy,Austin,Rundberg,142
+100847,English Language Arts,"English Language Arts, Grade 2",2nd,ELA,Academy,Austin,Rundberg,142
+22163,English Language Arts,"English Language Arts, Grade 1",1st,ELA,Academy,Lower Valley,Robindale,117
+84071,English Language Arts,"English Language Arts, Grade 4",4th,ELA,Academy,Austin,Rundberg,84
+10346,Math,"Mathematics, Grade 2",2nd,MATH,Academy,Austin,Rundberg,23
+95422,Math,"Mathematics, Grade 3",3rd,MATH,Academy,Austin,Rundberg,93
+21394,Math,"Mathematics, Grade 4",4th,MATH,Academy,Austin,Rundberg,52
+61861,Science,"Science, Grade 2",2nd,SCI,Academy,Austin,Rundberg,201
+23993,Science,"Science, Kindergarten",K,SCI,Academy,Lower Valley,Robindale,168
+10346,Science,"Science, Grade 3",3rd,SCI,Academy,Austin,Rundberg,23
+95055,Science,"Science, Grade 4",4th,SCI,Academy,Austin,Rundberg,38
+10346,Social Studies,"Social Studies, Grade 2",2nd,SS,Academy,Austin,Rundberg,23
+10346,Social Studies,"Social Studies, Grade 3",3rd,SS,Academy,Austin,Rundberg,23
+95055,Social Studies,"Social Studies, Grade 4",4th,SS,Academy,Austin,Rundberg,38
+23993,Science,"Science, Grade 5",5th,SCI,Academy,Lower Valley,Robindale,168
+101191,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,Lower Valley,Robindale,198
+101191,Social Studies,Humanities ,1st - 5th ,SS,Academy,Lower Valley,Robindale,198
+68976,Social Studies,Humanities ,1st - 5th ,SS,Academy,Lower Valley,Robindale,87
+101191,Math,Mathematics ,1st - 5th ,MATH,Academy,Lower Valley,Robindale,198
+101191,Science,Science ,1st - 5th ,SCI,Academy,Lower Valley,Robindale,198
+68976,Science,Science ,1st - 5th ,SCI,Academy,Lower Valley,Robindale,87
+95003,Science,Computer Science I,9th - 12th ,SCI,College Prep,East San Antonio,Eastside,30
+69986,English Language Arts,AP English Language and Composition,9th - 12th ,ELA,College Prep,East San Antonio,Eastside,190
+69986,English Language Arts,AP English Literature and Composition,9th - 12th ,ELA,College Prep,East San Antonio,Eastside,190
+95003,Math,Advanced Geometry,9th - 12th ,MATH,College Prep,East San Antonio,Eastside,30
+70604,English Language Arts,English IV ,9th - 12th ,ELA,College Prep,Lower Valley,Weslaco Pike,49
+70604,Social Studies,U.S. Government ,9th - 12th ,SS,College Prep,Lower Valley,Weslaco Pike,49
+84486,Math,AP Computer Science A - Math,9th - 12th ,MATH,College Prep,Lower Valley,Weslaco Pike,54
+84486,Science,AP Computer Science Principles,9th - 12th ,SCI,College Prep,Lower Valley,Weslaco Pike,54
+70604,Math,Advanced Algebra 2,9th - 12th ,MATH,College Prep,Lower Valley,Weslaco Pike,49
+85967,Science,Pre-AP Chemistry,9th - 12th ,SCI,College Prep,Lower Valley,Weslaco Pike,54
+94733,Science,AP Environmental Science,9th - 12th ,SCI,College Prep,East San Antonio,Walzem,3
+94995,Math,Advanced Geometry,9th - 12th ,MATH,College Prep,East San Antonio,Walzem,30
+101065,English Language Arts,Pre-AP English II,9th - 12th ,ELA,College Prep,East San Antonio,Walzem,170
+92698,English Language Arts,"Advanced English Language Arts, Grade 7",7th,ELA,College Prep,Austin,Health Professions,119
+94889,English Language Arts,"Advanced English Language Arts, Grade 8",8th,ELA,College Prep,Austin,Health Professions,16
+6573,English Language Arts,"Reading, Kindergarten",K,ELA,Academy,Mid Valley,San Juan,98
+6573,English Language Arts,"English Language Arts, Kindergarten",K,ELA,Academy,Mid Valley,San Juan,98
+6573,Math,"Mathematics, Kindergarten",K,MATH,Academy,Mid Valley,San Juan,98
+22937,Math,"Mathematics, Grade 2",2nd,MATH,Academy,Mid Valley,San Juan,91
+6573,Science,"Science, Kindergarten",K,SCI,Academy,Mid Valley,San Juan,98
+22937,Science,"Science, Grade 2",2nd,SCI,Academy,Mid Valley,San Juan,91
+6573,Social Studies,"Social Studies, Kindergarten",K,SS,Academy,Mid Valley,San Juan,98
+22937,Social Studies,"Social Studies, Grade 2",2nd,SS,Academy,Mid Valley,San Juan,91
+69134,Social Studies,"Advanced Social Studies, Grade 6-World H",6th,SS,College Prep,Lower Valley,Brownsville,91
+69134,Social Studies,"Advanced Social Studies, Grade 7-Texas H",7th,SS,College Prep,Lower Valley,Brownsville,91
+89379,English Language Arts,"Advanced English Language Arts, Grade 6",6th,ELA,College Prep,Lower Valley,Weslaco,51
+86290,Math,"Advanced Mathematics, Grade 7 Pre-Algebr",7th,MATH,College Prep,Lower Valley,Weslaco,294
+94999,Math,"Advanced Mathematics, Grade 8-Algebra I",8th,MATH,College Prep,Lower Valley,Weslaco,30
+88550,English Language Arts,"Reading, Kindergarten",K,ELA,Academy,El Paso,Horizon Vista,296
+88550,English Language Arts,"English Language Arts, Kindergarten",K,ELA,Academy,El Paso,Horizon Vista,296
+88550,Math,"Mathematics, Kindergarten",K,MATH,Academy,El Paso,Horizon Vista,296
+70011,Math,"Mathematics, Grade 3",3rd,MATH,Academy,El Paso,Horizon Vista,71
+88550,Science,"Science, Kindergarten",K,SCI,Academy,El Paso,Horizon Vista,296
+87271,Math,AP Precalculus,9th - 12th ,MATH,College Prep,Mid Valley,Toros,50
+86413,Math,"Advanced Mathematics, Grade 6",6th,MATH,College Prep,West San Antonio,Mays,140
+70604,Science,Food Science ,9th - 12th ,SCI,College Prep,Lower Valley,Weslaco Pike,49
+70604,Math,Ind Study Math (First Time) Full Yr,9th - 12th ,MATH,College Prep,Lower Valley,Weslaco Pike,49
+94949,English Language Arts,"English Language Arts, Grade 2",2nd,ELA,Academy,Greater Houston Area,Spears,23
+94990,Math,"Mathematics, Grade 2",2nd,MATH,Academy,Greater Houston Area,Spears,30
+95237,Social Studies,"Social Studies, Kindergarten",K,SS,Academy,Greater Houston Area,Spears,58
+84682,Math,Reading Intervention-3rd,3rd,MATH,Academy,Greater Houston Area,Spears,318
+84682,Math,Reading Intervention-4th,4th,MATH,Academy,Greater Houston Area,Spears,318
+84682,Math,Reading Intervention-5th,5th,MATH,Academy,Greater Houston Area,Spears,318
+61286,English Language Arts,"Reading, Grade 1",1st,ELA,Academy,Upper Valley,Palmview,118
+61286,English Language Arts,"English Language Arts, Grade 1",1st,ELA,Academy,Upper Valley,Palmview,118
+19833,Science,"Science, Grade 4",4th,SCI,Academy,Upper Valley,Palmview,85
+95289,Science,"Science, Grade 5",5th,SCI,Academy,Upper Valley,Palmview,65
+21331,Social Studies,"Social Studies, Grade 1",1st,SS,Academy,Upper Valley,Palmview,147
+91415,Social Studies,"Social Studies, Grade 5",5th,SS,Academy,Upper Valley,Palmview,104
+73908,English Language Arts,"Advanced English Language Arts, Grade 7",7th,ELA,College Prep,Upper Valley,Palmview,3
+83539,English Language Arts,"Reading, Grade 2",2nd,ELA,Academy,Lower Valley,Weslaco Pike,105
+83539,English Language Arts,"English Language Arts, Grade 2",2nd,ELA,Academy,Lower Valley,Weslaco Pike,105
+95555,Science,"Science, Grade 2",2nd,SCI,Academy,Lower Valley,Weslaco Pike,240
+95639,Science,Principles of Nursing Science,9th - 12th ,SCI,College Prep,Greater Houston Area,Spears,128
+101138,Science,Pre-AP Chemistry,9th - 12th ,SCI,College Prep,Greater Houston Area,Spears,198
+70604,English Language Arts,English III ,9th - 12th ,ELA,College Prep,Lower Valley,Weslaco Pike,49
+70604,Science,Physics ,9th - 12th ,SCI,College Prep,Lower Valley,Weslaco Pike,49
+70604,Social Studies,U.S. History ,9th - 12th ,SS,College Prep,Lower Valley,Weslaco Pike,49
+95645,Math,Advanced Geometry,9th - 12th ,MATH,College Prep,El Paso,Mesa Hills,142
+93452,Science,Pre-AP Chemistry,9th - 12th ,SCI,College Prep,El Paso,Mesa Hills,252
+88664,English Language Arts,Pre-AP English I,9th - 12th ,ELA,College Prep,El Paso,Mesa Hills,78
+93798,Social Studies,"Advanced Social Studies, Grade 7-Texas H",7th,SS,College Prep,Tarrant County,Edgecliff,129
+85370,Science,Pre-AP Biology (8th Grade),8th,SCI,College Prep,Tarrant County,Edgecliff,66
+24309,Science,"Advanced Science, Grade 6-Earth Science",6th,SCI,College Prep,Lower Valley,Harlingen,86
+60000,English Language Arts,Reading Intervention-7th,7th,ELA,College Prep,Upper Valley,Tres Lagos,84
+86507,Math,"Advanced Mathematics, Grade 7 Pre-Algebr",7th,MATH,College Prep,Mid Valley,Owassa,56
+90232,Math,"Advanced Mathematics, Grade 8-Algebra I",8th,MATH,College Prep,Mid Valley,Owassa,300
+93915,Math,"Advanced Mathematics, Grade 7 Pre-Algebr",7th,MATH,College Prep,El Paso,Mesa Hills,134
+95167,Science,Pre-AP Biology,9th - 12th ,SCI,College Prep,El Paso,Mesa Hills,51
+60000,English Language Arts,Reading Intervention-6th,6th,ELA,College Prep,Upper Valley,Tres Lagos,84
+84532,English Language Arts,"Reading, Grade 2",2nd,ELA,Academy,West San Antonio,Hidden Meadow,74
+95570,English Language Arts,"English Language Arts, Grade 2",2nd,ELA,Academy,West San Antonio,Hidden Meadow,122
+84532,English Language Arts,"English Language Arts, Grade 2",2nd,ELA,Academy,West San Antonio,Hidden Meadow,74
+6560,Social Studies,AP US History,9th - 12th ,SS,College Prep,Mid Valley,Toros,100
+84080,English Language Arts,AP English Language and Composition,9th - 12th ,ELA,College Prep,Mid Valley,Toros,89
+90141,Math,"Mathematics, Grade 1",1st,MATH,Academy,Austin,Round Rock Tech,61
+90141,Science,"Science, Grade 1",1st,SCI,Academy,Austin,Round Rock Tech,61
+90141,Social Studies,"Social Studies, Grade 1",1st,SS,Academy,Austin,Round Rock Tech,61
+87760,English Language Arts,"Reading, Grade 1",1st,ELA,Academy,Lower Valley,Harlingen,99
+85235,Science,"Science, Grade 3",3rd,SCI,Academy,Lower Valley,Harlingen,108
+11880,Science,"Science, Grade 4",4th,SCI,Academy,Lower Valley,Harlingen,66
+17843,Science,"Science, Grade 5",5th,SCI,Academy,Lower Valley,Harlingen,84
+85235,Social Studies,"Social Studies, Grade 3",3rd,SS,Academy,Lower Valley,Harlingen,108
+11880,Social Studies,"Social Studies, Grade 4",4th,SS,Academy,Lower Valley,Harlingen,66
+18347,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,Lower Valley,Harlingen,239
+18347,Social Studies,Humanities ,1st - 5th ,SS,Academy,Lower Valley,Harlingen,239
+100899,Science,Science ,1st - 5th ,SCI,Academy,Lower Valley,Harlingen,149
+91562,Social Studies,AP U.S. Government,9th - 12th ,SS,College Prep,Austin,Montopolis,53
+95580,English Language Arts,Pre-AP English I,9th - 12th ,ELA,College Prep,Austin,Montopolis,128
+95287,English Language Arts,Pre-AP English II,9th - 12th ,ELA,College Prep,Austin,Montopolis,65
+100997,Social Studies,AP World History,9th - 12th ,SS,College Prep,Austin,Bluff Springs,163
+95350,Math,Advanced Geometry,9th - 12th ,MATH,College Prep,Austin,Bluff Springs,72
+94822,English Language Arts,Pre-AP English II,9th - 12th ,ELA,College Prep,Austin,Bluff Springs,9
+94963,Math,"Mathematics, Grade 2",2nd,MATH,Academy,Lower Valley,Weslaco,30
+95664,Science,"Science, Grade 5",5th,SCI,Academy,Lower Valley,Weslaco,136
+94936,Social Studies,"Social Studies, Grade 5",5th,SS,Academy,Lower Valley,Weslaco,23
+101204,Math,Math Intervention-3rd,3rd,MATH,Academy,Lower Valley,Weslaco,205
+14404,English Language Arts,Reading Intervention-3rd,3rd,ELA,Academy,Lower Valley,Weslaco,91
+101204,Math,Math Intervention-4th,4th,MATH,Academy,Lower Valley,Weslaco,205
+14404,English Language Arts,Reading Intervention-4th,4th,ELA,Academy,Lower Valley,Weslaco,91
+101204,Math,Math Intervention-5th,5th,MATH,Academy,Lower Valley,Weslaco,205
+14404,English Language Arts,Reading Intervention-5th,5th,ELA,Academy,Lower Valley,Weslaco,91
+11004,English Language Arts,Pre-AP English I,9th - 12th ,ELA,College Prep,Lower Valley,San Benito,87
+94822,English Language Arts,English Seminar,9th - 12th ,ELA,College Prep,Austin,Bluff Springs,9
+95418,Math,Advanced Algebra 1,9th - 12th ,MATH,College Prep,Tarrant County,Rise,93
+84042,Math,"Mathematics, Grade 1",1st,MATH,Academy,Upper Valley,Los Encinos,58
+84042,Science,"Science, Grade 1",1st,SCI,Academy,Upper Valley,Los Encinos,58
+84042,Social Studies,"Social Studies, Grade 1",1st,SS,Academy,Upper Valley,Los Encinos,58
+95620,Social Studies,"Advanced Social Studies, Grade 6-World H",6th,SS,College Prep,East San Antonio,Converse,128
+87365,Math,"Advanced Mathematics, Grade 7 Pre-Algebr",7th,MATH,College Prep,East San Antonio,Converse,81
+95527,Math,"Advanced Mathematics, Grade 8-Algebra I",8th,MATH,College Prep,East San Antonio,Converse,122
+101162,English Language Arts,"Advanced English Language Arts, Grade 7",7th,ELA,College Prep,East San Antonio,Converse,198
+95276,Social Studies,"Advanced Social Studies, Grade 6-World H",6th,SS,College Prep,Lower Valley,Sports Park,65
+95276,Science,"Advanced Science, Grade 6-Earth Science",6th,SCI,College Prep,Lower Valley,Sports Park,65
+95276,Science,"Advanced Science, Grade 7-Life Science",7th,SCI,College Prep,Lower Valley,Sports Park,65
+70104,English Language Arts,"Advanced English Language Arts, Grade 8",8th,ELA,College Prep,Lower Valley,Sports Park,99
+95276,Social Studies,"Advanced Social Studies, Grade 7-Texas H",7th,SS,College Prep,Lower Valley,Sports Park,65
+101021,Science,Pre-AP Biology,9th - 12th ,SCI,College Prep,Lower Valley,Sports Park,170
+69768,Social Studies,AP Microeconomics,9th - 12th ,SS,College Prep,Austin,Rundberg,49
+69768,Social Studies,AP U.S. Government,9th - 12th ,SS,College Prep,Austin,Rundberg,49
+62256,Math,Advanced Geometry,9th - 12th ,MATH,College Prep,Austin,Rundberg,46
+95225,Science,AP Computer Science Principles,9th - 12th ,SCI,College Prep,Mid Valley,Owassa,58
+91408,Math,Advanced Algebra 2,9th - 12th ,MATH,College Prep,Mid Valley,Owassa,300
+101000,English Language Arts,Reading Intervention-7th,7th,ELA,College Prep,Lower Valley,San Benito,163
+101000,English Language Arts,Reading Intervention-8th,8th,ELA,College Prep,Lower Valley,San Benito,163
+17640,Math,"Advanced Mathematics, Grade 7 Pre-Algebr",7th,MATH,College Prep,Lower Valley,San Benito,44
+73758,Math,"Advanced Mathematics, Grade 8-Algebra I",8th,MATH,College Prep,Lower Valley,San Benito,66
+69016,Social Studies,AP Human Geography,9th - 12th ,SS,College Prep,Mid Valley,Toros,83
+84598,Science,Biology ,9th - 12th ,SCI,College Prep,West San Antonio,Mays,239
+84598,Science,Chemistry ,9th - 12th ,SCI,College Prep,West San Antonio,Mays,239
+84598,Science,Physics ,9th - 12th ,SCI,College Prep,West San Antonio,Mays,239
+84598,Math,Algebra I ,9th - 12th ,MATH,College Prep,West San Antonio,Mays,239
+84598,Math,Algebra II ,9th - 12th ,MATH,College Prep,West San Antonio,Mays,239
+84598,Math,Geometry ,9th - 12th ,MATH,College Prep,West San Antonio,Mays,239
+84598,Math,Ind Study Math (First Time) Full Yr,9th - 12th ,MATH,College Prep,West San Antonio,Mays,239
+86377,Math,"Mathematics, Grade 1",1st,MATH,Academy,Upper Valley,La Joya,56
+86377,Science,"Science, Grade 1",1st,SCI,Academy,Upper Valley,La Joya,56
+86377,Social Studies,"Social Studies, Grade 1",1st,SS,Academy,Upper Valley,La Joya,56
+84598,Science,Earth and Space Science ,9th - 12th ,SCI,College Prep,West San Antonio,Mays,239
+70119,Math,AP Statistics,9th - 12th ,MATH,College Prep,West San Antonio,Mays,137
+70119,Science,AP Biology,9th - 12th ,SCI,College Prep,West San Antonio,Mays,137
+70119,Math,AP Calculus AB,9th - 12th ,MATH,College Prep,West San Antonio,Mays,137
+86897,English Language Arts,AP English Language and Composition,9th - 12th ,ELA,College Prep,West San Antonio,Mays,122
+70119,Science,Advanced Physics,9th - 12th ,SCI,College Prep,West San Antonio,Mays,137
+94569,Math,"Mathematics, Grade 1",1st,MATH,Academy,East San Antonio,Najim,145
+94569,Science,"Science, Grade 1",1st,SCI,Academy,East San Antonio,Najim,145
+95329,Science,"Science, Grade 2",2nd,SCI,Academy,East San Antonio,Najim,72
+94569,Social Studies,"Social Studies, Grade 1",1st,SS,Academy,East San Antonio,Najim,145
+84382,Social Studies,"Social Studies, Grade 3",3rd,SS,Academy,East San Antonio,Najim,107
+88448,Math,Advanced Geometry,9th - 12th ,MATH,College Prep,East San Antonio,Najim,111
+101024,English Language Arts,English Language Arts - Grade 6 ,6th,ELA,College Prep,West San Antonio,Hidden Meadow,170
+25286,Social Studies,"Advanced Social Studies, Gr 8-U.S. Histo",8th,SS,College Prep,Upper Valley,McAllen,88
+95683,English Language Arts,"Pre-AP English Language Arts, Grade 8",8th,ELA,College Prep,Upper Valley,McAllen,136
+73922,Science,Biology ,9th - 12th ,SCI,College Prep,Upper Valley,Tres Lagos,63
+73922,Math,Algebra I ,9th - 12th ,MATH,College Prep,Upper Valley,Tres Lagos,63
+73922,Social Studies,World Geography ,9th - 12th ,SS,College Prep,Upper Valley,Tres Lagos,63
+100818,Science,AP Environmental Science,9th - 12th ,SCI,College Prep,Tarrant County,Achieve,142
+100818,Science,Pre-AP Biology,9th - 12th ,SCI,College Prep,Tarrant County,Achieve,142
+100826,Science,Pre-AP Chemistry,9th - 12th ,SCI,College Prep,Tarrant County,Achieve,142
+14071,English Language Arts,"English Language Arts, Kindergarten",K,ELA,Academy,Lower Valley,Sports Park,38
+94827,English Language Arts,"English Language Arts, Grade 4",4th,ELA,Academy,Lower Valley,Sports Park,9
+61757,Math,"Mathematics, Kindergarten",K,MATH,Academy,Lower Valley,Sports Park,63
+84064,Science,"Science, Grade 3",3rd,SCI,Academy,Lower Valley,Sports Park,125
+100900,Science,"Science, Grade 5",5th,SCI,Academy,Lower Valley,Sports Park,149
+84064,Social Studies,"Social Studies, Grade 3",3rd,SS,Academy,Lower Valley,Sports Park,125
+95623,Math,Advanced Algebra 1,9th - 12th ,MATH,College Prep,Greater Houston Area,Hardy,136
+95623,Math,Advanced Geometry,9th - 12th ,MATH,College Prep,Greater Houston Area,Hardy,136
+84339,English Language Arts,English Language Arts - Grade 7,7th,ELA,College Prep,Tarrant County,Achieve,239
+84339,Social Studies,Humanities - Grade 7,7th,SS,College Prep,Tarrant County,Achieve,239
+84339,Science,Science - Grade 7,7th,SCI,College Prep,Tarrant County,Achieve,239
+83959,Math,"Advanced Mathematics, Grade 8-Algebra I",8th,MATH,College Prep,Lower Valley,Robindale,106
+92889,English Language Arts,"Advanced English Language Arts, Grade 8",8th,ELA,College Prep,West San Antonio,Ewing Halsell,130
+86508,Social Studies,AP Human Geography,9th - 12th ,SS,College Prep,El Paso,Edgemere,156
+60782,English Language Arts,Pre-AP English II,9th - 12th ,ELA,College Prep,El Paso,Edgemere,363
+86678,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,Lower Valley,Sports Park,83
+86678,Math,Mathematics ,1st - 5th ,MATH,Academy,Lower Valley,Sports Park,83
+86678,Social Studies,Humanities ,1st - 5th ,SS,Academy,Lower Valley,Sports Park,83
+86678,Science,Science ,1st - 5th ,SCI,Academy,Lower Valley,Sports Park,83
+17567,English Language Arts,Reading Intervention-3rd,3rd,ELA,Academy,Lower Valley,Sports Park,92
+17567,English Language Arts,Reading Intervention-4th,4th,ELA,Academy,Lower Valley,Sports Park,92
+95485,English Language Arts,"Reading, Kindergarten",K,ELA,Academy,El Paso,Mesa Hills,100
+84689,English Language Arts,"Reading, Kindergarten",K,ELA,Academy,El Paso,Mesa Hills,101
+95485,English Language Arts,"English Language Arts, Kindergarten",K,ELA,Academy,El Paso,Mesa Hills,100
+84689,English Language Arts,"English Language Arts, Kindergarten",K,ELA,Academy,El Paso,Mesa Hills,101
+95485,Math,"Mathematics, Kindergarten",K,MATH,Academy,El Paso,Mesa Hills,100
+84689,Math,"Mathematics, Kindergarten",K,MATH,Academy,El Paso,Mesa Hills,101
+61365,Science,"Science, Kindergarten",K,SCI,Academy,El Paso,Mesa Hills,223
+84689,Science,"Science, Kindergarten",K,SCI,Academy,El Paso,Mesa Hills,101
+95485,Social Studies,"Social Studies, Kindergarten",K,SS,Academy,El Paso,Mesa Hills,100
+84689,Social Studies,"Social Studies, Kindergarten",K,SS,Academy,El Paso,Mesa Hills,101
+95680,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,El Paso,Mesa Hills,136
+95680,Social Studies,Humanities ,1st - 5th ,SS,Academy,El Paso,Mesa Hills,136
+95680,Math,Mathematics ,1st - 5th ,MATH,Academy,El Paso,Mesa Hills,136
+95680,Science,Science ,1st - 5th ,SCI,Academy,El Paso,Mesa Hills,136
+94764,English Language Arts,"Reading, Kindergarten",K,ELA,Academy,Austin,Pflugerville,3
+94764,Math,"Mathematics, Kindergarten",K,MATH,Academy,Austin,Pflugerville,3
+94764,English Language Arts,"English Language Arts, Kindergarten",K,ELA,Academy,Austin,Pflugerville,3
+94764,Science,"Science, Kindergarten",K,SCI,Academy,Austin,Pflugerville,3
+94764,Social Studies,"Social Studies, Kindergarten",K,SS,Academy,Austin,Pflugerville,3
+94823,English Language Arts,"Reading, Kindergarten",K,ELA,Academy,Austin,Pflugerville,9
+94823,Math,"Mathematics, Kindergarten",K,MATH,Academy,Austin,Pflugerville,9
+94823,English Language Arts,"English Language Arts, Kindergarten",K,ELA,Academy,Austin,Pflugerville,9
+94823,Science,"Science, Kindergarten",K,SCI,Academy,Austin,Pflugerville,9
+94823,Social Studies,"Social Studies, Kindergarten",K,SS,Academy,Austin,Pflugerville,9
+94693,Science,"Science, Grade 3",3rd,SCI,Academy,Tarrant County,Achieve,3
+94693,Social Studies,"Social Studies, Grade 3",3rd,SS,Academy,Tarrant County,Achieve,3
+61778,Science,Science ,1st - 5th ,SCI,Academy,West San Antonio,Mays,82
+61778,Math,Mathematics ,1st - 5th ,MATH,Academy,West San Antonio,Mays,82
+17567,English Language Arts,Reading Intervention-5th,5th,ELA,Academy,Lower Valley,Sports Park,92
+60225,Math,Advanced Algebra 1,9th - 12th ,MATH,College Prep,Tarrant County,Edgecliff,88
+60225,Math,Advanced Geometry,9th - 12th ,MATH,College Prep,Tarrant County,Edgecliff,88
+86374,English Language Arts,English Seminar,9th - 12th ,ELA,College Prep,Mid Valley,Quest,91
+85647,Math,Algebra I ,9th - 12th ,MATH,College Prep,Upper Valley,Palmview,77
+85647,English Language Arts,English I ,9th - 12th ,ELA,College Prep,Upper Valley,Palmview,77
+85647,Science,Biology ,9th - 12th ,SCI,College Prep,Upper Valley,Palmview,77
+85647,Social Studies,World Geography ,9th - 12th ,SS,College Prep,Upper Valley,Palmview,77
+84598,Math,Mathematics -Grade 8,8th,MATH,College Prep,West San Antonio,Mays,239
+84598,Science,Science - Grade 8,8th,SCI,College Prep,West San Antonio,Mays,239
+88796,Science,AP Environmental science,9th - 12th ,SCI,College Prep,Austin,Pflugerville,82
+95300,Math,Advanced Algebra 2,9th - 12th ,MATH,College Prep,Austin,Pflugerville,65
+95299,Math,Advanced Precalculus,9th - 12th ,MATH,College Prep,Austin,Pflugerville,65
+101120,Science,Pre-AP Chemistry,9th - 12th ,SCI,College Prep,Austin,Pflugerville,184
+95508,English Language Arts,Pre-AP English I,9th - 12th ,ELA,College Prep,Austin,Pflugerville,100
+95513,English Language Arts,Pre-AP English II,9th - 12th ,ELA,College Prep,Austin,Pflugerville,100
+84598,Science,Science - Grade 7,7th,SCI,College Prep,West San Antonio,Mays,239
+84598,Math,Mathematics -Grade 7,7th,MATH,College Prep,West San Antonio,Mays,239
+70043,Math,Geometry ,9th - 12th ,MATH,College Prep,Austin,Pflugerville,66
+70043,English Language Arts,English II,9th - 12th ,ELA,College Prep,Austin,Pflugerville,66
+70043,Social Studies,World History ,9th - 12th ,SS,College Prep,Austin,Pflugerville,66
+70043,Science,Chemistry ,9th - 12th ,SCI,College Prep,Austin,Pflugerville,66
+95209,Math,Mathematics -Grade 6,6th,MATH,College Prep,Tarrant County,Edgecliff,58
+95209,English Language Arts,English Language Arts - Grade 6 ,6th,ELA,College Prep,Tarrant County,Edgecliff,58
+70043,Math,Algebra II ,9th - 12th ,MATH,College Prep,Austin,Pflugerville,66
+70043,English Language Arts,English I ,9th - 12th ,ELA,College Prep,Austin,Pflugerville,66
+70043,Science,Biology ,9th - 12th ,SCI,College Prep,Austin,Pflugerville,66
+70043,Social Studies,World Geography ,9th - 12th ,SS,College Prep,Austin,Pflugerville,66
+70043,Math,Algebra I ,9th - 12th ,MATH,College Prep,Austin,Pflugerville,66
+70043,English Language Arts,English III ,9th - 12th ,ELA,College Prep,Austin,Pflugerville,66
+70043,Social Studies,U.S. History ,9th - 12th ,SS,College Prep,Austin,Pflugerville,66
+70043,Science,Physics ,9th - 12th ,SCI,College Prep,Austin,Pflugerville,66
+84598,Science,Science - Grade 6 ,6th,SCI,College Prep,West San Antonio,Mays,239
+84598,Math,Mathematics -Grade 6,6th,MATH,College Prep,West San Antonio,Mays,239
+70043,English Language Arts,English II ,9th - 12th ,ELA,College Prep,Austin,Pflugerville,66
+73922,English Language Arts,English I ,9th - 12th ,ELA,College Prep,Upper Valley,Tres Lagos,63
+73922,Science,Physics ,9th - 12th ,SCI,College Prep,Upper Valley,Tres Lagos,63
+73922,English Language Arts,English III ,9th - 12th ,ELA,College Prep,Upper Valley,Tres Lagos,63
+73922,Social Studies,U.S. History ,9th - 12th ,SS,College Prep,Upper Valley,Tres Lagos,63
+73922,Math,Algebra II ,9th - 12th ,MATH,College Prep,Upper Valley,Tres Lagos,63
+70119,Science,Pre-AP Biology,9th - 12th ,SCI,College Prep,West San Antonio,Mays,137
+61778,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,West San Antonio,Mays,82
+95306,English Language Arts,"English Language Arts, Grade 5",5th,ELA,Academy,East San Antonio,Monterrey Park,65
+95287,English Language Arts,Reading II,9th - 12th ,ELA,College Prep,Austin,Montopolis,65
+94961,English Language Arts,"Reading, Grade 1",1st,ELA,Academy,Mid Valley,Quest,30
+94961,Math,"Mathematics, Grade 1",1st,MATH,Academy,Mid Valley,Quest,30
+94961,Math,"Mathematics, Grade 2",2nd,MATH,Academy,Mid Valley,Quest,30
+94961,English Language Arts,"Reading, Grade 2",2nd,ELA,Academy,Mid Valley,Quest,30
+94773,Science,Principles of Nursing Science,9th - 12th ,SCI,College Prep,El Paso,Mesa Hills,9
+13615,Math,Mathematics ,1st - 5th ,MATH,Academy,West San Antonio,Ingram Hills,136
+2032,English Language Arts,English II,9th - 12th ,ELA,College Prep,Mid Valley,Toros,156
+95209,Social Studies,World Geography ,9th - 12th ,SS,College Prep,Tarrant County,Edgecliff,58
+74395,Math,Math Intervention-3rd,3rd,MATH,Academy,Mid Valley,Elsa,84
+73922,English Language Arts,English IV ,9th - 12th ,ELA,College Prep,Upper Valley,Tres Lagos,63
+95299,Math,Advanced Algebra 1,9th - 12th ,MATH,College Prep,Austin,Pflugerville,65
+73922,Science,Food Science ,9th - 12th ,SCI,College Prep,Upper Valley,Tres Lagos,63
+73922,Math,Ind Study Math (First Time) Full Yr,9th - 12th ,MATH,College Prep,Upper Valley,Tres Lagos,63
+94961,Science,"Science, Grade 1",1st,SCI,Academy,Mid Valley,Quest,30
+94961,Social Studies,"Social Studies, Grade 1",1st,SS,Academy,Mid Valley,Quest,30
+9983,Math,Algebra I ,9th - 12th ,MATH,College Prep,Lower Valley,Sports Park,84
+9983,Social Studies,World Geography ,9th - 12th ,SS,College Prep,Lower Valley,Sports Park,84
+9983,English Language Arts,English I ,9th - 12th ,ELA,College Prep,Lower Valley,Sports Park,84
+9983,Science,Biology ,9th - 12th ,SCI,College Prep,Lower Valley,Sports Park,84
+9983,Math,Geometry ,9th - 12th ,MATH,College Prep,Lower Valley,Sports Park,84
+9983,Social Studies,World History ,9th - 12th ,SS,College Prep,Lower Valley,Sports Park,84
+9983,English Language Arts,English II ,9th - 12th ,ELA,College Prep,Lower Valley,Sports Park,84
+9983,Science,Chemistry ,9th - 12th ,SCI,College Prep,Lower Valley,Sports Park,84
+9983,Math,Algebra II ,9th - 12th ,MATH,College Prep,Lower Valley,Sports Park,84
+9983,Social Studies,U.S. History ,9th - 12th ,SS,College Prep,Lower Valley,Sports Park,84
+9983,English Language Arts,English III ,9th - 12th ,ELA,College Prep,Lower Valley,Sports Park,84
+9983,Science,Physics ,9th - 12th ,SCI,College Prep,Lower Valley,Sports Park,84
+95209,Math,Algebra I ,9th - 12th ,MATH,College Prep,Tarrant County,Edgecliff,58
+95209,English Language Arts,English I ,9th - 12th ,ELA,College Prep,Tarrant County,Edgecliff,58
+95209,Science,Biology ,9th - 12th ,SCI,College Prep,Tarrant County,Edgecliff,58
+95209,Social Studies,Humanities - Grade 6,6th,SS,College Prep,Tarrant County,Edgecliff,58
+95209,English Language Arts,English Language Arts - Grade 8,8th,ELA,College Prep,Tarrant County,Edgecliff,58
+95209,Science,Science - Grade 8,8th,SCI,College Prep,Tarrant County,Edgecliff,58
+95209,Social Studies,Humanities - Grade 8,8th,SS,College Prep,Tarrant County,Edgecliff,58
+95209,Math,Mathematics -Grade 8,8th,MATH,College Prep,Tarrant County,Edgecliff,58
+60827,Social Studies,Humanities - Grade 6,6th,SS,College Prep,El Paso,Edgemere,156
+60827,Math,Mathematics -Grade 6,6th,MATH,College Prep,El Paso,Edgemere,156
+60827,Science,Science - Grade 6 ,6th,SCI,College Prep,El Paso,Edgemere,156
+84447,Social Studies,Humanities - Grade 7,7th,SS,College Prep,El Paso,Edgemere,103
+60827,Math,Mathematics -Grade 7,7th,MATH,College Prep,El Paso,Edgemere,156
+60827,Science,Science - Grade 7,7th,SCI,College Prep,El Paso,Edgemere,156
+60827,Social Studies,Humanities - Grade 8,8th,SS,College Prep,El Paso,Edgemere,156
+60827,Math,Mathematics -Grade 8,8th,MATH,College Prep,El Paso,Edgemere,156
+60827,English Language Arts,English Language Arts - Grade 8,8th,ELA,College Prep,El Paso,Edgemere,156
+60827,Science,Science - Grade 8,8th,SCI,College Prep,El Paso,Edgemere,156
+60827,Social Studies,"Advanced Social Studies, Gr 8-U.S. Histo",8th,SS,College Prep,El Paso,Edgemere,156
+94961,Social Studies,"Social Studies, Grade 3",3rd,SS,Academy,Mid Valley,Quest,30
+94961,Math,"Mathematics, Grade 3",3rd,MATH,Academy,Mid Valley,Quest,30
+94961,English Language Arts,"Reading, Grade 3",3rd,ELA,Academy,Mid Valley,Quest,30
+87529,English Language Arts,Reading Intervention-8th,8th,ELA,College Prep,Mid Valley,Owassa,38
+94986,English Language Arts,Pre-AP English I,9th - 12th ,ELA,College Prep,West San Antonio,South Flores,30
+89811,Math,Math Intervention-6th,6th,MATH,College Prep,Upper Valley,Mission,91
+89811,Math,Math Intervention-7th,7th,MATH,College Prep,Upper Valley,Mission,91
+17756,English Language Arts,Reading Intervention-8th,8th,ELA,College Prep,Mid Valley,San Juan,91
+92929,Social Studies,Humanities ,1st - 5th ,SS,Academy,Greater Houston Area,Hardy,91
+86554,English Language Arts,Reading Intervention-6th,6th,ELA,College Prep,Upper Valley,Mission,48
+86554,English Language Arts,Reading Intervention-7th,7th,ELA,College Prep,Upper Valley,Mission,48
+17262,English Language Arts,Reading Intervention-3rd,3rd,ELA,Academy,Mid Valley,Quest,94
+17262,English Language Arts,Reading Intervention-4th,4th,ELA,Academy,Mid Valley,Quest,94
+17262,English Language Arts,Reading Intervention-5th,5th,ELA,Academy,Mid Valley,Quest,94
+93076,Social Studies,"Advanced Social Studies, Grade 6-World H",6th,SS,College Prep,Upper Valley,Rio Grande City,84
+9983,Math,Mathematics -Grade 6,6th,MATH,College Prep,Lower Valley,Sports Park,84
+9983,Social Studies,Humanities - Grade 6,6th,SS,College Prep,Lower Valley,Sports Park,84
+9983,Science,Science - Grade 6 ,6th,SCI,College Prep,Lower Valley,Sports Park,84
+9983,English Language Arts,English Language Arts - Grade 6 ,6th,ELA,College Prep,Lower Valley,Sports Park,84
+9983,Math,Mathematics -Grade 8,8th,MATH,College Prep,Lower Valley,Sports Park,84
+9983,Social Studies,Humanities - Grade 8,8th,SS,College Prep,Lower Valley,Sports Park,84
+9983,Science,Science - Grade 8,8th,SCI,College Prep,Lower Valley,Sports Park,84
+9983,English Language Arts,English Language Arts - Grade 8,8th,ELA,College Prep,Lower Valley,Sports Park,84
+95087,English Language Arts,English Language Arts - Grade 7,7th,ELA,College Prep,Tarrant County,Southeast,51
+86303,English Language Arts,Reading Intervention-6th,6th,ELA,College Prep,El Paso,Mesquite Hills,106
+100899,Social Studies,Humanities ,1st - 5th ,SS,Academy,Lower Valley,Harlingen,149
+83565,Social Studies,AP U.S. Government,9th - 12th ,SS,College Prep,East San Antonio,Eastside,86
+86554,English Language Arts,Reading Intervention-8th,8th,ELA,College Prep,Upper Valley,Mission,48
+86303,English Language Arts,Reading Intervention-7th,7th,ELA,College Prep,El Paso,Mesquite Hills,106
+68623,English Language Arts,Reading Intervention-7th,7th,ELA,College Prep,East San Antonio,Carver,239
+68623,English Language Arts,Reading Intervention-6th,6th,ELA,College Prep,East San Antonio,Carver,239
+17530,English Language Arts,Reading Intervention-6th,6th,ELA,College Prep,East San Antonio,Carver,239
+69316,Science,"Science, Grade 3",3rd,SCI,Academy,West San Antonio,Robinson,76
+69316,Social Studies,"Social Studies, Grade 3",3rd,SS,Academy,West San Antonio,Robinson,76
+86897,English Language Arts,Pre-AP English I,9th - 12th ,ELA,College Prep,West San Antonio,Mays,122
+101138,Science,Pre-AP Biology,9th - 12th ,SCI,College Prep,Greater Houston Area,Spears,198
+73807,English Language Arts,Reading Intervention-7th,7th,ELA,College Prep,Lower Valley,Frontier,98
+73807,English Language Arts,Reading Intervention-6th,6th,ELA,College Prep,Lower Valley,Frontier,98
+24745,Math,"Advanced Mathematics, Grade 6",6th,MATH,College Prep,Upper Valley,Rio Grande City,47
+100951,English Language Arts,Reading Intervention-3rd,3rd,ELA,Academy,El Paso,Mesquite Hills,156
+24745,Math,"Advanced Mathematics, Grade 7 Pre-Algebr",7th,MATH,College Prep,Upper Valley,Rio Grande City,47
+100951,English Language Arts,Reading Intervention-4th,4th,ELA,Academy,El Paso,Mesquite Hills,156
+100951,English Language Arts,Reading Intervention-5th,5th,ELA,Academy,El Paso,Mesquite Hills,156
+24745,Math,"Advanced Mathematics, Grade 8-Algebra I",8th,MATH,College Prep,Upper Valley,Rio Grande City,47
+60841,English Language Arts,"Reading, Grade 3",3rd,ELA,Academy,Mid Valley,Elsa,57
+94824,English Language Arts,"English Language Arts, Kindergarten",K,ELA,Academy,West San Antonio,Brackenridge,9
+94824,Math,"Mathematics, Kindergarten",K,MATH,Academy,West San Antonio,Brackenridge,9
+94824,Science,"Science, Kindergarten",K,SCI,Academy,West San Antonio,Brackenridge,9
+95198,English Language Arts,"Advanced English Language Arts, Grade 8",8th,ELA,College Prep,Tarrant County,Southeast,51
+23586,Math,Algebra 1,9th - 12th ,MATH,College Prep,El Paso,Horizon Vista,120
+94679,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,Upper Valley,Mission,3
+94679,Math,Mathematics ,1st - 5th ,MATH,Academy,Upper Valley,Mission,3
+94679,Science,Science ,1st - 5th ,SCI,Academy,Upper Valley,Mission,3
+94679,Social Studies,Humanities ,1st - 5th ,SS,Academy,Upper Valley,Mission,3
+69707,English Language Arts,Pre-AP English I,9th - 12th ,ELA,College Prep,Upper Valley,Rio Grande City,239
+69707,English Language Arts,Pre-AP English II,9th - 12th ,ELA,College Prep,Upper Valley,Rio Grande City,239
+84382,Science,"Science, Grade 3",3rd,SCI,Academy,East San Antonio,Najim,107
+94643,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,Upper Valley,Palmview,3
+74395,Math,"Mathematics, Grade 5",5th,MATH,Academy,Mid Valley,Elsa,84
+87918,English Language Arts,Reading Intervention-6th,6th,ELA,College Prep,El Paso,Mesa Hills,48
+87918,English Language Arts,Reading Intervention-7th,7th,ELA,College Prep,El Paso,Mesa Hills,48
+87918,English Language Arts,Reading Intervention-8th,8th,ELA,College Prep,El Paso,Mesa Hills,48
+94961,Science,"Science, Grade 3",3rd,SCI,Academy,Mid Valley,Quest,30
+88114,English Language Arts,Reading Intervention-5th,5th,ELA,Academy,El Paso,Horizon Vista,239
+88114,English Language Arts,Reading Intervention-4th,4th,ELA,Academy,El Paso,Horizon Vista,239
+88114,English Language Arts,Reading Intervention-3rd,3rd,ELA,Academy,El Paso,Horizon Vista,239
+95216,English Language Arts,Reading Intervention-4th,4th,ELA,Academy,El Paso,Mesa Hills,58
+95216,English Language Arts,Reading Intervention-3rd,3rd,ELA,Academy,El Paso,Mesa Hills,58
+95019,English Language Arts,"English Language Arts, Grade 2",2nd,ELA,Academy,East San Antonio,Eastside,30
+95019,Science,"Science, Grade 2",2nd,SCI,Academy,East San Antonio,Eastside,30
+95019,Social Studies,"Social Studies, Grade 2",2nd,SS,Academy,East San Antonio,Eastside,30
+95111,English Language Arts,Reading Intervention-6th,6th,ELA,College Prep,Austin,Rundberg,44
+95111,English Language Arts,Reading Intervention-7th,7th,ELA,College Prep,Austin,Rundberg,44
+95111,English Language Arts,Reading Intervention-8th,8th,ELA,College Prep,Austin,Rundberg,44
+92007,English Language Arts,Reading Intervention-6th,6th,ELA,College Prep,Greater Houston Area,Spears,52
+92007,English Language Arts,Reading Intervention-7th,7th,ELA,College Prep,Greater Houston Area,Spears,52
+84682,English Language Arts,Reading Intervention-3rd,3rd,ELA,Academy,Greater Houston Area,Spears,318
+84682,English Language Arts,Reading Intervention-5th,5th,ELA,Academy,Greater Houston Area,Spears,318
+84682,English Language Arts,Reading Intervention-4th,4th,ELA,Academy,Greater Houston Area,Spears,318
+85911,English Language Arts,Reading Intervention-6th,6th,ELA,College Prep,El Paso,Rio Vista,321
+85911,English Language Arts,Reading Intervention-8th,8th,ELA,College Prep,El Paso,Rio Vista,321
+14434,English Language Arts,English Language Arts - Grade 8,8th,ELA,College Prep,Tarrant County,Edgecliff,85
+14434,Science,Science - Grade 8,8th,SCI,College Prep,Tarrant County,Edgecliff,85
+14434,Social Studies,Humanities - Grade 8,8th,SS,College Prep,Tarrant County,Edgecliff,85
+14434,Math,Mathematics -Grade 8,8th,MATH,College Prep,Tarrant County,Edgecliff,85
+14434,English Language Arts,English Language Arts - Grade 7,7th,ELA,College Prep,Tarrant County,Edgecliff,85
+14434,Math,Mathematics -Grade 7,7th,MATH,College Prep,Tarrant County,Edgecliff,85
+60827,English Language Arts,English Language Arts - Grade 6 ,6th,ELA,College Prep,El Paso,Edgemere,156
+60827,English Language Arts,English Language Arts - Grade 7,7th,ELA,College Prep,El Paso,Edgemere,156
+87529,English Language Arts,Reading Intervention-6th,6th,ELA,College Prep,Mid Valley,Owassa,38
+87529,English Language Arts,Reading Intervention-7th,7th,ELA,College Prep,Mid Valley,Owassa,38
+14434,Math,Algebra I ,9th - 12th ,MATH,College Prep,Tarrant County,Edgecliff,85
+14434,English Language Arts,English I ,9th - 12th ,ELA,College Prep,Tarrant County,Edgecliff,85
+14434,Science,Biology ,9th - 12th ,SCI,College Prep,Tarrant County,Edgecliff,85
+14434,Social Studies,World Geography ,9th - 12th ,SS,College Prep,Tarrant County,Edgecliff,85
+95329,Social Studies,"Social Studies, Grade 2",2nd,SS,Academy,East San Antonio,Najim,72
+69768,Social Studies,Personal Financial Literacy (Full-Year),9th - 12th ,SS,College Prep,Austin,Rundberg,49
+87065,Social Studies,"Advanced Social Studies, Gr 8-U.S. Histo",8th,SS,College Prep,West San Antonio,Robinson,129
+68656,Science,"Science, Grade 5",5th,SCI,Academy,West San Antonio,Burke,239
+88550,Social Studies,"Social Studies, Kindergarten",K,SS,Academy,El Paso,Horizon Vista,296
+68656,English Language Arts,"English Language Arts, Grade 4",4th,ELA,Academy,West San Antonio,Burke,239
+101288,Math,"Mathematics, Grade 1",1st,MATH,Academy,West San Antonio,Brackenridge,219
+92272,Social Studies,"Social Studies, Grade 2",2nd,SS,Academy,West San Antonio,Brackenridge,69
+9983,Math,Mathematics -Grade 7,7th,MATH,College Prep,Lower Valley,Sports Park,84
+9983,Social Studies,Humanities - Grade 7,7th,SS,College Prep,Lower Valley,Sports Park,84
+9983,English Language Arts,English Language Arts - Grade 7,7th,ELA,College Prep,Lower Valley,Sports Park,84
+84598,English Language Arts,English Language Arts - Grade 6 ,6th,ELA,College Prep,West San Antonio,Mays,239
+100982,English Language Arts,Reading,1st - 5th ,ELA,Academy,Upper Valley,Los Encinos,164
+100982,English Language Arts,English Language Arts ,1st - 5th ,ELA,Academy,Upper Valley,Los Encinos,164
+100982,Math,Mathematics ,1st - 5th ,MATH,Academy,Upper Valley,Los Encinos,164
+100982,Social Studies,Humanities ,1st - 5th ,SS,Academy,Upper Valley,Los Encinos,164
+100982,Science,Science ,1st - 5th ,SCI,Academy,Upper Valley,Los Encinos,164
+94643,Social Studies,Humanities ,1st - 5th ,SS,Academy,Upper Valley,Palmview,3
+94643,Math,Mathematics ,1st - 5th ,MATH,Academy,Upper Valley,Palmview,3
+115209,Science,SCIENCE 3,1st - 5th ,SCI,Academy,Permian Basin,Travis,156
+115127,English Language Arts,ELAR PK,Pre-K,ELA,Academy,Permian Basin,Travis,104
+115065,Social Studies,SOC STUD 6,1st - 5th ,SS,Academy,Permian Basin,Travis,66
+115127,Math,MATH PK,Pre-K,MATH,Academy,Permian Basin,Travis,104
+85982,Math,MATH 1,1st - 5th ,MATH,Academy,Permian Basin,Travis,83
+115127,Science,SCIENCE PK,Pre-K,SCI,Academy,Permian Basin,Travis,104
+115065,English Language Arts,ELAR 6,1st - 5th ,ELA,Academy,Permian Basin,Travis,66
+115211,Science,BIO EAS,1st - 5th ,SCI,Academy,Permian Basin,Travis,177
+85982,Math,MATH KG,K,MATH,Academy,Permian Basin,Travis,83

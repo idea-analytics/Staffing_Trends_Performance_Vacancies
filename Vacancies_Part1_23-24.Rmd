@@ -163,10 +163,27 @@ jobvite_staffing_vacancies   #number of days vacancy   #872
 # jobvite_staffing_vacancies2
 
 
-join_time_cols <- left_join(grade_fmla_data, courses_tm_fmla_staff, by = "employee_id") %>%
-  mutate(`Total Days FMLA` = total_days_out) %>%
-  select(employee_id, Grade, Subject, Region, Campus, leave_start_date, leave_end_date, fmla_days_out, total_days_out)
-join_time_cols
+# join_time_cols <- left_join(grade_fmla_data, courses_tm_fmla_staff, by = "employee_id") %>%
+#   mutate(`Total Days FMLA` = total_days_out) %>%
+#   select(employee_id, Grade, Subject, Region, Campus, leave_start_date, leave_end_date, fmla_days_out, total_days_out)
+# join_time_cols
+
+# distinct_campus_name <- jobvite_staffing_vacancies %>%
+#   select(campus_upper) %>%
+#   distinct()
+# distinct_campus_name
+# 
+# distinct_internal_role <- jobvite_staffing_vacancies %>%
+# select(internal_role) %>%
+#   distinct(internal_role) 
+# distinct_internal_role
+# 
+# distinct_course_credit_type <- courses_tm_fmla_staff %>%
+#   select(course_credit_type) %>%
+#   distinct()
+# distinct_course_credit_type
+
+
 
 ```
 

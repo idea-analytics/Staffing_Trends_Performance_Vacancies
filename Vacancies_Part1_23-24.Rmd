@@ -85,13 +85,13 @@ a) subject    (col: course credit type)
  BAR/hist #4) Add box plots and histograms. 
 
 
-b) **grade
+b) grade
   #1) How long are vacancies (median and mean and SD)?
   #2) How many vacancies (median, mean and SD)?
   #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?
   #4) Add box plots and histograms. 
 
-c) **grade-subject
+c) grade-subject
   #1) How long are vacancies (median and mean and SD)?
   #2) How many vacancies (median, mean and SD)?
   #3) What is the most # of vacancies at one "time" (time = week, month, quarter, semester)?

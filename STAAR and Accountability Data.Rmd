@@ -1,0 +1,263 @@
+---
+title: "STAAR & Accountability Data"
+author: Maura Carter
+date: 10/15/2024
+output: html_notebook
+---
+
+#schools rating data
+
+```{r}
+
+ratings_data <- IDEA_Public_Schools_Campus_A_F_Results_2024_Verified
+
+ratings_data
+
+```
+
+
+
+#STAAR data
+```{r}
+#STAAR data
+library(ideadata)
+library(ideadata)
+library(dplyr)
+library(janitor)
+
+#my data pull
+ staar_data <-   get_table(.table_name = "STAAR", .database_name = "Dashboard", .schema = "dbo", .server_name = "RGVPDRA-DASQL") %>%
+   select(StudentID, 
+          LocalStudentID, 
+          GradeLevel, 
+          SubjectCode, 
+          AdminDate, 
+          SchoolYear, 
+          ScoreCode,
+          ScaleScore, 
+          TestVersion, 
+          RawScore, 
+          LevelII, 
+          LevelIII, 
+          LevelIIFinal, 
+          Percentile, 
+          Growth) %>%
+   mutate( Approaches = LevelII) %>%
+   mutate(Meets = LevelIIFinal) %>%
+   mutate(Masters = LevelIII) %>%
+   filter(SchoolYear == "2023-2024") %>%
+   select(StudentID, 
+          LocalStudentID, 
+          GradeLevel, 
+          SubjectCode, 
+          AdminDate, 
+          SchoolYear,
+          Approaches,
+          Meets,
+          Masters,
+          ScoreCode,
+          ScaleScore, 
+          TestVersion, 
+          RawScore, 
+          #Percentile, 
+          Growth) %>%
+    mutate(StudentID = as.numeric(StudentID),
+         LocalStudentID = as.numeric(LocalStudentID),
+         StudentNumber = if_else(LocalStudentID %in% c(0, NA), StudentID, LocalStudentID),
+         StudentNumber = as.numeric(StudentNumber)) %>%
+    filter(StudentNumber != 0) %>% 
+    select(-StudentID, -LocalStudentID) %>%
+    group_by(StudentNumber) %>%
+    clean_names() %>%
+   collect() %>%
+   ungroup() 
+ staar_data     #error need help
+
+#disconnect(conn_Dashboard)
+
+
+# To get a count of distinct student numbers to see how much duplication exists
+Count_stus <- staar_data %>%
+  distinct(StudentNumber)
+Count_stus
+
+
+# Getting max score to de-duplicate
+staar_math <- staar_data %>%
+  group_by(StudentNumber) %>%
+  mutate(Best_score = max(ScaleScore),
+         BestScoreFlag = if_else(Best_score == ScaleScore, 1, 0)) %>%
+  filter(BestScoreFlag == 1) %>%
+  select(-BestScoreFlag, -Best_score, -AdminDate, -ScaleScore, -GradeLevel) %>%
+  distinct()
+staar_math
+
+# Calculating the % Approaches and the % Masters
+pct_apprhs_mstrs <- staar_data %>%
+  select(Approaches, Masters) %>%
+  summarise(n_students = n(),
+         n_apprchs = sum(Approaches),
+         n_mstrs = sum(Masters)) %>%
+  mutate(pct_app = n_apprchs/n_students,
+         pct_mst = n_mstrs/n_students)
+pct_apprhs_mstrs
+#-----------------------------------------------------
+#from Manual
+# library(ideadata)
+# STAAR <- get_table(.table_name = "STAAR", .database_name = "Dashboard", 
+#                    .schema = "dbo", .server_name = "RGVPDRA-DASQL") %>%
+#   filter(
+#     #TestVersion == "S", 
+#         # ScoreCode == "S", 
+#          SubjectCode == "Math"
+#          #,
+#          #AdminDate %in% c("0421", "0521")
+#          ) %>%
+#   select(StudentID,
+#          LocalStudentID,
+#          GradeLevel,
+#          SubjectCode,
+#          AdminDate,
+#          SchoolYear,
+#          ScoreCode,
+#          ScaleScore,
+#          Approaches = LevelII,
+#          Meets = LevelIIFinal,
+#          Masters = LevelIII) %>%
+#   mutate(StudentID = as.numeric(StudentID),
+#          LocalStudentID = as.numeric(LocalStudentID),
+#          StudentNumber = if_else(LocalStudentID %in% c(0, NA), StudentID, LocalStudentID),
+#          StudentNumber = as.numeric(StudentNumber)) %>%
+#   filter(StudentNumber != 0) %>%
+#   filter(SchoolYear == "2023-2024")%>%
+#   select(-StudentID, -LocalStudentID, -ScoreCode) %>%
+#   group_by(StudentNumber) %>%
+#   distinct() %>%
+#   collect()
+# STAAR
+
+
+#------------
+#students table for school number, join to schools table to get campus, join back to original vacancies table by campus name
+disconnect(conn_PROD1)
+library(ideadata)
+library(janitor)
+stus_data <- get_table(.table_name = "Students", .database_name = "PROD1", .schema = "Schools", .server_name = "RGVPDSD-DWPRD1") %>%
+  filter(AcademicYear == "2023-2024") %>%
+  select(StudentNumber, AcademicYear, GradeLevelID, SchoolNumber, GraduatedSchoolId) %>%
+  clean_names() %>%
+  collect()
+stus_data
+
+#schools
+schools <- ideadata::get_schools() %>%
+  mutate(school_number = SchoolNumber) %>%
+  select(school_number, RegionAltID, RegionID, SchoolName, SchoolShortName) %>%
+  clean_names() %>%
+  collect() 
+schools
+
+#region
+region <- get_table(.table_name = "Regions", .database_name = "PROD1", 
+        .schema = "Schools", .server_name = "RGVPDSD-DWPRD1") %>%          #[RGVPDSD-DWPRD1].[PROD1].[Schools].[Regions]
+  mutate(region_id = RegionID) %>%
+  select(region_id, RegionDescription, State) %>%
+  clean_names() %>%
+  collect()
+region
+
+#total regions (not sub regions)
+join_schools_region <- left_join(schools, region, by = "region_id")
+join_schools_region
+
+join_stus_schools_region <- left_join(stus_data, join_schools_region, by = "school_number")
+join_stus_schools_region                      #join this back to staar data with student number, then join that table to original vacancies data by campus name, then join to Ratings data by campus name or school number.
+
+#--------------------------------------------
+#sub-regions
+schools_sub <-schools %>%
+  mutate(region_id_sub = region_alt_id)
+schools_sub
+
+regions_sub <- region %>%
+  mutate(region_id_sub = region_id)
+regions_sub
+
+join_schools_region_sub <- left_join(schools_sub, regions_sub, by = "region_id")
+join_schools_region_sub
+
+join_stus_schools_region_sub <- left_join(stus_data, join_schools_region_sub, by = "school_number")
+join_stus_schools_region_sub
+
+
+```
+
+
+#join STAAR, stus_schools_region, ratings data
+```{r}
+# To get a count of distinct student numbers to see how much duplication exists
+Count_stus <- staar_data %>%
+  distinct(student_number)
+Count_stus
+
+
+# Getting max score to de-duplicate
+staar_data_dedup <- staar_data %>%
+  group_by(student_number) %>%
+  mutate(best_score = max(scale_score),
+         best_score_flag = if_else(best_score == scale_score, 1, 0)) %>%
+  filter(best_score_flag == 1) %>%
+  select(-best_score_flag, -best_score, -admin_date, -scale_score) %>%
+  distinct()
+staar_data_dedup
+
+
+
+#STAAR
+staar_data_dedup
+
+#stus_schools_region
+join_stus_schools_region
+
+#join
+
+join_staar_stus_schools_region <- left_join(staar_data_dedup, join_stus_schools_region, by = "student_number")
+join_staar_stus_schools_region
+
+
+```
+
+
+
+#percent approaches, meets, masters
+```{r}
+
+# To get a count of distinct student numbers to see how much duplication exists
+Count_stus <- staar_data %>%
+  distinct(StudentNumber)
+Count_stus
+
+
+# Getting max score to de-duplicate
+staar_math <- staar_data %>%
+  group_by(StudentNumber) %>%
+  mutate(Best_score = max(ScaleScore),
+         BestScoreFlag = if_else(Best_score == ScaleScore, 1, 0)) %>%
+  filter(BestScoreFlag == 1) %>%
+  select(-BestScoreFlag, -Best_score, -AdminDate, -ScaleScore, -GradeLevel) %>%
+  distinct()
+staar_math
+
+# Calculating the % Approaches and the % Masters
+pct_apprhs_mstrs <- staar_data %>%
+  select(Approaches, Masters) %>%
+  summarise(n_students = n(),
+         n_apprchs = sum(Approaches),
+         n_mstrs = sum(Masters)) %>%
+  mutate(pct_app = n_apprchs/n_students,
+         pct_mst = n_mstrs/n_students)
+pct_apprhs_mstrs
+
+
+
+```

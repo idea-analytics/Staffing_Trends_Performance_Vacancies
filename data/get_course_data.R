@@ -60,7 +60,7 @@ staffing_courses <- courses_dwh %>%
   left_join(course_schools, join_by(power_school_number))
 
 
-#distinct staff courses data (course that came from power school)
+#DISTINCT!!! staff courses data (course that came from power school)
 staffing_w_courses <- staffing_courses %>%
   select(employee_id) %>%
   distinct() 

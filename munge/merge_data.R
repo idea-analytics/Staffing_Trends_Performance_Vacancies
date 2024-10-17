@@ -50,7 +50,7 @@ jobvite_staffing_vacancies <- tyler_munis %>%
   filter(job_filled_on < work_start_date) %>%
   filter(job_most_recent_open_date <= work_start_date) %>%
   filter(work_end_date > job_most_recent_open_date) %>%
-  left_join(staffing_w_courses %>% mutate(staffing_w_courses = employee_id) , join_by(employee_id)) %>%
+  left_join(staffing_courses %>% mutate(staffing_courses = employee_id) , join_by(employee_id)) %>%
   mutate(vacancy_begining_start_date = if_else(work_start_date > job_most_recent_open_date, job_most_recent_open_date, work_start_date)) %>%
   mutate(vacancy_begining_end_date = if_else(!is.na(vacancy_begining_start_date),  work_start_date, job_filled_on)) %>%
   mutate(total_days_vacancy = as.numeric(difftime(ymd(vacancy_begining_end_date), 

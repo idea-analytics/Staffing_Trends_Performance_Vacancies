@@ -186,6 +186,132 @@ jobvite_staffing_vacancies   #number of days vacancy   #872
 
 
 ```
+#Total Org - IDEA
+```{r}
+
+#look at data
+#vacancys, filtered for all TX regions
+#look at pmpc_comment1 for teacher (or not teacher) and area (for teacher/instructional, or other)
+
+IDEA_teacher <-jobvite_staffing_vacancies %>%
+  mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+  select(employee_id, pmpc_comment1, job_title, area, campus_upper, location.x, region.x, total_days_vacancy)
+IDEA_teacher
+
+#distinct pmpc_comment1 and area
+distinct_pmpc_comment1 <- IDEA_teacher %>%
+  select(pmpc_comment1) %>%
+  distinct()
+distinct_pmpc_comment1
+
+#distinct area
+distinct_area <- IDEA_teacher %>%
+  select(area) %>%
+  distinct()
+distinct_area
+
+# INSTRUCTIONAL				
+# TEACHER				
+# INSTRUCTIONAL SUPPORT				
+# SCHOOL LEAD TEAM       #not instructional/teacher
+
+#check to see how many rows for area not teacher, pmpc not teacher
+IDEA_teacher_area <- IDEA_teacher %>%
+  filter(area == "SCHOOL LEAD TEAM")
+IDEA_teacher_area         #12 rows
+
+#check campus_upper, look for HQ
+distinct_campus <- IDEA_teacher %>%
+  select(campus_upper) %>%
+  distinct()
+distinct_campus
+
+# HQ RGV
+# HQ SAN ANTONIO
+
+#check job_title (which will become "subject")
+distinct_jobtitle <- IDEA_teacher %>%
+  select(job_title) %>%
+  distinct()
+distinct_jobtitle
+# ELA
+# MATH 
+# SCIENCE 
+# SOCIAL STUDIES
+# EXECUTIVE CAMPUS LEADERSHIP   #12 rows, all are also "area" = "school lead team", so should be removed
+
+#-------------------------------------
+
+#Master Data
+
+IDEA_teacher_data <-jobvite_staffing_vacancies %>%
+  mutate(Region = region.x) %>%
+  filter(Region == "AUSTIN REGION" |
+           Region == "EL PASO REGION" |
+           Region == "GREATER HOUSTON REGION" |
+           Region == "LOWER VALLEY RGV"|
+           Region == "UPPER VALLEY RGV"|
+           Region == "MID VALLEY RGV" |
+           Region == "PERMIAN BASIN REGION" |
+           Region == "SAN ANTONIO REGION" |
+           Region == "TARRANT COUNTY REGION") %>%
+ # select(employee_id, pmpc_comment1, job_title, area, campus_upper, location.x, region.x, total_days_vacancy) %>%
+  filter(job_title != "Executive Campus Leadership") %>%   #12 rows
+  filter(area != "SCHOOL LEAD TEAM") %>%  #12 rows (same 12 rows as "executive campus leadership")
+  filter(campus_upper != "HQ RGV" |
+          campus_upper != "HQ San Antonio"|
+          campus_upper != "HQ Tarrant County") 
+  IDEA_teacher_data    #714 rows of vacancies
+
+```
+
+#IDEA org (Texas)
+#Vacancy
+#1) How long are vacancies?
+
+```{r}
+#1) How long are vacancies (median and mean and SD)?
+#data
+IDEA_teacher_data 
+
+
+#vacancy
+IDEA_median_mean_sd <- IDEA_teacher_data %>%
+  select(total_days_vacancy) %>%
+ #group_by(total_days_vacancy)  %>%
+  summarise(Median = median(total_days_vacancy),
+            Mean = mean(total_days_vacancy),
+            SD = sd(total_days_vacancy)) 
+  # count()
+IDEA_median_mean_sd
+
+
+
+```
+
+#IDEA Org Texas
+#2) How many vacancies are there? Count
+
+```{r}
+#IDEA org texas
+#count
+
+#vacancy
+IDEA_vacancy_count <-IDEA_teacher_data %>%
+  summarise(`Number of Vacancies IDEA Texas` = n()) 
+IDEA_vacancy_count
+
+```
+
 
 #F) Region
 ```{r}
@@ -202,24 +328,19 @@ jobvite_staffing_vacancies   #number of days vacancy   #872
 
 
 #f-1) region - VACANCY
-region_median_mean_sd <-jobvite_staffing_vacancies %>%
-  mutate(Region = region.x) %>%
-  filter(Region == "AUSTIN REGION" |
-           Region == "EL PASO REGION" |
-           Region == "GREATER HOUSTON REGION" |
-           Region == "LOWER VALLEY RGV"|
-           Region == "UPPER VALLEY RGV"|
-           Region == "MID VALLEY RGV" |
-           Region == "PERMIAN BASIN REGION" |
-           Region == "SAN ANTONIO REGION" |
-           Region == "TARRANT COUNTY REGION") %>%
+region_median_mean_sd <-IDEA_teacher_data %>%
   select(Region, total_days_vacancy) %>%
   group_by(Region)  %>%
   summarise(Median = median(total_days_vacancy),
             Mean = mean(total_days_vacancy),
             SD = sd(total_days_vacancy)) 
-  # count()
 region_median_mean_sd
+
+# sort by mpg
+newdata <- mtcars[order(mpg),]
+
+region_median_mean_sd_sort <- region_median_mean_sd[order(-Median),]
+region_median_mean_sd_sort
 
 
 #change data to numeric

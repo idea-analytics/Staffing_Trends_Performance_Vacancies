@@ -1,0 +1,339 @@
+---
+title: "Rates/ Position Control Data"
+author: Maura Carter
+date: 10/17/2024
+output: html_notebook
+---
+
+
+
+#RATES data 
+
+#(vacancies)
+
+
+#POSITION CONTROL
+#bring in data   (SY 23-24)
+```{r}
+library(janitor)
+library(dplyr)
+#july
+pc_july_23 <- position_control_july_23 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  mutate(month = "July") %>%
+  mutate(year = "2023") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_july_23       #4179 rows total
+
+#aug
+pc_aug_23 <- position_control_aug_23 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  mutate(month = "August") %>%
+  mutate(year = "2023") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_aug_23        #4143 rows total
+
+#sept
+pc_sep_23 <- position_control_sept_23 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  mutate(month = "September") %>%
+  mutate(year = "2023") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_sep_23        #4143 rows total
+
+#oct
+pc_oct_23 <- position_control_oct_23 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  mutate(month = "October") %>%
+  mutate(year = "2023") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_oct_23         #4125 rows total
+
+#nov
+pc_nov_23 <- position_control_nov_23 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  mutate(month = "November") %>%
+  mutate(year = "2023") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_nov_23        #4120 rows total
+
+#dec
+pc_dec_23 <- position_control_dec_23 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  mutate(month = "December") %>%
+  mutate(year = "2023") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_dec_23       #4120 rows total
+
+
+#jan
+pc_jan_24 <- position_control_jan_24 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  mutate(month = "January") %>%
+  mutate(year = "2024") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_jan_24      #4121 rows total
+
+
+#feb
+pc_feb_24 <- position_control_feb_24 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  mutate(month = "February") %>%
+  mutate(year = "2024") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_feb_24     #4124 rows total
+
+#mar
+pc_mar_24 <- position_control_march_24 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  mutate(month = "March") %>%
+  mutate(year = "2024") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_mar_24     #4116 rows total
+
+
+#apr
+pc_apr_24 <- position_control_apr_24 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  mutate(month = "April") %>%
+  mutate(year = "2024") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_apr_24      #4105 rows total
+
+
+#may
+pc_may_24 <- position_control_may_24 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  mutate(month = "May") %>%
+  mutate(year = "2024") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_may_24     #4088 rows total
+
+#june
+pc_june_24 <- position_control_june_24 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  mutate(month = "June") %>%
+  mutate(year = "2024") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_june_24      #4802 rows total
+
+```
+#numerator for rate
+#filter for vacancies, which is column employee_id = 0
+```{r}
+#july
+pc_july_23_num <- position_control_july_23 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  filter(`Employee Number` == 0) %>%
+  mutate(month = "July") %>%
+  mutate(year = "2023") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_july_23_num     #568 rows emp_num = 0 (vacancies); numerator for vac rate
+
+#aug
+pc_aug_23_num <- position_control_aug_23 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  filter(`Employee Number` == 0) %>%
+  mutate(month = "August") %>%
+  mutate(year = "2023") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_aug_23_num        #316 rows emp_num = 0 (vacancies); numerator for vac rate
+
+#sept
+pc_sep_23_num <- position_control_sept_23 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  filter(`Employee Number` == 0) %>%
+  mutate(month = "September") %>%
+  mutate(year = "2023") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_sep_23_num        #306 rows emp_num = 0 (vacancies); numerator for vac rate
+
+#oct
+pc_oct_23_num <- position_control_oct_23 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  filter(`Employee Number` == 0) %>%
+  mutate(month = "October") %>%
+  mutate(year = "2023") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_oct_23_num         #273 rows emp_num = 0 (vacancies); numerator for vac rate
+
+#nov
+pc_nov_23_num <- position_control_nov_23 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  filter(`Employee Number` == 0) %>% 
+  mutate(month = "November") %>%
+  mutate(year = "2023") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_nov_23_num        #258 rows emp_num = 0 (vacancies); numerator for vac rate
+
+#dec
+pc_dec_23_num <- position_control_dec_23 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  filter(`Employee Number` == 0) %>%
+  mutate(month = "December") %>%
+  mutate(year = "2023") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_dec_23_num       #244 rows emp_num = 0 (vacancies); numerator for vac rate
+
+
+#jan
+pc_jan_24_num <- position_control_jan_24 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  filter(`Employee Number` == 0) %>%
+  mutate(month = "January") %>%
+  mutate(year = "2024") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_jan_24_num      #252 rows emp_num = 0 (vacancies); numerator for vac rate
+
+
+#feb
+pc_feb_24_num <- position_control_feb_24 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  filter(`Employee Number` == 0) %>%
+  mutate(month = "February") %>%
+  mutate(year = "2024") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_feb_24_num     #258 rows emp_num = 0 (vacancies); numerator for vac rate
+
+#mar
+pc_mar_24_num <- position_control_march_24 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  filter(`Employee Number` == 0) %>%
+  mutate(month = "March") %>%
+  mutate(year = "2024") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_mar_24_num     #235 rows emp_num = 0 (vacancies); numerator for vac rate
+
+
+#apr
+pc_apr_24_num <- position_control_apr_24 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  filter(`Employee Number` == 0) %>%
+  mutate(month = "April") %>%
+  mutate(year = "2024") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_apr_24_num      #209 rows emp_num = 0 (vacancies); numerator for vac rate
+
+
+#may
+pc_may_24_num <- position_control_may_24 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  filter(`Employee Number` == 0) %>%
+  mutate(month = "May") %>%
+  mutate(year = "2024") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_may_24_num     #210 rows emp_num = 0 (vacancies); numerator for vac rate
+
+#june
+pc_june_24_num <- position_control_june_24 %>%
+  select(`Employee Number`, `Employee Name`, Position, `Bargain Desc`, `Location Desc`, `Comment 1`, `Comment 2`) %>%
+  filter(`Employee Number` == 0) %>%
+  mutate(month = "June") %>%
+  mutate(year = "2024") %>%
+  mutate(academic_year = "2023-2024") %>%
+  clean_names()
+pc_june_24_num      #207 rows emp_num = 0 (vacancies); numerator for vac rate
+
+
+```
+
+#vacancy rate per month
+
+```{r}
+#vectors
+number_vacancies = c(568, 316, 306, 273, 258, 244, 252, 258, 235, 209, 210, 207) #numerators, july - june
+total_positions = c(4179, 4143, 4143, 4125, 4120, 4120, 4121, 4124, 4116, 4105, 4088, 4802)  #denominators, july - june
+month = c("July", "August", "September", "October", "November", "December", "January", "February", "March", "April", "May", "June")
+
+
+#create df
+#ref: https://www.reddit.com/r/RStudio/comments/gowfre/how_to_create_a_dataframe_in_rstudio/
+
+new_df <- cbind.data.frame(
+                "pc_month" = c("July", "August", "September", "October", "November", "December", "January", "February", "March", "April", "May", "June"),
+                "number_vacancies" = c(568, 316, 306, 273, 258, 244, 252, 258, 235, 209, 210, 207), 
+                "total_num_positions" = c(4179, 4143, 4143, 4125, 4120, 4120, 4121, 4124, 4116, 4105, 4088, 4802)
+                ) %>%
+  mutate(vacancy_rate =number_vacancies/total_num_positions) %>%
+  mutate(month = pc_month)
+
+new_df
+
+#put numbers ahead of month name (so plots in order)
+new_df$month[new_df$month == "July"] <- "01 Jul"
+new_df$month[new_df$month == "August"] <- "02 Aug"
+new_df$month[new_df$month == "September"] <- "03 Sep"
+new_df$month[new_df$month == "October"] <- "04 Oct"
+new_df$month[new_df$month == "November"] <- "05 Nov"
+new_df$month[new_df$month == "December"] <- "06 Dec"
+new_df$month[new_df$month == "January"] <- "07 Jan"
+new_df$month[new_df$month == "February"] <- "08 Feb"
+new_df$month[new_df$month == "March"] <- "09 Mar"
+new_df$month[new_df$month == "April"] <- "10 Apr"
+new_df$month[new_df$month == "May"] <- "11 May"
+new_df$month[new_df$month == "June"] <- "12 Jun"
+new_df
+
+
+```
+
+
+
+#line graph of IDEA Texas vac rate per month
+```{r}
+library(ggplot2)
+library(ideacolors)
+library(ideadata)
+
+
+#line graph
+l_IDEA_tx_vac_per_month <- new_df %>%
+  ggplot(aes(x=month, 
+             y= vacancy_rate, 
+             #group = Subject, 
+             #color = month
+             )) +
+ geom_point() +
+    #scale_color_viridis(discrete = TRUE) +
+    #ggtitle("Number of Vacancies for Each Month by Subject") + 
+    #theme_ipsum() +
+    #ylab("Number of Vacancies SY 23-24")
+geom_line() +
+  scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+   theme(legend.position="none") +             #removes legend  (REF:https://r-charts.com/ggplot2/legend/ )
+  labs(
+    x= "Month",
+      y ="Vacancy Rate",
+       title = "IDEA Texas Vacancy Rate by Month",
+       subtitle = "for Position Control Data SY 23-24")
+
+l_IDEA_tx_vac_per_month
+
+```

@@ -332,7 +332,7 @@ geom_line() +
     x= "Month",
       y ="Vacancy Rate",
        title = "IDEA Texas Vacancy Rate by Month",
-       subtitle = "for Position Control Data SY 23-24")
+       subtitle = "for Position Control Data SY 23-24") 
 
 l_IDEA_tx_vac_per_month
 

@@ -261,3 +261,23 @@ pct_apprhs_mstrs
 
 
 ```
+
+
+
+#correlation matrix
+```{r}
+
+
+corrplot()
+
+
+
+```
+
+
+#regression
+```{r}
+
+
+
+```

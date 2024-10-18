@@ -595,7 +595,8 @@ semester_intervals_23_24 = data.frame(
 
 # data frame to work on
 #vacancies_exp3 <- jobvite_staffing_vacancies_trimmed
-vacancies_exp_sem <- jobvite_staffing_vacancies
+#vacancies_exp_sem <- jobvite_staffing_vacancies
+vacancies_exp_sem <- IDEA_teacher_data
 
 for (i in 1:nrow(semester_intervals_23_24))
 {
@@ -627,16 +628,16 @@ vacancy_interval_counts_sem
 #semester
 vacancy_interval_counts_sem_region <- vacancies_exp_sem %>%
   # TODO: other grouping, eg. by region
-  mutate(Region = region.x) %>%
-  filter(Region == "AUSTIN REGION" |
-           Region == "EL PASO REGION" |
-           Region == "GREATER HOUSTON REGION" |
-           Region == "LOWER VALLEY RGV"|
-           Region == "UPPER VALLEY RGV"|
-           Region == "MID VALLEY RGV" |
-           Region == "PERMIAN BASIN REGION" |
-           Region == "SAN ANTONIO REGION" |
-           Region == "TARRANT COUNTY REGION") %>%
+  # mutate(Region = region.x) %>%
+  # filter(Region == "AUSTIN REGION" |
+  #          Region == "EL PASO REGION" |
+  #          Region == "GREATER HOUSTON REGION" |
+  #          Region == "LOWER VALLEY RGV"|
+  #          Region == "UPPER VALLEY RGV"|
+  #          Region == "MID VALLEY RGV" |
+  #          Region == "PERMIAN BASIN REGION" |
+  #          Region == "SAN ANTONIO REGION" |
+  #          Region == "TARRANT COUNTY REGION") %>%
   group_by(Region) %>%
   #select(all_of(month_intervals_23_24[["label"]]))
    summarise(across(all_of(semester_intervals_23_24[["label"]]),sum))
@@ -804,7 +805,23 @@ l_subject_sem <- vacancy_interval_counts_sem_subjects %>%
     #x= "Number of Staffing Vacancies",
       y ="Number of Vacancies",
        title = "Number of Vacancies by Subject",
-       subtitle = "for Each Semester for SY 23-24")
+       subtitle = "by Semester for SY 23-24") +
+  
+  #add annotation
+  annotate("text", x= 0.65, y= 251, label = "ELA") +
+  annotate("text", x = 0.65, y = 160, label = "Math") +
+  annotate("text", x= 0.65, y= 114, label = "Social Studies") +
+  annotate("text", x = 0.65, y = 83, label = "Science") +
+  
+ annotate("text", x= 0.95, y= 251, label = "246") +
+  annotate("text", x = 0.95, y = 160, label = "155") +
+  annotate("text", x= 0.95, y= 114, label = "109") +
+  annotate("text", x = 0.95, y = 83, label = "78") +
+
+ annotate("text", x= 2.05, y= 73, label = "78") +
+  annotate("text", x = 2.05, y = 49, label = "44") +
+  annotate("text", x= 2.05, y= 38, label = "40") +
+  annotate("text", x = 2.05, y = 25, label = "32") 
 
 l_subject_sem
 #-------------------------------

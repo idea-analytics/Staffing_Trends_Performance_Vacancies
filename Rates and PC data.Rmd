@@ -278,7 +278,8 @@ new_df <- cbind.data.frame(
                 "total_num_positions" = c(4179, 4143, 4143, 4125, 4120, 4120, 4121, 4124, 4116, 4105, 4088, 4802)
                 ) %>%
   mutate(vacancy_rate =number_vacancies/total_num_positions) %>%
-  mutate(month = pc_month)
+  mutate(month = pc_month) %>%
+  mutate(`Mean Vacancy Rate` = mean(vacancy_rate))
 
 new_df
 
@@ -297,12 +298,37 @@ new_df$month[new_df$month == "May"] <- "11 May"
 new_df$month[new_df$month == "June"] <- "12 Jun"
 new_df
 
+#-------------------------------------------
+#exclude July
+new_df_exclude_july <- cbind.data.frame(
+                "pc_month" = c("August", "September", "October", "November", "December", "January", "February", "March", "April", "May", "June"),
+                "number_vacancies" = c(316, 306, 273, 258, 244, 252, 258, 235, 209, 210, 207), 
+                "total_num_positions" = c(4143, 4143, 4125, 4120, 4120, 4121, 4124, 4116, 4105, 4088, 4802)
+                ) %>%
+  filter(pc_month != "July") %>%
+  mutate(vacancy_rate =number_vacancies/total_num_positions) %>%
+  mutate(month = pc_month) %>%
+  mutate(`Mean Vacancy Rate` = mean(vacancy_rate))
 
+new_df_exclude_july
+
+#put numbers ahead of month name (so plots in order)
+new_df_exclude_july$month[new_df_exclude_july$month == "July"] <- "01 Jul"
+new_df_exclude_july$month[new_df_exclude_july$month == "August"] <- "02 Aug"
+new_df_exclude_july$month[new_df_exclude_july$month == "September"] <- "03 Sep"
+new_df_exclude_july$month[new_df_exclude_july$month == "October"] <- "04 Oct"
+new_df_exclude_july$month[new_df_exclude_july$month == "November"] <- "05 Nov"
+new_df_exclude_july$month[new_df_exclude_july$month == "December"] <- "06 Dec"
+new_df_exclude_july$month[new_df_exclude_july$month == "January"] <- "07 Jan"
+new_df_exclude_july$month[new_df_exclude_july$month == "February"] <- "08 Feb"
+new_df_exclude_july$month[new_df_exclude_july$month == "March"] <- "09 Mar"
+new_df_exclude_july$month[new_df_exclude_july$month == "April"] <- "10 Apr"
+new_df_exclude_july$month[new_df_exclude_july$month == "May"] <- "11 May"
+new_df_exclude_july$month[new_df_exclude_july$month == "June"] <- "12 Jun"
+new_df_exclude_july
 ```
 
-
-
-#line graph of IDEA Texas vac rate per month
+#line graph of IDEA Texas vac rate per month - NOT ROUNDED
 ```{r}
 library(ggplot2)
 library(ideacolors)
@@ -310,6 +336,7 @@ library(ideadata)
 
 
 #line graph
+#all months- not rounded
 l_IDEA_tx_vac_per_month <- new_df %>%
   ggplot(aes(x=month, 
              y= vacancy_rate, 
@@ -320,8 +347,9 @@ l_IDEA_tx_vac_per_month <- new_df %>%
     #scale_color_viridis(discrete = TRUE) +
     #ggtitle("Number of Vacancies for Each Month by Subject") + 
     #theme_ipsum() +
-    #ylab("Number of Vacancies SY 23-24")
-geom_line() +
+    #ylab("Vacancy Rate SY 23-24")
+#geom_line() +
+    geom_hline(yintercept = 0.07, color="blue") +
   scale_fill_idea(reverse = FALSE) +
   scale_color_idea() +
   ideacolors::theme_idea_min() +
@@ -336,4 +364,162 @@ geom_line() +
 
 l_IDEA_tx_vac_per_month
 
+#excluding July - not rounded
+l_IDEA_tx_vac_per_month_exc <- new_df_exclude_july %>%
+  ggplot(aes(x=month, 
+             y= vacancy_rate, 
+             #group = Subject, 
+             #color = month
+             )) +
+ geom_point() +
+    #scale_color_viridis(discrete = TRUE) +
+    #ggtitle("Number of Vacancies for Each Month by Subject") + 
+    #theme_ipsum() +
+    #ylab("Vacancy Rate SY 23-24")
+#geom_line() +
+    geom_hline(yintercept = 0.06, color="blue") +
+  scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+   theme(legend.position="none") +             #removes legend  (REF:https://r-charts.com/ggplot2/legend/ )
+  labs(
+    x= "Month",
+      y ="Vacancy Rate",
+       title = "IDEA Texas Vacancy Rate by Month",
+       subtitle = "for Position Control Data SY 23-24") 
+
+l_IDEA_tx_vac_per_month_exc
+
+
+
 ```
+
+#average rate - remove july (twice as large and it's prior to school starting)
+```{r}
+
+#data
+new_df
+
+#average vacancy rate all months (including july)
+
+average_vac_rate_all_months_pc <- new_df %>%
+  mutate(`Mean Number of Monthly Vacancies (All Months)` = mean(number_vacancies)) %>%                         #278 (ave numb vacancies/month, all months)
+  mutate(`Mean Number of Monthly Total Positions (All Months)` = mean(total_num_positions)) %>%                #4182.12 (ave total numb positions/month, all months)
+  mutate(`Mean Monthly Vacancy Rate (All Months)` = mean(vacancy_rate))                                         #0.0667 ave vacancy rate per month, all months
+average_vac_rate_all_months_pc
+
+#average vacancy rate all months excluding July - remove july
+average_vac_rate_not_july_pc <- new_df %>%
+  filter(pc_month != "July") %>%
+  mutate(`Mean Number of Monthly Vacancies (Exclude July)` = mean(number_vacancies)) %>%                   #251.64 (ave numb vacancies/month - not july)
+  mutate(`Mean Number of Monthly Total Positions (Exclude July)` = mean(total_num_positions)) %>%          #4182.46 (ave total numb positions/month, - not july)
+  mutate(`Mean Monthly Vacancy Rate (Exclude July)` = mean(vacancy_rate))                                 #0.0604 ave vac rate (not july)
+
+  average_vac_rate_not_july_pc
+
+  
+  
+#round to 2 decimals
+
+#all months
+average_vac_rate_all_months_pc[,'vacancy_rate']=round(average_vac_rate_all_months_pc[,'vacancy_rate'],2)
+average_vac_rate_all_months_pc 
+  
+average_vac_rate_all_months_pc[,'Mean Number of Monthly Vacancies (All Months)']=round(average_vac_rate_all_months_pc[,'Mean Number of Monthly Vacancies (All Months)'],1)
+average_vac_rate_all_months_pc 
+ 
+average_vac_rate_all_months_pc[,'Mean Number of Monthly Total Positions (All Months)']=round(average_vac_rate_all_months_pc[,'Mean Number of Monthly Total Positions (All Months)'],1)
+average_vac_rate_all_months_pc
+ 
+average_vac_rate_all_months_pc[,'Mean Monthly Vacancy Rate (All Months)']=round(average_vac_rate_all_months_pc[,'Mean Monthly Vacancy Rate (All Months)'],2)
+average_vac_rate_all_months_pc
+  
+
+#exclude july
+average_vac_rate_not_july_pc[,'vacancy_rate']=round(average_vac_rate_not_july_pc[,'vacancy_rate'],2)
+average_vac_rate_not_july_pc
+
+average_vac_rate_not_july_pc[,'Mean Number of Monthly Vacancies (Exclude July)']=round(average_vac_rate_not_july_pc[,'Mean Number of Monthly Vacancies (Exclude July)'],1)
+average_vac_rate_not_july_pc  
+ 
+average_vac_rate_not_july_pc[,'Mean Number of Monthly Total Positions (Exclude July)']=round(average_vac_rate_not_july_pc[,'Mean Number of Monthly Total Positions (Exclude July)'],1)
+average_vac_rate_not_july_pc
+ 
+average_vac_rate_not_july_pc[,'Mean Monthly Vacancy Rate (Exclude July)']=round(average_vac_rate_not_july_pc[,'Mean Monthly Vacancy Rate (Exclude July)'],2)
+average_vac_rate_not_july_pc
+
+
+
+```
+
+
+#line graph
+#IDEA Texas vac rate per month - ROUNDED
+```{r}
+library(ggplot2)
+library(ideacolors)
+library(ideadata)
+
+#all months
+l_IDEA_tx_vac_per_month_all_round <- average_vac_rate_all_months_pc %>%
+  ggplot(aes(x=month, 
+             y= vacancy_rate, 
+             #group = Subject, 
+             #color = month
+             )) +
+ geom_point() +
+    #scale_color_viridis(discrete = TRUE) +
+    #ggtitle("Number of Vacancies for Each Month by Subject") + 
+    #theme_ipsum() +
+    #ylab("Vacancy Rate SY 23-24")
+#geom_line() +
+  scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+   theme(legend.position="none") +             #removes legend  (REF:https://r-charts.com/ggplot2/legend/ )
+  labs(
+    x= "Month",
+      y ="Vacancy Rate",
+       title = "IDEA Texas Vacancy Rate by Month",
+       subtitle = "for Position Control Data SY 23-24") 
+
+l_IDEA_tx_vac_per_month_all_round
+
+
+
+#excluding july
+l_IDEA_tx_vac_per_month_no_july_round <- average_vac_rate_not_july_pc %>%
+  ggplot(aes(x=month, 
+             y= vacancy_rate, 
+             #group = Subject, 
+             #color = month
+             )) +
+ geom_point() +
+    #scale_color_viridis(discrete = TRUE) +
+    #ggtitle("Number of Vacancies for Each Month by Subject") + 
+    #theme_ipsum() +
+    #ylab("Vacancy Rate SY 23-24")
+#geom_line() +
+  geom_hline(yintercept = 0.06, color="blue") +
+  scale_fill_idea(reverse = FALSE) +
+  scale_color_idea() +
+  ideacolors::theme_idea_min() +
+   #ideacolors::theme_idea_light() +
+  #guides(fill = "none", color = "none") +
+   theme(legend.position="none") +             #removes legend  (REF:https://r-charts.com/ggplot2/legend/ )
+  labs(
+    x= "Month",
+      y ="Vacancy Rate",
+       title = "IDEA Texas Vacancy Rate by Month",
+       subtitle = "for Position Control Data SY 23-24") 
+
+l_IDEA_tx_vac_per_month_no_july_round
+
+```
+
+
+
